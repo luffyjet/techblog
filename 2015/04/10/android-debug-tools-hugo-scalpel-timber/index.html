@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Android调试自测工具01 (Hugo、Timber、Scalpel) | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="三个工具都出自JakeWharton大神。hugo和timber用于打印Log, scalpel用于在3D下查看界面的图层。
+Hugo做项目的时候有时候需要打印方法的传参和返回值，甚至方法的执行时间，有没有一种简单方便通用的方式去做这个呢，Hugo就可以。使用方法很简单，Hugo是基于注解被调用的，引入相关依赖后，在方法上加上 @DebugLog 即可。也可以加在内部类上。
+我没研究在Eclips">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android调试自测工具01 (Hugo、Timber、Scalpel)">
+<meta property="og:url" content="http://luffyjet.oschina.io/2015/04/10/android-debug-tools-hugo-scalpel-timber/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="三个工具都出自JakeWharton大神。hugo和timber用于打印Log, scalpel用于在3D下查看界面的图层。
+Hugo做项目的时候有时候需要打印方法的传参和返回值，甚至方法的执行时间，有没有一种简单方便通用的方式去做这个呢，Hugo就可以。使用方法很简单，Hugo是基于注解被调用的，引入相关依赖后，在方法上加上 @DebugLog 即可。也可以加在内部类上。
+我没研究在Eclips">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292wolk1wj30s40g6jwe.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292xq5efaj30k00y4jv7.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292y8ciz4j30k00y8jtt.jpg">
+<meta property="og:updated_time" content="2016-11-09T06:54:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android调试自测工具01 (Hugo、Timber、Scalpel)">
+<meta name="twitter:description" content="三个工具都出自JakeWharton大神。hugo和timber用于打印Log, scalpel用于在3D下查看界面的图层。
+Hugo做项目的时候有时候需要打印方法的传参和返回值，甚至方法的执行时间，有没有一种简单方便通用的方式去做这个呢，Hugo就可以。使用方法很简单，Hugo是基于注解被调用的，引入相关依赖后，在方法上加上 @DebugLog 即可。也可以加在内部类上。
+我没研究在Eclips">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292wolk1wj30s40g6jwe.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                5
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-android-debug-tools-hugo-scalpel-timber" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Android调试自测工具01 (Hugo、Timber、Scalpel)
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/">
+            <time datetime="2015-04-10T02:43:23.000Z" itemprop="datePublished">2015-04-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/debug/">debug</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>三个工具都出自<a href="https://github.com/JakeWharton" target="_blank" rel="external">JakeWharton</a>大神。hugo和timber用于打印Log, scalpel用于在3D下查看界面的图层。</p>
+<h2 id="Hugo"><a href="#Hugo" class="headerlink" title="Hugo"></a>Hugo</h2><p>做项目的时候有时候需要打印方法的传参和返回值，甚至方法的执行时间，有没有一种简单方便通用的方式去做这个呢，Hugo就可以。<br>使用方法很简单，Hugo是基于注解被调用的，引入相关依赖后，在方法上加上 @DebugLog 即可。也可以加在内部类上。</p>
+<p>我没研究在Eclipse下怎么引入这个东西，用Eclipse的同志趁早转投AndroidStudio吧。AndroidStudio下引入Hugo很方便，添加两行代码即可。</p>
+<p>先看看打印的效果图：</p>
+<p> <img src="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292wolk1wj30s40g6jwe.jpg" alt="hugo_logs"></p>
+<a id="more"></a>
+<p>配置的流程：</p>
+<blockquote>
+<p>Project级别的build.gradle dependencies 内加入 </p>
+</blockquote>
+<pre><code>dependencies {
+    classpath &apos;com.android.tools.build:gradle:1.1.0&apos;
+    classpath &apos;com.jakewharton.hugo:hugo-plugin:1.2.1&apos;
+}
+</code></pre><p>Module级别的build.gradle 顶部加入  </p>
+<pre><code>apply plugin: &apos;com.jakewharton.hugo&apos;
+</code></pre><p>然后代码中加入注解即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@DebugLog</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">fibonacci</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</div><div class="line">   <span class="keyword">if</span> (number &lt;= <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Number must be greater than zero."</span>);</div><div class="line">    &#125;</div><div class="line">    	</div><div class="line">   <span class="keyword">if</span> (number == <span class="number">1</span> || number == <span class="number">2</span>) &#123;</div><div class="line">   	 	<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// <span class="doctag">NOTE:</span> Don't ever do this. Use the iterative approach!</span></div><div class="line">    <span class="keyword">return</span> fibonacci(number - <span class="number">1</span>) + fibonacci(number - <span class="number">2</span>);</div><div class="line">&#125;</div><div class="line">		</div><div class="line"><span class="meta">@DebugLog</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Charmer</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">final</span> String name;</div><div class="line"></div><div class="line">   Charmer(String name) &#123;</div><div class="line">      <span class="keyword">this</span>.name = name;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">askHowAreYou</span><span class="params">()</span> </span>&#123;</div><div class="line">     <span class="keyword">return</span> <span class="string">"How are you "</span> + name + <span class="string">"?"</span>;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Timber"><a href="#Timber" class="headerlink" title="Timber"></a>Timber</h2><p>Timber其实就是对Android的Log类进行封装后的一个Log工具，平时我自己也有封装过，不过大神的封装非常优雅。<br>Timber只有一个类文件，可以单独把它复制出来放项目里，也可以通过Gradle引用：<br>​<br>    compile ‘com.jakewharton.timber:timber:2.7.1’</p>
+<p>Timber使用的时候推荐在Application类中初始化，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line">      <span class="meta">@Override</span></div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">	       <span class="keyword">super</span>.onCreate();</div><div class="line">	       <span class="keyword">if</span> (BuildConfig.DEBUG) &#123;</div><div class="line">	           Timber.plant(<span class="keyword">new</span> Timber.DebugTree());</div><div class="line">	        &#125; <span class="keyword">else</span> &#123;</div><div class="line">	           Timber.plant(<span class="keyword">new</span> CrashReportingTree());</div><div class="line">	       &#125;</div><div class="line">	    &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Timber.plant（Tree tree）用来给Timber设置用于打印的实现类，Tree是个接口，DebugTree是Timber中已经实现了tree的类，可直接拿来用。Timber中还有个HollowTree的类用于扩展，比如上面的CrashReportingTree，我们可以把崩溃打印进行一些处理。使用的时候调用静态方法即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Timber.tag(<span class="string">"LifeCycles"</span>);<span class="comment">//设置只能用一次的Tag</span></div><div class="line">Timber.d(<span class="string">"Activity Created"</span>);  </div><div class="line"><span class="comment">//DebugTree 会帮你进行格式化输出</span></div><div class="line">Timber.i(<span class="string">"A button with ID %s was clicked to say '%s'."</span>, id, messag);</div></pre></td></tr></table></figure>
+<p>其他的查看源码吧。</p>
+<h2 id="Scalpel"><a href="#Scalpel" class="headerlink" title="Scalpel"></a>Scalpel</h2><p>这个可以查看界面的图层，3D的效果，不像开发者选项中 开启显示布局边界 是平面的线框。用AndroidStudio 引用只要在 build.gradle添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.jakewharton.scalpel:scalpel:1.1.2&apos;</div></pre></td></tr></table></figure>
+<p>使用的时候你的layout根节点必须是 ScalpelFrameLayout , ScalpelFrameLayout有以下几个常用方法：</p>
+<blockquote>
+<p>开启3D效果 ： setLayerInteractionEnabled(boolean).</p>
+<p>显隐DrawViews：setDrawViews(boolean).</p>
+<p>显隐 view ID： setDrawIds(boolean).</p>
+<p>修改边框的颜色和阴影 setChromeColor(int) and setChromeShadowColor(int).</p>
+</blockquote>
+<p>手势操作的方法：</p>
+<ol>
+<li><p>单指用来旋转整个模型</p>
+</li>
+<li><p>双指垂直收缩来调整模型大小</p>
+</li>
+<li><p>双指水平收缩来调整每个图层间的间距</p>
+</li>
+</ol>
+<p>效果图：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292xq5efaj30k00y4jv7.jpg" alt="scalpel_preview1"></p>
+<p><img src="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292y8ciz4j30k00y8jtt.jpg" alt="scalpel_preview1"></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://luffyjet.oschina.io/2015/04/10/android-debug-tools-hugo-scalpel-timber/" data-id="civardbn50002q5fb8kdf1ket" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://luffyjet.oschina.io/2015/04/10/android-debug-tools-hugo-scalpel-timber/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2015/04/08/facebook-stetho-okhttp-study/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Facebook Stetho 使用学习</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="title">Android调试自测工具01 (Hugo、Timber、Scalpel)</a></p>
+                            <p class="item-date"><time datetime="2015-04-10T02:43:23.000Z" itemprop="datePublished">2015-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/08/facebook-stetho-okhttp-study/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2015/04/08/facebook-stetho-okhttp-study/" class="title">Facebook Stetho 使用学习</a></p>
+                            <p class="item-date"><time datetime="2015-04-08T07:39:46.000Z" itemprop="datePublished">2015-04-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/08/open-source-licenses-study/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/OpenSource/">OpenSource</a></p>
+                            <p class="item-title"><a href="/2015/04/08/open-source-licenses-study/" class="title">开源许可协议学习</a></p>
+                            <p class="item-date"><time datetime="2015-04-08T04:03:41.000Z" itemprop="datePublished">2015-04-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2014/12/30/retrofit-singleton-usage/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2014/12/30/retrofit-singleton-usage/" class="title">Retrofit的科学使用：Singleton </a></p>
+                            <p class="item-date"><time datetime="2014-12-30T02:43:23.000Z" itemprop="datePublished">2014-12-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2014/12/21/to_build_hexo_blog/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/other/">other</a></p>
+                            <p class="item-title"><a href="/2014/12/21/to_build_hexo_blog/" class="title">基于Hexo框架的静态博客搭建</a></p>
+                            <p class="item-date"><time datetime="2014-12-21T14:20:20.000Z" itemprop="datePublished">2014-12-21</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/debug/" style="font-size: 20px;">debug</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

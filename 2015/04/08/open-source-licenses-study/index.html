@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>开源许可协议学习 | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一直在用开源代码，但是对于那些 开源许可协议 了解太少，惭愧。
+关于几个主流协议间的区别，一图顶千言：
+GitHub上开源项目协议使用情况：
+由图可以看出 MIT 限制是最宽松的，其可谓为所欲为，因此使用量也是最大的。当然图中的协议不全，还有比GPL更严格的协议AGPL。每个协议的具体内容，我看不懂，能区别他们就好。要商用的软件就不能采用带GPL系列许可证的，不过在中国这方面就… 
+
+以下是具体的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源许可协议学习">
+<meta property="og:url" content="http://luffyjet.oschina.io/2015/04/08/open-source-licenses-study/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="一直在用开源代码，但是对于那些 开源许可协议 了解太少，惭愧。
+关于几个主流协议间的区别，一图顶千言：
+GitHub上开源项目协议使用情况：
+由图可以看出 MIT 限制是最宽松的，其可谓为所欲为，因此使用量也是最大的。当然图中的协议不全，还有比GPL更严格的协议AGPL。每个协议的具体内容，我看不懂，能区别他们就好。要商用的软件就不能采用带GPL系列许可证的，不过在中国这方面就… 
+
+以下是具体的">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006lhyt2gw1f291tmf8imj30g409yaai.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006lhyt2gw1f291uhygs1j30m80dw40j.jpg">
+<meta property="og:updated_time" content="2016-03-25T05:39:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源许可协议学习">
+<meta name="twitter:description" content="一直在用开源代码，但是对于那些 开源许可协议 了解太少，惭愧。
+关于几个主流协议间的区别，一图顶千言：
+GitHub上开源项目协议使用情况：
+由图可以看出 MIT 限制是最宽松的，其可谓为所欲为，因此使用量也是最大的。当然图中的协议不全，还有比GPL更严格的协议AGPL。每个协议的具体内容，我看不懂，能区别他们就好。要商用的软件就不能采用带GPL系列许可证的，不过在中国这方面就… 
+
+以下是具体的">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006lhyt2gw1f291tmf8imj30g409yaai.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                5
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-open-source-licenses-study" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            开源许可协议学习
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/04/08/open-source-licenses-study/">
+            <time datetime="2015-04-08T04:03:41.000Z" itemprop="datePublished">2015-04-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/OpenSource/">OpenSource</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/OpenSourceLicenses/">OpenSourceLicenses</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>一直在用开源代码，但是对于那些 开源许可协议 了解太少，惭愧。</p>
+<p>关于几个主流协议间的区别，一图顶千言：<br><img src="http://ww2.sinaimg.cn/large/006lhyt2gw1f291tmf8imj30g409yaai.jpg" alt=""></p>
+<p>GitHub上开源项目协议使用情况：<br><img src="http://ww2.sinaimg.cn/large/006lhyt2gw1f291uhygs1j30m80dw40j.jpg" alt=""></p>
+<p>由图可以看出 MIT 限制是最宽松的，其可谓为所欲为，因此使用量也是最大的。当然图中的协议不全，还有比GPL更严格的协议AGPL。每个协议的具体内容，我看不懂，能区别他们就好。要商用的软件就不能采用带GPL系列许可证的，不过在中国这方面就… </p>
+<blockquote>
+<p>以下是具体的介绍，文字均来源于网络。</p>
+</blockquote>
+<h2 id="什么是软件许可协议？"><a href="#什么是软件许可协议？" class="headerlink" title="什么是软件许可协议？"></a>什么是软件许可协议？</h2><a id="more"></a>
+<p> 关于究竟什么是许可协议的问题上有很多事实而非的说法。当你给软件附上许可证时，意味着你将保留对软件的所有权利。你将对你的作品拥有原创版权(或者是专利权，如果你申请到了)。许可协议用来授权其他人具有某种使用你的作品的权利。</p>
+<p>&#160;     &#160;     &#160;     &#160;    依靠许可协议将你的作品对外开源或者对你的作品的各个方面逐一进行授权，是一个不错的方法。一旦对外开源，你将失去所有对你的作品的版权，别人也没有义务将你标注为作品的原创者或捐献者。而我说的后一种情况里，估计你需要从设计和开发的工作中抽出更多的时间来处理遇到的各种侵权问题。</p>
+<p>&#160;     &#160;     &#160;     &#160;    开源许可协议 使人们免去了研究那些专业的许可条款的麻烦，使人们更方便的对开源项目贡献出自己的代码。而且它还能保护你作为作品的原创作者，确保你至少拥有由于贡献参与而带来的署名荣誉。它还能用来阻止其他人企图声明对你的作品拥有所有权的行为。</p>
+<h2 id="常见开源许可协议：GPL、LGPL、BSD、Apache-License-2-0、MIT等"><a href="#常见开源许可协议：GPL、LGPL、BSD、Apache-License-2-0、MIT等" class="headerlink" title="常见开源许可协议：GPL、LGPL、BSD、Apache License 2.0、MIT等"></a>常见开源许可协议：GPL、LGPL、BSD、Apache License 2.0、MIT等</h2><h5 id="GPL"><a href="#GPL" class="headerlink" title="GPL"></a>GPL</h5><p>&#160;     &#160;     &#160;     &#160;    全称 GNU General Public License。它的主要内容为：只要在一个软件中使用(“使用”指类库引用或者修改后的代码) GPL 协议的产品，则该软件产品必须也采用GPL协议，既必须也是开源和免费。这个协议就不太适合商用软件，或者准备使用GPL开源组件的商用项目。基于这个协议的项目，极大的提高了开源软件的数量。上面那个微博的案例，如果作者使用了GPL协议，而使用方没有公开源代码就是违反了协议。目前用的多的是GPLV1，GPLV2。这两个什么区别看后面那张树形图。采用这个协议的开源软件有：Linux、 MySQL.</p>
+<h5 id="LGPL"><a href="#LGPL" class="headerlink" title="LGPL"></a>LGPL</h5><p>&#160;     &#160;     &#160;     &#160;    最初是Library GPL的缩写，后来改称作Lesser GPL。由于GPL太严格，限制了很多商用软件使用GPL组件才推出了这个LGPL。LGPL允许商业软件通过引用类库的方式使用LGPL组件（不直接使用源代码），这样可以不需要开源商业软件的代码。但是如果要修改原始组件的代码，则涉及修改部分的代码和基于原来代码衍生的代码都必须采用LGPL协议。LGPL不适合以LGPL协议为基础的代码进行二次开发的商业软件，但是商用软件可以采用编译后的类库引用就不需要公开源代码了。采用这个协议的开源软件有： JBoss、 FCKeditor 、 Hibernate。之前extjs就因为从LGPL转换到GPL带来了不少的震动。详情点击。</p>
+<h5 id="BSD"><a href="#BSD" class="headerlink" title="BSD"></a>BSD</h5><p>&#160;     &#160;     &#160;     &#160;    全称 Berkeley Software Distribution。这个协议相对上面两个协议宽松很多，允许使用者修改和重新发布代码，也允许使用或在BSD代码基础上开发商业软件发布和销售，因此是适用于商业软件的。使用者别太高兴，使用时还必须做到满足三个条件：</p>
+<ol>
+<li><p>如果再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议。</p>
+</li>
+<li><p>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档和版权声明中包含原来代码中的BSD协议。</p>
+</li>
+<li><p>不可以用开源代码的作者/机构名字和原来产品的名字做市场推广。使用用BSD协议的开源软件有： nginx、CruiseControl、Redis…</p>
+</li>
+</ol>
+<h5 id="Apache-License-2-0"><a href="#Apache-License-2-0" class="headerlink" title="Apache License 2.0"></a>Apache License 2.0</h5><p>&#160;     &#160;     &#160;     &#160;    这个协议除了为用户提供版权许可之外，还有专利许可。与BSD协议权限类似， 允许代码修改，再发布，适用商业软件。但是也需要满足以下条件：</p>
+<ol>
+<li><p>需要给代码的用户一份Apache Licence。</p>
+</li>
+<li><p>如果你修改了代码，需要再被修改的文件中说明。</p>
+</li>
+<li><p>在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。</p>
+</li>
+<li><p>如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</p>
+</li>
+</ol>
+<p>除了这些条件它还有这些好处：</p>
+<ol>
+<li><p>永久权利 一旦被授权，永久拥有。</p>
+</li>
+<li><p>全球范围的权利 在一个国家获得授权，适用于所有国家。假如你在美国，许可是从印度授权的，也没有问题。</p>
+</li>
+<li><p>授权免费 无版税， 前期、后期均无任何费用。</p>
+</li>
+<li><p>授权无排他性 任何人都可以获得授权</p>
+</li>
+<li><p>授权不可撤消 一旦获得授权，没有任何人可以取消。比如，你基于该产品代码开发了衍生产品，你不用担心会在某一天被禁止使用该代码</p>
+</li>
+</ol>
+<p>使用Apache License 2.0协议的开源软件有：Hadoop、SpringFramework、MongoDB…</p>
+<h5 id="MIT"><a href="#MIT" class="headerlink" title="MIT"></a>MIT</h5><p>&#160;     &#160;     &#160;     &#160;    源自麻省理工学院（Massachusetts Institute of Technology, MIT），又称X11协议。MIT与BSD类似，但是比BSD协议更加宽松，是目前最少限制的协议。这个协议唯一的条件就是在修改后的代码或者发行包包含原作者的许可信息。适用商业软件。使用MIT的软件项目有：jquery、Node.js。</p>
+<h3 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h3><h4 id="流行的开源许可协议"><a href="#流行的开源许可协议" class="headerlink" title="流行的开源许可协议"></a><a href="http://opensource.org/licenses/" target="_blank" rel="external">流行的开源许可协议</a></h4><h4 id="经过Open-Source-Initiative-组织批准的开源协议-http-opensource-org-licenses-alphabetical"><a href="#经过Open-Source-Initiative-组织批准的开源协议-http-opensource-org-licenses-alphabetical" class="headerlink" title="经过Open Source Initiative 组织批准的开源协议](http://opensource.org/licenses/alphabetical)["></a><a href="http://opensource.org/licenses/alphabetical" target="_blank" rel="external">经过</a><a href="http://opensource.org/licenses/alphabetical" target="_blank" rel="external">Open Source Initiative</a> <a href="http://opensource.org/licenses/alphabetical" target="_blank" rel="external">组织批准的开源协议](http://opensource.org/licenses/alphabetical)</a>[</h4><h4 id="开源软件及国内发展现状"><a href="#开源软件及国内发展现状" class="headerlink" title="开源软件及国内发展现状"></a><a href="http://www.fmsoft.cn/zhcn/about/blog/185/" target="_blank" rel="external">开源软件及国内发展现状</a></h4><h4 id="做一个优秀的开源项目，需要注意哪些方面？"><a href="#做一个优秀的开源项目，需要注意哪些方面？" class="headerlink" title="做一个优秀的开源项目，需要注意哪些方面？"></a><a href="http://blog.jobbole.com/57767/" target="_blank" rel="external">做一个优秀的开源项目，需要注意哪些方面？</a></h4>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://luffyjet.oschina.io/2015/04/08/open-source-licenses-study/" data-id="civardbnc0006q5fb0gyat6qd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://luffyjet.oschina.io/2015/04/08/open-source-licenses-study/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2015/04/08/facebook-stetho-okhttp-study/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Facebook Stetho 使用学习
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/12/30/retrofit-singleton-usage/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Retrofit的科学使用：Singleton </div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="title">Android调试自测工具01 (Hugo、Timber、Scalpel)</a></p>
+                            <p class="item-date"><time datetime="2015-04-10T02:43:23.000Z" itemprop="datePublished">2015-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/08/facebook-stetho-okhttp-study/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2015/04/08/facebook-stetho-okhttp-study/" class="title">Facebook Stetho 使用学习</a></p>
+                            <p class="item-date"><time datetime="2015-04-08T07:39:46.000Z" itemprop="datePublished">2015-04-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/08/open-source-licenses-study/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/OpenSource/">OpenSource</a></p>
+                            <p class="item-title"><a href="/2015/04/08/open-source-licenses-study/" class="title">开源许可协议学习</a></p>
+                            <p class="item-date"><time datetime="2015-04-08T04:03:41.000Z" itemprop="datePublished">2015-04-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2014/12/30/retrofit-singleton-usage/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2014/12/30/retrofit-singleton-usage/" class="title">Retrofit的科学使用：Singleton </a></p>
+                            <p class="item-date"><time datetime="2014-12-30T02:43:23.000Z" itemprop="datePublished">2014-12-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2014/12/21/to_build_hexo_blog/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/other/">other</a></p>
+                            <p class="item-title"><a href="/2014/12/21/to_build_hexo_blog/" class="title">基于Hexo框架的静态博客搭建</a></p>
+                            <p class="item-date"><time datetime="2014-12-21T14:20:20.000Z" itemprop="datePublished">2014-12-21</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/debug/" style="font-size: 20px;">debug</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

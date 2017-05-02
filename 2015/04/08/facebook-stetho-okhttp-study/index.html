@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Facebook Stetho 使用学习 | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="今年年初，facebook开源了一个Android开发调试工具，叫stetho，应该是单词stethoscope的一部分吧，意为诊断器。
+
+代码托管地址： https://github.com/facebook/stetho
+
+在项目中添加相应代码，通过Chrome DevTools连接设备后具备以下功能：
+
+可以在Chrome里进行网络访问检测，可以查看请求链接，请求头，JSON数据等
+不roo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Facebook Stetho 使用学习">
+<meta property="og:url" content="http://luffyjet.oschina.io/2015/04/08/facebook-stetho-okhttp-study/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="今年年初，facebook开源了一个Android开发调试工具，叫stetho，应该是单词stethoscope的一部分吧，意为诊断器。
+
+代码托管地址： https://github.com/facebook/stetho
+
+在项目中添加相应代码，通过Chrome DevTools连接设备后具备以下功能：
+
+可以在Chrome里进行网络访问检测，可以查看请求链接，请求头，JSON数据等
+不roo">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/006lhyt2gw1f292grjobgj30zk0j476p.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/mw690/006lhyt2gw1f292m9yg49j30zk0ixmzo.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/006lhyt2gw1f292ivas43j30zk0j8mzd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292jdzx87j30zk0j5juj.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/mw690/006lhyt2gw1f292kuwfgwj30zk1r8tc5.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292jwa4bqj30zk0j7dhz.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292kasihqj30zk0iz0vl.jpg">
+<meta property="og:updated_time" content="2016-03-25T06:04:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Facebook Stetho 使用学习">
+<meta name="twitter:description" content="今年年初，facebook开源了一个Android开发调试工具，叫stetho，应该是单词stethoscope的一部分吧，意为诊断器。
+
+代码托管地址： https://github.com/facebook/stetho
+
+在项目中添加相应代码，通过Chrome DevTools连接设备后具备以下功能：
+
+可以在Chrome里进行网络访问检测，可以查看请求链接，请求头，JSON数据等
+不roo">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/mw690/006lhyt2gw1f292grjobgj30zk0j476p.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                5
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-facebook-stetho-okhttp-study" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Facebook Stetho 使用学习
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/04/08/facebook-stetho-okhttp-study/">
+            <time datetime="2015-04-08T07:39:46.000Z" itemprop="datePublished">2015-04-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/debug/">debug</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>今年年初，facebook开源了一个Android开发调试工具，叫stetho，应该是单词stethoscope的一部分吧，意为诊断器。</p>
+<blockquote>
+<p>代码托管地址： <a href="https://github.com/facebook/stetho" target="_blank" rel="external">https://github.com/facebook/stetho</a></p>
+</blockquote>
+<p>在项目中添加相应代码，通过Chrome DevTools连接设备后具备以下功能：</p>
+<ol>
+<li>可以在Chrome里进行网络访问检测，可以查看请求链接，请求头，JSON数据等</li>
+<li>不root的情况下查看Sqlite数据库，并且可以使用sql语句去操作</li>
+<li>最近又升级了，API 15 以上能查看View hierarchy了</li>
+<li>dumpapp 工具提供强大的命令行接口来访问应用内部</li>
+</ol>
+<p>更新比较频繁，前几天更新到1.1.0了，使用AndroidStudio可以很方便的添加到项目中。当然也可以从github页面下载最新Jar包。<br><a id="more"></a></p>
+<h4 id="Chrome-DevTools-需要科学上网-fanqiang-否则点-inspect-会出一直是一块白板。（或者寻求其他方法解决）"><a href="#Chrome-DevTools-需要科学上网-fanqiang-否则点-inspect-会出一直是一块白板。（或者寻求其他方法解决）" class="headerlink" title="Chrome DevTools 需要科学上网(fanqiang),否则点 inspect 会出一直是一块白板。（或者寻求其他方法解决）"></a>Chrome DevTools 需要科学上网(fanqiang),否则点 inspect 会出一直是一块白板。（或者寻求其他方法解决）</h4><p>要在项目中启动Stetho很方便，按照官方的说明：</p>
+<ol>
+<li><p>添加初始化的代码到Application内，完成这一步就具备查看数据库，查看View层级结构，使用默认dumpapp工具的能力了</p>
+<pre><code>    public class MyApplication extends Application {
+    public void onCreate() {
+         super.onCreate();
+         Stetho.initialize(Stetho.newInitializerBuilder(this)
+            .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+              .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this)).build();
+   }
+}
+</code></pre></li>
+</ol>
+<ol>
+<li><p>开启网络检测，有两种方式</p>
+<ul>
+<li>使用HttpURLConnection有些麻烦，可以参考我提供的DEMO的代码（在正文最底下），需要用到另一个依赖 stetho-urlconnection</li>
+<li><p>如果用的目前超流行的 OkHttp 则非常方便，给OkHttpClient 设置一个StethoInterceptor 即可,需要另一个依赖 stetho-okhttp</p>
+<pre><code>   OkHttpClient client = new OkHttpClient();
+client.networkInterceptors().add(new StethoInterceptor());
+</code></pre></li>
+<li><p>如果用了Retrofit这个开源项目，也可以很方便的进行设置，同样需要另一个依赖 stetho-okhttp</p>
+<pre><code>OkHttpClient client = new OkHttpClient();
+   client.networkInterceptors().add(new StethoInterceptor());
+RestAdapter adapter = new RestAdapter.Builder().setClient(new OkClient(client)).setEndpoint(BASE_URL).buid();
+</code></pre></li>
+</ul>
+</li>
+<li><p>自定义 dumpapp 可以参考我提供的DEMO的代码，值得注意的是 该工具只能运行在 类Unix环境下，比如Linux和Mac。</p>
+</li>
+</ol>
+<h2 id="效果截图（点击可查看大图）"><a href="#效果截图（点击可查看大图）" class="headerlink" title="效果截图（点击可查看大图）"></a>效果截图（点击可查看大图）</h2><ol>
+<li>网络请求监测<br> <img src="http://ww2.sinaimg.cn/mw690/006lhyt2gw1f292grjobgj30zk0j476p.jpg" alt="网络检测效果1"></li>
+<li>查看与操作sqlite操作效果<br> <img src="http://ww2.sinaimg.cn/mw690/006lhyt2gw1f292m9yg49j30zk0ixmzo.jpg" alt="sqlite操作效果"></li>
+<li>查看与操作sharedpreference<br><img src="http://ww4.sinaimg.cn/mw690/006lhyt2gw1f292ivas43j30zk0j8mzd.jpg" alt="sharedpref操作效果"></li>
+<li>在Chrome上查看View的层级<br>  <img src="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292jdzx87j30zk0j5juj.jpg" alt="view层级查看"></li>
+<li>在上图显示的层级中我选中Actionbar后，手机上也会显示被选中的位置<br><img src="http://ww4.sinaimg.cn/mw690/006lhyt2gw1f292kuwfgwj30zk1r8tc5.jpg" alt="手机界面效果"></li>
+<li>http请求头查看<br><img src="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292jwa4bqj30zk0j7dhz.jpg" alt="http请求头查看"></li>
+<li>json数据查看<br><img src="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292kasihqj30zk0iz0vl.jpg" alt="json数据查看"></li>
+</ol>
+<h2 id="最后附上我的-DEMO"><a href="#最后附上我的-DEMO" class="headerlink" title="最后附上我的 DEMO"></a>最后附上我的 DEMO</h2><blockquote>
+<p><a href="/assets/stetho_study/stetho_sample.apk">APK</a></p>
+<p><a href="/assets/stetho_study/StethoSample.7z">Source Code</a></p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://luffyjet.oschina.io/2015/04/08/facebook-stetho-okhttp-study/" data-id="civardbmz0000q5fble1v4yru" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://luffyjet.oschina.io/2015/04/08/facebook-stetho-okhttp-study/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Android调试自测工具01 (Hugo、Timber、Scalpel)
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2015/04/08/open-source-licenses-study/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">开源许可协议学习</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="title">Android调试自测工具01 (Hugo、Timber、Scalpel)</a></p>
+                            <p class="item-date"><time datetime="2015-04-10T02:43:23.000Z" itemprop="datePublished">2015-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/08/facebook-stetho-okhttp-study/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2015/04/08/facebook-stetho-okhttp-study/" class="title">Facebook Stetho 使用学习</a></p>
+                            <p class="item-date"><time datetime="2015-04-08T07:39:46.000Z" itemprop="datePublished">2015-04-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/08/open-source-licenses-study/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/OpenSource/">OpenSource</a></p>
+                            <p class="item-title"><a href="/2015/04/08/open-source-licenses-study/" class="title">开源许可协议学习</a></p>
+                            <p class="item-date"><time datetime="2015-04-08T04:03:41.000Z" itemprop="datePublished">2015-04-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2014/12/30/retrofit-singleton-usage/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/2014/12/30/retrofit-singleton-usage/" class="title">Retrofit的科学使用：Singleton </a></p>
+                            <p class="item-date"><time datetime="2014-12-30T02:43:23.000Z" itemprop="datePublished">2014-12-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2014/12/21/to_build_hexo_blog/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/other/">other</a></p>
+                            <p class="item-title"><a href="/2014/12/21/to_build_hexo_blog/" class="title">基于Hexo框架的静态博客搭建</a></p>
+                            <p class="item-date"><time datetime="2014-12-21T14:20:20.000Z" itemprop="datePublished">2014-12-21</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/tags/debug/" style="font-size: 20px;">debug</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

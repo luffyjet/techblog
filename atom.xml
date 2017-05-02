@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>luffyjet の手帳</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://luffyjet.oschina.io/"/>
+  <updated>2016-11-09T06:54:05.000Z</updated>
+  <id>http://luffyjet.oschina.io/</id>
+  
+  <author>
+    <name>luffyjet</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android调试自测工具01 (Hugo、Timber、Scalpel)</title>
+    <link href="http://luffyjet.oschina.io/2015/04/10/android-debug-tools-hugo-scalpel-timber/"/>
+    <id>http://luffyjet.oschina.io/2015/04/10/android-debug-tools-hugo-scalpel-timber/</id>
+    <published>2015-04-10T02:43:23.000Z</published>
+    <updated>2016-11-09T06:54:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>三个工具都出自<a href="https://github.com/JakeWharton" target="_blank" rel="external">JakeWharton</a>大神。hugo和timber用于打印Log, scalpel用于在3D下查看界面的图层。</p>
+<h2 id="Hugo"><a href="#Hugo" class="headerlink" title="Hugo"></a>Hugo</h2><p>做项目的时候有时候需要打印方法的传参和返回值，甚至方法的执行时间，有没有一种简单方便通用的方式去做这个呢，Hugo就可以。<br>使用方法很简单，Hugo是基于注解被调用的，引入相关依赖后，在方法上加上 @DebugLog 即可。也可以加在内部类上。</p>
+<p>我没研究在Eclipse下怎么引入这个东西，用Eclipse的同志趁早转投AndroidStudio吧。AndroidStudio下引入Hugo很方便，添加两行代码即可。</p>
+<p>先看看打印的效果图：</p>
+<p> <img src="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292wolk1wj30s40g6jwe.jpg" alt="hugo_logs"></p>
+<a id="more"></a>
+<p>配置的流程：</p>
+<blockquote>
+<p>Project级别的build.gradle dependencies 内加入 </p>
+</blockquote>
+<pre><code>dependencies {
+    classpath &apos;com.android.tools.build:gradle:1.1.0&apos;
+    classpath &apos;com.jakewharton.hugo:hugo-plugin:1.2.1&apos;
+}
+</code></pre><p>Module级别的build.gradle 顶部加入  </p>
+<pre><code>apply plugin: &apos;com.jakewharton.hugo&apos;
+</code></pre><p>然后代码中加入注解即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@DebugLog</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">fibonacci</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</div><div class="line">   <span class="keyword">if</span> (number &lt;= <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Number must be greater than zero."</span>);</div><div class="line">    &#125;</div><div class="line">    	</div><div class="line">   <span class="keyword">if</span> (number == <span class="number">1</span> || number == <span class="number">2</span>) &#123;</div><div class="line">   	 	<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// <span class="doctag">NOTE:</span> Don't ever do this. Use the iterative approach!</span></div><div class="line">    <span class="keyword">return</span> fibonacci(number - <span class="number">1</span>) + fibonacci(number - <span class="number">2</span>);</div><div class="line">&#125;</div><div class="line">		</div><div class="line"><span class="meta">@DebugLog</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Charmer</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">final</span> String name;</div><div class="line"></div><div class="line">   Charmer(String name) &#123;</div><div class="line">      <span class="keyword">this</span>.name = name;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">askHowAreYou</span><span class="params">()</span> </span>&#123;</div><div class="line">     <span class="keyword">return</span> <span class="string">"How are you "</span> + name + <span class="string">"?"</span>;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Timber"><a href="#Timber" class="headerlink" title="Timber"></a>Timber</h2><p>Timber其实就是对Android的Log类进行封装后的一个Log工具，平时我自己也有封装过，不过大神的封装非常优雅。<br>Timber只有一个类文件，可以单独把它复制出来放项目里，也可以通过Gradle引用：<br>​<br>    compile ‘com.jakewharton.timber:timber:2.7.1’</p>
+<p>Timber使用的时候推荐在Application类中初始化，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line">      <span class="meta">@Override</span></div><div class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">	       <span class="keyword">super</span>.onCreate();</div><div class="line">	       <span class="keyword">if</span> (BuildConfig.DEBUG) &#123;</div><div class="line">	           Timber.plant(<span class="keyword">new</span> Timber.DebugTree());</div><div class="line">	        &#125; <span class="keyword">else</span> &#123;</div><div class="line">	           Timber.plant(<span class="keyword">new</span> CrashReportingTree());</div><div class="line">	       &#125;</div><div class="line">	    &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Timber.plant（Tree tree）用来给Timber设置用于打印的实现类，Tree是个接口，DebugTree是Timber中已经实现了tree的类，可直接拿来用。Timber中还有个HollowTree的类用于扩展，比如上面的CrashReportingTree，我们可以把崩溃打印进行一些处理。使用的时候调用静态方法即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Timber.tag(<span class="string">"LifeCycles"</span>);<span class="comment">//设置只能用一次的Tag</span></div><div class="line">Timber.d(<span class="string">"Activity Created"</span>);  </div><div class="line"><span class="comment">//DebugTree 会帮你进行格式化输出</span></div><div class="line">Timber.i(<span class="string">"A button with ID %s was clicked to say '%s'."</span>, id, messag);</div></pre></td></tr></table></figure>
+<p>其他的查看源码吧。</p>
+<h2 id="Scalpel"><a href="#Scalpel" class="headerlink" title="Scalpel"></a>Scalpel</h2><p>这个可以查看界面的图层，3D的效果，不像开发者选项中 开启显示布局边界 是平面的线框。用AndroidStudio 引用只要在 build.gradle添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.jakewharton.scalpel:scalpel:1.1.2&apos;</div></pre></td></tr></table></figure>
+<p>使用的时候你的layout根节点必须是 ScalpelFrameLayout , ScalpelFrameLayout有以下几个常用方法：</p>
+<blockquote>
+<p>开启3D效果 ： setLayerInteractionEnabled(boolean).</p>
+<p>显隐DrawViews：setDrawViews(boolean).</p>
+<p>显隐 view ID： setDrawIds(boolean).</p>
+<p>修改边框的颜色和阴影 setChromeColor(int) and setChromeShadowColor(int).</p>
+</blockquote>
+<p>手势操作的方法：</p>
+<ol>
+<li><p>单指用来旋转整个模型</p>
+</li>
+<li><p>双指垂直收缩来调整模型大小</p>
+</li>
+<li><p>双指水平收缩来调整每个图层间的间距</p>
+</li>
+</ol>
+<p>效果图：</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292xq5efaj30k00y4jv7.jpg" alt="scalpel_preview1"></p>
+<p><img src="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292y8ciz4j30k00y8jtt.jpg" alt="scalpel_preview1"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;三个工具都出自&lt;a href=&quot;https://github.com/JakeWharton&quot;&gt;JakeWharton&lt;/a&gt;大神。hugo和timber用于打印Log, scalpel用于在3D下查看界面的图层。&lt;/p&gt;
+&lt;h2 id=&quot;Hugo&quot;&gt;&lt;a href=&quot;#Hugo&quot; class=&quot;headerlink&quot; title=&quot;Hugo&quot;&gt;&lt;/a&gt;Hugo&lt;/h2&gt;&lt;p&gt;做项目的时候有时候需要打印方法的传参和返回值，甚至方法的执行时间，有没有一种简单方便通用的方式去做这个呢，Hugo就可以。&lt;br&gt;使用方法很简单，Hugo是基于注解被调用的，引入相关依赖后，在方法上加上 @DebugLog 即可。也可以加在内部类上。&lt;/p&gt;
+&lt;p&gt;我没研究在Eclipse下怎么引入这个东西，用Eclipse的同志趁早转投AndroidStudio吧。AndroidStudio下引入Hugo很方便，添加两行代码即可。&lt;/p&gt;
+&lt;p&gt;先看看打印的效果图：&lt;/p&gt;
+&lt;p&gt; &lt;img src=&quot;http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292wolk1wj30s40g6jwe.jpg&quot; alt=&quot;hugo_logs&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="http://luffyjet.oschina.io/categories/android/"/>
+    
+    
+      <category term="debug" scheme="http://luffyjet.oschina.io/tags/debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Facebook Stetho 使用学习</title>
+    <link href="http://luffyjet.oschina.io/2015/04/08/facebook-stetho-okhttp-study/"/>
+    <id>http://luffyjet.oschina.io/2015/04/08/facebook-stetho-okhttp-study/</id>
+    <published>2015-04-08T07:39:46.000Z</published>
+    <updated>2016-03-25T06:04:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今年年初，facebook开源了一个Android开发调试工具，叫stetho，应该是单词stethoscope的一部分吧，意为诊断器。</p>
+<blockquote>
+<p>代码托管地址： <a href="https://github.com/facebook/stetho" target="_blank" rel="external">https://github.com/facebook/stetho</a></p>
+</blockquote>
+<p>在项目中添加相应代码，通过Chrome DevTools连接设备后具备以下功能：</p>
+<ol>
+<li>可以在Chrome里进行网络访问检测，可以查看请求链接，请求头，JSON数据等</li>
+<li>不root的情况下查看Sqlite数据库，并且可以使用sql语句去操作</li>
+<li>最近又升级了，API 15 以上能查看View hierarchy了</li>
+<li>dumpapp 工具提供强大的命令行接口来访问应用内部</li>
+</ol>
+<p>更新比较频繁，前几天更新到1.1.0了，使用AndroidStudio可以很方便的添加到项目中。当然也可以从github页面下载最新Jar包。<br><a id="more"></a></p>
+<h4 id="Chrome-DevTools-需要科学上网-fanqiang-否则点-inspect-会出一直是一块白板。（或者寻求其他方法解决）"><a href="#Chrome-DevTools-需要科学上网-fanqiang-否则点-inspect-会出一直是一块白板。（或者寻求其他方法解决）" class="headerlink" title="Chrome DevTools 需要科学上网(fanqiang),否则点 inspect 会出一直是一块白板。（或者寻求其他方法解决）"></a>Chrome DevTools 需要科学上网(fanqiang),否则点 inspect 会出一直是一块白板。（或者寻求其他方法解决）</h4><p>要在项目中启动Stetho很方便，按照官方的说明：</p>
+<ol>
+<li><p>添加初始化的代码到Application内，完成这一步就具备查看数据库，查看View层级结构，使用默认dumpapp工具的能力了</p>
+<pre><code>    public class MyApplication extends Application {
+    public void onCreate() {
+         super.onCreate();
+         Stetho.initialize(Stetho.newInitializerBuilder(this)
+            .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+              .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this)).build();
+   }
+}
+</code></pre></li>
+</ol>
+<ol>
+<li><p>开启网络检测，有两种方式</p>
+<ul>
+<li>使用HttpURLConnection有些麻烦，可以参考我提供的DEMO的代码（在正文最底下），需要用到另一个依赖 stetho-urlconnection</li>
+<li><p>如果用的目前超流行的 OkHttp 则非常方便，给OkHttpClient 设置一个StethoInterceptor 即可,需要另一个依赖 stetho-okhttp</p>
+<pre><code>   OkHttpClient client = new OkHttpClient();
+client.networkInterceptors().add(new StethoInterceptor());
+</code></pre></li>
+<li><p>如果用了Retrofit这个开源项目，也可以很方便的进行设置，同样需要另一个依赖 stetho-okhttp</p>
+<pre><code>OkHttpClient client = new OkHttpClient();
+   client.networkInterceptors().add(new StethoInterceptor());
+RestAdapter adapter = new RestAdapter.Builder().setClient(new OkClient(client)).setEndpoint(BASE_URL).buid();
+</code></pre></li>
+</ul>
+</li>
+<li><p>自定义 dumpapp 可以参考我提供的DEMO的代码，值得注意的是 该工具只能运行在 类Unix环境下，比如Linux和Mac。</p>
+</li>
+</ol>
+<h2 id="效果截图（点击可查看大图）"><a href="#效果截图（点击可查看大图）" class="headerlink" title="效果截图（点击可查看大图）"></a>效果截图（点击可查看大图）</h2><ol>
+<li>网络请求监测<br> <img src="http://ww2.sinaimg.cn/mw690/006lhyt2gw1f292grjobgj30zk0j476p.jpg" alt="网络检测效果1"></li>
+<li>查看与操作sqlite操作效果<br> <img src="http://ww2.sinaimg.cn/mw690/006lhyt2gw1f292m9yg49j30zk0ixmzo.jpg" alt="sqlite操作效果"></li>
+<li>查看与操作sharedpreference<br><img src="http://ww4.sinaimg.cn/mw690/006lhyt2gw1f292ivas43j30zk0j8mzd.jpg" alt="sharedpref操作效果"></li>
+<li>在Chrome上查看View的层级<br>  <img src="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292jdzx87j30zk0j5juj.jpg" alt="view层级查看"></li>
+<li>在上图显示的层级中我选中Actionbar后，手机上也会显示被选中的位置<br><img src="http://ww4.sinaimg.cn/mw690/006lhyt2gw1f292kuwfgwj30zk1r8tc5.jpg" alt="手机界面效果"></li>
+<li>http请求头查看<br><img src="http://ww1.sinaimg.cn/mw690/006lhyt2gw1f292jwa4bqj30zk0j7dhz.jpg" alt="http请求头查看"></li>
+<li>json数据查看<br><img src="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292kasihqj30zk0iz0vl.jpg" alt="json数据查看"></li>
+</ol>
+<h2 id="最后附上我的-DEMO"><a href="#最后附上我的-DEMO" class="headerlink" title="最后附上我的 DEMO"></a>最后附上我的 DEMO</h2><blockquote>
+<p><a href="/assets/stetho_study/stetho_sample.apk">APK</a></p>
+<p><a href="/assets/stetho_study/StethoSample.7z">Source Code</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今年年初，facebook开源了一个Android开发调试工具，叫stetho，应该是单词stethoscope的一部分吧，意为诊断器。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;代码托管地址： &lt;a href=&quot;https://github.com/facebook/stetho&quot;&gt;https://github.com/facebook/stetho&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在项目中添加相应代码，通过Chrome DevTools连接设备后具备以下功能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可以在Chrome里进行网络访问检测，可以查看请求链接，请求头，JSON数据等&lt;/li&gt;
+&lt;li&gt;不root的情况下查看Sqlite数据库，并且可以使用sql语句去操作&lt;/li&gt;
+&lt;li&gt;最近又升级了，API 15 以上能查看View hierarchy了&lt;/li&gt;
+&lt;li&gt;dumpapp 工具提供强大的命令行接口来访问应用内部&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;更新比较频繁，前几天更新到1.1.0了，使用AndroidStudio可以很方便的添加到项目中。当然也可以从github页面下载最新Jar包。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="http://luffyjet.oschina.io/categories/android/"/>
+    
+    
+      <category term="debug" scheme="http://luffyjet.oschina.io/tags/debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开源许可协议学习</title>
+    <link href="http://luffyjet.oschina.io/2015/04/08/open-source-licenses-study/"/>
+    <id>http://luffyjet.oschina.io/2015/04/08/open-source-licenses-study/</id>
+    <published>2015-04-08T04:03:41.000Z</published>
+    <updated>2016-03-25T05:39:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>一直在用开源代码，但是对于那些 开源许可协议 了解太少，惭愧。</p>
+<p>关于几个主流协议间的区别，一图顶千言：<br><img src="http://ww2.sinaimg.cn/large/006lhyt2gw1f291tmf8imj30g409yaai.jpg" alt=""></p>
+<p>GitHub上开源项目协议使用情况：<br><img src="http://ww2.sinaimg.cn/large/006lhyt2gw1f291uhygs1j30m80dw40j.jpg" alt=""></p>
+<p>由图可以看出 MIT 限制是最宽松的，其可谓为所欲为，因此使用量也是最大的。当然图中的协议不全，还有比GPL更严格的协议AGPL。每个协议的具体内容，我看不懂，能区别他们就好。要商用的软件就不能采用带GPL系列许可证的，不过在中国这方面就… </p>
+<blockquote>
+<p>以下是具体的介绍，文字均来源于网络。</p>
+</blockquote>
+<h2 id="什么是软件许可协议？"><a href="#什么是软件许可协议？" class="headerlink" title="什么是软件许可协议？"></a>什么是软件许可协议？</h2><a id="more"></a>
+<p> 关于究竟什么是许可协议的问题上有很多事实而非的说法。当你给软件附上许可证时，意味着你将保留对软件的所有权利。你将对你的作品拥有原创版权(或者是专利权，如果你申请到了)。许可协议用来授权其他人具有某种使用你的作品的权利。</p>
+<p>&#160;     &#160;     &#160;     &#160;    依靠许可协议将你的作品对外开源或者对你的作品的各个方面逐一进行授权，是一个不错的方法。一旦对外开源，你将失去所有对你的作品的版权，别人也没有义务将你标注为作品的原创者或捐献者。而我说的后一种情况里，估计你需要从设计和开发的工作中抽出更多的时间来处理遇到的各种侵权问题。</p>
+<p>&#160;     &#160;     &#160;     &#160;    开源许可协议 使人们免去了研究那些专业的许可条款的麻烦，使人们更方便的对开源项目贡献出自己的代码。而且它还能保护你作为作品的原创作者，确保你至少拥有由于贡献参与而带来的署名荣誉。它还能用来阻止其他人企图声明对你的作品拥有所有权的行为。</p>
+<h2 id="常见开源许可协议：GPL、LGPL、BSD、Apache-License-2-0、MIT等"><a href="#常见开源许可协议：GPL、LGPL、BSD、Apache-License-2-0、MIT等" class="headerlink" title="常见开源许可协议：GPL、LGPL、BSD、Apache License 2.0、MIT等"></a>常见开源许可协议：GPL、LGPL、BSD、Apache License 2.0、MIT等</h2><h5 id="GPL"><a href="#GPL" class="headerlink" title="GPL"></a>GPL</h5><p>&#160;     &#160;     &#160;     &#160;    全称 GNU General Public License。它的主要内容为：只要在一个软件中使用(“使用”指类库引用或者修改后的代码) GPL 协议的产品，则该软件产品必须也采用GPL协议，既必须也是开源和免费。这个协议就不太适合商用软件，或者准备使用GPL开源组件的商用项目。基于这个协议的项目，极大的提高了开源软件的数量。上面那个微博的案例，如果作者使用了GPL协议，而使用方没有公开源代码就是违反了协议。目前用的多的是GPLV1，GPLV2。这两个什么区别看后面那张树形图。采用这个协议的开源软件有：Linux、 MySQL.</p>
+<h5 id="LGPL"><a href="#LGPL" class="headerlink" title="LGPL"></a>LGPL</h5><p>&#160;     &#160;     &#160;     &#160;    最初是Library GPL的缩写，后来改称作Lesser GPL。由于GPL太严格，限制了很多商用软件使用GPL组件才推出了这个LGPL。LGPL允许商业软件通过引用类库的方式使用LGPL组件（不直接使用源代码），这样可以不需要开源商业软件的代码。但是如果要修改原始组件的代码，则涉及修改部分的代码和基于原来代码衍生的代码都必须采用LGPL协议。LGPL不适合以LGPL协议为基础的代码进行二次开发的商业软件，但是商用软件可以采用编译后的类库引用就不需要公开源代码了。采用这个协议的开源软件有： JBoss、 FCKeditor 、 Hibernate。之前extjs就因为从LGPL转换到GPL带来了不少的震动。详情点击。</p>
+<h5 id="BSD"><a href="#BSD" class="headerlink" title="BSD"></a>BSD</h5><p>&#160;     &#160;     &#160;     &#160;    全称 Berkeley Software Distribution。这个协议相对上面两个协议宽松很多，允许使用者修改和重新发布代码，也允许使用或在BSD代码基础上开发商业软件发布和销售，因此是适用于商业软件的。使用者别太高兴，使用时还必须做到满足三个条件：</p>
+<ol>
+<li><p>如果再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议。</p>
+</li>
+<li><p>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档和版权声明中包含原来代码中的BSD协议。</p>
+</li>
+<li><p>不可以用开源代码的作者/机构名字和原来产品的名字做市场推广。使用用BSD协议的开源软件有： nginx、CruiseControl、Redis…</p>
+</li>
+</ol>
+<h5 id="Apache-License-2-0"><a href="#Apache-License-2-0" class="headerlink" title="Apache License 2.0"></a>Apache License 2.0</h5><p>&#160;     &#160;     &#160;     &#160;    这个协议除了为用户提供版权许可之外，还有专利许可。与BSD协议权限类似， 允许代码修改，再发布，适用商业软件。但是也需要满足以下条件：</p>
+<ol>
+<li><p>需要给代码的用户一份Apache Licence。</p>
+</li>
+<li><p>如果你修改了代码，需要再被修改的文件中说明。</p>
+</li>
+<li><p>在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。</p>
+</li>
+<li><p>如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</p>
+</li>
+</ol>
+<p>除了这些条件它还有这些好处：</p>
+<ol>
+<li><p>永久权利 一旦被授权，永久拥有。</p>
+</li>
+<li><p>全球范围的权利 在一个国家获得授权，适用于所有国家。假如你在美国，许可是从印度授权的，也没有问题。</p>
+</li>
+<li><p>授权免费 无版税， 前期、后期均无任何费用。</p>
+</li>
+<li><p>授权无排他性 任何人都可以获得授权</p>
+</li>
+<li><p>授权不可撤消 一旦获得授权，没有任何人可以取消。比如，你基于该产品代码开发了衍生产品，你不用担心会在某一天被禁止使用该代码</p>
+</li>
+</ol>
+<p>使用Apache License 2.0协议的开源软件有：Hadoop、SpringFramework、MongoDB…</p>
+<h5 id="MIT"><a href="#MIT" class="headerlink" title="MIT"></a>MIT</h5><p>&#160;     &#160;     &#160;     &#160;    源自麻省理工学院（Massachusetts Institute of Technology, MIT），又称X11协议。MIT与BSD类似，但是比BSD协议更加宽松，是目前最少限制的协议。这个协议唯一的条件就是在修改后的代码或者发行包包含原作者的许可信息。适用商业软件。使用MIT的软件项目有：jquery、Node.js。</p>
+<h3 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h3><h4 id="流行的开源许可协议"><a href="#流行的开源许可协议" class="headerlink" title="流行的开源许可协议"></a><a href="http://opensource.org/licenses/" target="_blank" rel="external">流行的开源许可协议</a></h4><h4 id="经过Open-Source-Initiative-组织批准的开源协议-http-opensource-org-licenses-alphabetical"><a href="#经过Open-Source-Initiative-组织批准的开源协议-http-opensource-org-licenses-alphabetical" class="headerlink" title="经过Open Source Initiative 组织批准的开源协议](http://opensource.org/licenses/alphabetical)["></a><a href="http://opensource.org/licenses/alphabetical" target="_blank" rel="external">经过</a><a href="http://opensource.org/licenses/alphabetical" target="_blank" rel="external">Open Source Initiative</a> <a href="http://opensource.org/licenses/alphabetical" target="_blank" rel="external">组织批准的开源协议](http://opensource.org/licenses/alphabetical)</a>[</h4><h4 id="开源软件及国内发展现状"><a href="#开源软件及国内发展现状" class="headerlink" title="开源软件及国内发展现状"></a><a href="http://www.fmsoft.cn/zhcn/about/blog/185/" target="_blank" rel="external">开源软件及国内发展现状</a></h4><h4 id="做一个优秀的开源项目，需要注意哪些方面？"><a href="#做一个优秀的开源项目，需要注意哪些方面？" class="headerlink" title="做一个优秀的开源项目，需要注意哪些方面？"></a><a href="http://blog.jobbole.com/57767/" target="_blank" rel="external">做一个优秀的开源项目，需要注意哪些方面？</a></h4>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直在用开源代码，但是对于那些 开源许可协议 了解太少，惭愧。&lt;/p&gt;
+&lt;p&gt;关于几个主流协议间的区别，一图顶千言：&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006lhyt2gw1f291tmf8imj30g409yaai.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;GitHub上开源项目协议使用情况：&lt;br&gt;&lt;img src=&quot;http://ww2.sinaimg.cn/large/006lhyt2gw1f291uhygs1j30m80dw40j.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;由图可以看出 MIT 限制是最宽松的，其可谓为所欲为，因此使用量也是最大的。当然图中的协议不全，还有比GPL更严格的协议AGPL。每个协议的具体内容，我看不懂，能区别他们就好。要商用的软件就不能采用带GPL系列许可证的，不过在中国这方面就… &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以下是具体的介绍，文字均来源于网络。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;什么是软件许可协议？&quot;&gt;&lt;a href=&quot;#什么是软件许可协议？&quot; class=&quot;headerlink&quot; title=&quot;什么是软件许可协议？&quot;&gt;&lt;/a&gt;什么是软件许可协议？&lt;/h2&gt;
+    
+    </summary>
+    
+      <category term="OpenSource" scheme="http://luffyjet.oschina.io/categories/OpenSource/"/>
+    
+    
+      <category term="OpenSourceLicenses" scheme="http://luffyjet.oschina.io/tags/OpenSourceLicenses/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Retrofit的科学使用：Singleton </title>
+    <link href="http://luffyjet.oschina.io/2014/12/30/retrofit-singleton-usage/"/>
+    <id>http://luffyjet.oschina.io/2014/12/30/retrofit-singleton-usage/</id>
+    <published>2014-12-30T02:43:23.000Z</published>
+    <updated>2016-11-07T11:42:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>单例模式很适合Android开发，对于<a href="http://square.github.io/retrofit/" target="_blank" rel="external">Retrofit</a>(Android开发中一个非常优秀的Rest Client)，也要使用单例模式获取实例。</p>
+<p>下面是Jake大神在stackoverflow上关于Retrofit的使用问题的回答。</p>
+<pre><code>Both the RestAdapter and the generated instance of your services (MyTaskService in this case) are extremely expensive objects and should be used as singletons.
+
+This means that you should only ever call restAdapter.create once and re-use the same instance of MyTaskService every time you need to interact with.
+
+I cannot stress this enough.
+
+You can use the regular singleton pattern in order to ensure that there only is ever a single instance of these objects that you use everywhere. A dependency injection framework would also be something that could be used to manage these instances but would be a bit overkill if you are not already utilizing it.
+</code></pre><p>从中我们可以看到 Jake表示 Retrofit每次创建RestAdapter和自定义的接口对象是很耗费资源的，因此不需要每次去创建，要使用单例模式。确实Retrofit是通过添加运行时注解，采用动态代理的方式去创建实例的。<br><a id="more"></a><br>线程安全的饿汉式：    </p>
+<pre><code><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> GitHubApi sGitHubApi = <span class="keyword">new</span> GitHubApi();</div><div class="line">	 </div><div class="line"><span class="keyword">private</span> GitHub sGitHub;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="title">GitHubApi</span><span class="params">()</span> </span>&#123;</div><div class="line">    initService();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> GitHub <span class="title">getGitHub</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> sGitHub;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GitHubApi <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> sGitHubApi;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initService</span><span class="params">()</span> </span>&#123;</div><div class="line">    RestAdapter sRestAdapter = <span class="keyword">new</span> 	            RestAdapter.Builder().setClient(getOkClient()).setEndpoint(BASE_URL).build();</div><div class="line">    sGitHub = sRestAdapter.create(GitHub.class);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><p>or 懒汉式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> GitHub sGitHub;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GitHub <span class="title">getGitHub</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == sGitHub) &#123;</div><div class="line">        RestAdapter sRestAdapter = <span class="keyword">new</span> RestAdapter.Builder().setClient(getOkClient()).setEndpoint(BASE_URL).build();</div><div class="line">        sGitHub = sRestAdapter.create(GitHub.class);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sGitHub;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;单例模式很适合Android开发，对于&lt;a href=&quot;http://square.github.io/retrofit/&quot;&gt;Retrofit&lt;/a&gt;(Android开发中一个非常优秀的Rest Client)，也要使用单例模式获取实例。&lt;/p&gt;
+&lt;p&gt;下面是Jake大神在stackoverflow上关于Retrofit的使用问题的回答。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Both the RestAdapter and the generated instance of your services (MyTaskService in this case) are extremely expensive objects and should be used as singletons.
+
+This means that you should only ever call restAdapter.create once and re-use the same instance of MyTaskService every time you need to interact with.
+
+I cannot stress this enough.
+
+You can use the regular singleton pattern in order to ensure that there only is ever a single instance of these objects that you use everywhere. A dependency injection framework would also be something that could be used to manage these instances but would be a bit overkill if you are not already utilizing it.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;从中我们可以看到 Jake表示 Retrofit每次创建RestAdapter和自定义的接口对象是很耗费资源的，因此不需要每次去创建，要使用单例模式。确实Retrofit是通过添加运行时注解，采用动态代理的方式去创建实例的。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="http://luffyjet.oschina.io/categories/android/"/>
+    
+    
+      <category term="Retrofit" scheme="http://luffyjet.oschina.io/tags/Retrofit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于Hexo框架的静态博客搭建</title>
+    <link href="http://luffyjet.oschina.io/2014/12/21/to_build_hexo_blog/"/>
+    <id>http://luffyjet.oschina.io/2014/12/21/to_build_hexo_blog/</id>
+    <published>2014-12-21T14:20:20.000Z</published>
+    <updated>2016-02-22T07:48:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>BBS,WordPress都折腾过，弄来弄去最后发现<a href="https://www.github.com" target="_blank" rel="external">GitHub</a>上可以搭建自定义域名的静态页面博客，所以摸索了一下如何在github上搭建自己的博客。开始按着<a href="https://pages.github.com" target="_blank" rel="external">GitHub pages</a>的介绍和文档，搭建了基于Jekyll的博客，但是折腾了很久都没发现自己喜欢的博客模板。后来搜索，发现了<a href="http://hexo.io/" title="Hexo" target="_blank" rel="external">Hexo</a>框架，顿时觉得这正是我所需要的。到后面发现了国内的<a href="https://www.gitcafe.com" target="_blank" rel="external">GitCafe</a>,把博客部署到GitCafe上，访问速度快了很多。</p>
+<p>Hexo框架的安装也没有Jekyll繁琐，对Windows的支持比Jekyll好很多。Jekyll在windows下各种问题。</p>
+<h5 id="Hexo的安装"><a href="#Hexo的安装" class="headerlink" title="Hexo的安装"></a>Hexo的安装</h5><a id="more"></a>
+<p>保证你系统安装好了<a href="http://www.nodejs.org/" target="_blank" rel="external">NodeJS</a> 和 <a href="http://git-scm.com/downloads" target="_blank" rel="external">Git</a>客户端后，安装部署Hexo到本机只需要按照Hexo官网的说明输入几行命令即可。</p>
+<p>Windows下安装NodeJS就是动动鼠标的事，Linux下相对麻烦些。我尝试了将Hexo安装在Ubantu上。记录下我的安装过程。</p>
+<h5 id="Ubantu下安装NodeJS"><a href="#Ubantu下安装NodeJS" class="headerlink" title="Ubantu下安装NodeJS"></a>Ubantu下安装NodeJS</h5><ol>
+<li><p>不要sudo apt-get xxx 的方式安装NodeJS，这样只会安装过时的版本，到时候无法安装Hexo，以防万一先执行下卸载命令:</p>
+<p><code>$sudo apt-get autoremove npm</code><br> <code>$sudo apt-get autoremove nodejs</code></p>
+</li>
+<li><p>首先去官网下载Linux对应的<a href="http://www.nodejs.org/download/" target="_blank" rel="external">NodeJS</a><a href="http://www.nodejs.org/download/" target="_blank" rel="external">源码包</a> </p>
+</li>
+<li><p>Ubantu下直接双击打开拖出来就是。</p>
+</li>
+<li><p>确保NodeJS能正常编译还要检查Python、gcc、g++</p>
+<p> <code>$ sudo apt-get install python</code> </p>
+<p> <code>$ sudo apt-get install build-essential</code> </p>
+<p> <code>$ sudo apt-get install gcc</code> </p>
+<p> <code>$ sudo apt-get install g++</code> </p>
+</li>
+<li><p>然后cd 进入到你解压的目录 执行</p>
+<p><code>./configure</code><br><code>make</code><br><code>sudo make install</code></p>
+</li>
+</ol>
+<p>Make的过程有点久，请耐心等待。以上步骤完毕之后，进行软链接:</p>
+<pre><code>$ sudo ln -s /usr/local/bin/node /usr/bin/node
+$ sudo ln -s /usr/local/bin/npm /usr/bin/npm
+</code></pre><p>然后再查看NodeJS版本,没有执行上面命令时会出现无法找到node的错误</p>
+<pre><code>$ node -v
+$ npm -v
+</code></pre><p>到此NodeJS安装完毕。</p>
+<h5 id="Ubantu下安装Git安装"><a href="#Ubantu下安装Git安装" class="headerlink" title="Ubantu下安装Git安装"></a>Ubantu下安装Git安装</h5><p>Hexo下载主题、插件和部署到github，都用的Git 。 所以你还得安装Git，Windows下载<a href="http://msysgit.github.io" target="_blank" rel="external">安装文件</a>安装即可记得安装的时候勾选添加到环境变量。<br>Ubantu下执行 </p>
+<pre><code>sudo apt-get install git
+</code></pre><p>完成Git安装后按照一开始说的命令进行Hexo安装。安装好之后就是查看Hexo的<a href="http://hexo.io/docs/" target="_blank" rel="external">文档</a>和<a href="https://github.com/hexojs/hexo/wiki/Plugins" target="_blank" rel="external">插件</a>,还有<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">主题</a>页面，去完善自己的静态博客了。</p>
+<p>选择一套自己喜欢的主题，按照说明进行切换，然后添加评论，搜索等等插件。然后执行</p>
+<pre><code>hexo server
+</code></pre><p>用浏览器打开 localhost:4000 ，查看运行效果。</p>
+<p>那么要怎么部署到服务端上呢，接着看下面。</p>
+<h4 id="怎么在Github上创建自己的博客，参考"><a href="#怎么在Github上创建自己的博客，参考" class="headerlink" title="怎么在Github上创建自己的博客，参考"></a>怎么在Github上创建自己的博客，参考</h4><blockquote>
+<p><a href="https://pages.github.com/" target="_blank" rel="external">https://pages.github.com/</a></p>
+<p><a href="https://help.github.com/categories/github-pages-basics/" target="_blank" rel="external">https://help.github.com/categories/github-pages-basics/</a></p>
+</blockquote>
+<h4 id="怎么在GitCafe上创建自己的博客，参考"><a href="#怎么在GitCafe上创建自己的博客，参考" class="headerlink" title="怎么在GitCafe上创建自己的博客，参考"></a>怎么在GitCafe上创建自己的博客，参考</h4><blockquote>
+<p>GitCafe的帮助页面 <a href="https://gitcafe.com/GitCafe/Help" target="_blank" rel="external">https://gitcafe.com/GitCafe/Help</a></p>
+</blockquote>
+<p>GitCafe是国内的类Github网站，也支持搭建博客，访问速度会比Github快。<br>上面的帮助页面包含SSH Key配置(当然你也可以选择Https方式提交),如何部署博客到GitCafe Pages服务，如何绑定自定义域名等。</p>
+<h5 id="新版的Hexo部署博客的方式有所改变"><a href="#新版的Hexo部署博客的方式有所改变" class="headerlink" title="新版的Hexo部署博客的方式有所改变"></a>新版的Hexo部署博客的方式有所改变</h5><p> 统一了Git方式的部署，需要安装插件具体查看官方文档：</p>
+<blockquote>
+<p><a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></p>
+</blockquote>
+<h5 id="绑定自定义域名到Github-Pages"><a href="#绑定自定义域名到Github-Pages" class="headerlink" title="绑定自定义域名到Github Pages"></a>绑定自定义域名到Github Pages</h5><p>在自己的域名解析设置页面内添加一条A记录到以下IP的其中一个即可</p>
+<blockquote>
+<p>192.30.252.153</p>
+<p>192.30.252.154</p>
+</blockquote>
+<p>然后在相应的Github项目内创建一个CNAME文件，中间只记录你的域名 比如</p>
+<blockquote>
+<p>www.luffyjet.com</p>
+</blockquote>
+<p>DNS设置具体过程请参考</p>
+<blockquote>
+<p><a href="http://jingyan.baidu.com/article/dca1fa6fa1e403f1a5405262.html" target="_blank" rel="external">http://jingyan.baidu.com/article/dca1fa6fa1e403f1a5405262.html</a></p>
+</blockquote>
+<h5 id="用Markdown写文章"><a href="#用Markdown写文章" class="headerlink" title="用Markdown写文章"></a>用Markdown写文章</h5><p>Hexo博客的文章都是用Markdown写作的，具体语法参考</p>
+<blockquote>
+<p>标准版<br>: <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">http://daringfireball.net/projects/markdown/syntax</a></p>
+<p>Github版<br>: <a href="https://help.github.com/articles/github-flavored-markdown/" target="_blank" rel="external">https://help.github.com/articles/github-flavored-markdown/</a></p>
+</blockquote>
+<h5 id="更多的Hexo使用和修改请仔细阅读官方文档。"><a href="#更多的Hexo使用和修改请仔细阅读官方文档。" class="headerlink" title="更多的Hexo使用和修改请仔细阅读官方文档。"></a>更多的Hexo使用和修改请仔细阅读官方文档。</h5><p>更多的个性化设置介绍请参考下面的文章：</p>
+<blockquote>
+<p><a href="http://zipperary.com/categories/hexo/" target="_blank" rel="external">http://zipperary.com/categories/hexo/</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;BBS,WordPress都折腾过，弄来弄去最后发现&lt;a href=&quot;https://www.github.com&quot;&gt;GitHub&lt;/a&gt;上可以搭建自定义域名的静态页面博客，所以摸索了一下如何在github上搭建自己的博客。开始按着&lt;a href=&quot;https://pages.github.com&quot;&gt;GitHub pages&lt;/a&gt;的介绍和文档，搭建了基于Jekyll的博客，但是折腾了很久都没发现自己喜欢的博客模板。后来搜索，发现了&lt;a href=&quot;http://hexo.io/&quot; title=&quot;Hexo&quot;&gt;Hexo&lt;/a&gt;框架，顿时觉得这正是我所需要的。到后面发现了国内的&lt;a href=&quot;https://www.gitcafe.com&quot;&gt;GitCafe&lt;/a&gt;,把博客部署到GitCafe上，访问速度快了很多。&lt;/p&gt;
+&lt;p&gt;Hexo框架的安装也没有Jekyll繁琐，对Windows的支持比Jekyll好很多。Jekyll在windows下各种问题。&lt;/p&gt;
+&lt;h5 id=&quot;Hexo的安装&quot;&gt;&lt;a href=&quot;#Hexo的安装&quot; class=&quot;headerlink&quot; title=&quot;Hexo的安装&quot;&gt;&lt;/a&gt;Hexo的安装&lt;/h5&gt;
+    
+    </summary>
+    
+      <category term="other" scheme="http://luffyjet.oschina.io/categories/other/"/>
+    
+    
+      <category term="hexo" scheme="http://luffyjet.oschina.io/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
