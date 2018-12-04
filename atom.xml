@@ -213,15 +213,12 @@ http://www.facefinger.cn/
     <link href="http://www.luffyjet.com/techblog/2018/03/15/android-interview/"/>
     <id>http://www.luffyjet.com/techblog/2018/03/15/android-interview/</id>
     <published>2018-03-15T15:28:55.000Z</published>
-    <updated>2018-12-04T08:53:23.944Z</updated>
+    <updated>2018-12-04T14:35:24.492Z</updated>
     
     <content type="html"><![CDATA[<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ol>
-<li><p>[Android 开发工程师面试指南]<br>(<a href="https://www.diycode.cc/wiki/androidinterview" target="_blank" rel="external">https://www.diycode.cc/wiki/androidinterview</a>)</p>
-</li>
-<li><p><a href="https://github.com/hadyang/interview" target="_blank" rel="external">Java / Android 笔试、面试 知识整理</a></p>
-</li>
-<li><p><a href="http://www.jackywang.tech/AndroidInterview-Q-A/" target="_blank" rel="external">国内一线互联网公司内部面试题库</a></p>
-</li>
+<li><a href="https://www.diycode.cc/wiki/androidinterview" target="_blank" rel="external">Android 开发工程师面试指南</a></li>
+<li><a href="https://github.com/hadyang/interview" target="_blank" rel="external">Java / Android 笔试、面试 知识整理</a></li>
+<li><a href="http://www.jackywang.tech/AndroidInterview-Q-A/" target="_blank" rel="external">国内一线互联网公司内部面试题库</a></li>
 <li><a href="https://yuchengkai.cn/docs/zh/" target="_blank" rel="external">InterviewMap 面试图谱</a></li>
 <li><a href="https://github.com/crossoverJie/JCSprout" target="_blank" rel="external">Java Core Sprout </a></li>
 <li><a href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="external">设计模式(菜鸟学院)</a></li>
@@ -267,12 +264,9 @@ http://www.facefinger.cn/
     <summary type="html">
     
       &lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;[Android 开发工程师面试指南]&lt;br&gt;(&lt;a href=&quot;https://www.diycode.cc/wiki/androidinterview&quot;&gt;https://www.diycode.cc/wiki/androidinterview&lt;/a&gt;)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/hadyang/interview&quot;&gt;Java / Android 笔试、面试 知识整理&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.jackywang.tech/AndroidInterview-Q-A/&quot;&gt;国内一线互联网公司内部面试题库&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.diycode.cc/wiki/androidinterview&quot;&gt;Android 开发工程师面试指南&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/hadyang/interview&quot;&gt;Java / Android 笔试、面试 知识整理&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jackywang.tech/AndroidInterview-Q-A/&quot;&gt;国内一线互联网公司内部面试题库&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://yuchengkai.cn/docs/zh/&quot;&gt;InterviewMap 面试图谱&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/crossoverJie/JCSprout&quot;&gt;Java Core Sprout &lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.runoob.com/design-pattern/design-pattern-tutorial.html&quot;&gt;设计模式(菜鸟学院)&lt;/a&gt;&lt;/li&gt;
@@ -370,13 +364,11 @@ http://www.facefinger.cn/
     <link href="http://www.luffyjet.com/techblog/2018/03/02/RxJava-Agera-articles/"/>
     <id>http://www.luffyjet.com/techblog/2018/03/02/RxJava-Agera-articles/</id>
     <published>2018-03-02T02:43:23.000Z</published>
-    <updated>2018-12-04T07:50:37.516Z</updated>
+    <updated>2018-12-04T14:35:48.369Z</updated>
     
     <content type="html"><![CDATA[<ol>
-<li><p><a href="http://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;mid=2649796857&amp;idx=1&amp;sn=ed8325aeddac7fd2bd81a0717c010e98&amp;mpshare=1&amp;scene=23&amp;srcid=11286ayNT2eeDyDzzSRbS9rg#rd" target="_blank" rel="external">RxJava &amp; Agera 从源码简要分析基本调用流程</a></p>
-</li>
-<li><p><a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></p>
-</li>
+<li><a href="http://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;mid=2649796857&amp;idx=1&amp;sn=ed8325aeddac7fd2bd81a0717c010e98&amp;mpshare=1&amp;scene=23&amp;srcid=11286ayNT2eeDyDzzSRbS9rg#rd" target="_blank" rel="external">RxJava &amp; Agera 从源码简要分析基本调用流程</a></li>
+<li><a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></li>
 <li><a href="http://gank.io/post/56e80c2c677659311bed9841" target="_blank" rel="external">RxJava 与 Retrofit 结合的最佳实践</a></li>
 <li><a href="http://blog.csdn.net/lzyzsd/article/details/41833541/" target="_blank" rel="external">深入浅出RxJava（一：基础篇）</a>  系列文章</li>
 <li><a href="https://github.com/kaushikgopal/RxJava-Android-Samples" target="_blank" rel="external">Learning RxJava for Android by example</a></li>
@@ -399,10 +391,8 @@ http://www.facefinger.cn/
     <summary type="html">
     
       &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;amp;mid=2649796857&amp;amp;idx=1&amp;amp;sn=ed8325aeddac7fd2bd81a0717c010e98&amp;amp;mpshare=1&amp;amp;scene=23&amp;amp;srcid=11286ayNT2eeDyDzzSRbS9rg#rd&quot;&gt;RxJava &amp;amp; Agera 从源码简要分析基本调用流程&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://gank.io/post/560e15be2dca930e00da1083&quot;&gt;给 Android 开发者的 RxJava 详解&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;amp;mid=2649796857&amp;amp;idx=1&amp;amp;sn=ed8325aeddac7fd2bd81a0717c010e98&amp;amp;mpshare=1&amp;amp;scene=23&amp;amp;srcid=11286ayNT2eeDyDzzSRbS9rg#rd&quot;&gt;RxJava &amp;amp; Agera 从源码简要分析基本调用流程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://gank.io/post/560e15be2dca930e00da1083&quot;&gt;给 Android 开发者的 RxJava 详解&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://gank.io/post/56e80c2c677659311bed9841&quot;&gt;RxJava 与 Retrofit 结合的最佳实践&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/lzyzsd/article/details/41833541/&quot;&gt;深入浅出RxJava（一：基础篇）&lt;/a&gt;  系列文章&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/kaushikgopal/RxJava-Android-Samples&quot;&gt;Learning RxJava for Android by example&lt;/a&gt;&lt;/li&gt;
@@ -913,7 +903,7 @@ http://www.facefinger.cn/
     <link href="http://www.luffyjet.com/techblog/2016/05/09/android6.0-permissions/"/>
     <id>http://www.luffyjet.com/techblog/2016/05/09/android6.0-permissions/</id>
     <published>2016-05-09T04:30:33.000Z</published>
-    <updated>2018-12-04T08:45:52.320Z</updated>
+    <updated>2018-12-04T14:34:11.158Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><a href="https://github.com/yanzhenjie/AndPermission" target="_blank" rel="external">开源项目 AndPermission</a></li>
@@ -925,14 +915,22 @@ http://www.facefinger.cn/
 <li><a href="https://github.com/tbruyelle/RxPermissions" target="_blank" rel="external">https://github.com/tbruyelle/RxPermissions</a></li>
 <li><a href="https://github.com/anthonycr/Grant" target="_blank" rel="external">https://github.com/anthonycr/Grant</a></li>
 </ol>
+<a id="more"></a>
 <h4 id="正常权限"><a href="#正常权限" class="headerlink" title="正常权限"></a>正常权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">As of API level 23, the following permissions are classified as PROTECTION_NORMAL:</div><div class="line"></div><div class="line">ACCESS_LOCATION_EXTRA_COMMANDS</div><div class="line">ACCESS_NETWORK_STATE</div><div class="line">ACCESS_NOTIFICATION_POLICY</div><div class="line">ACCESS_WIFI_STATE</div><div class="line">BLUETOOTH</div><div class="line">BLUETOOTH_ADMIN</div><div class="line">BROADCAST_STICKY</div><div class="line">CHANGE_NETWORK_STATE</div><div class="line">CHANGE_WIFI_MULTICAST_STATE</div><div class="line">CHANGE_WIFI_STATE</div><div class="line">DISABLE_KEYGUARD</div><div class="line">EXPAND_STATUS_BAR</div><div class="line">GET_PACKAGE_SIZE</div><div class="line">INSTALL_SHORTCUT</div><div class="line">INTERNET</div><div class="line">KILL_BACKGROUND_PROCESSES</div><div class="line">MODIFY_AUDIO_SETTINGS</div><div class="line">NFC</div><div class="line">READ_SYNC_SETTINGS</div><div class="line">READ_SYNC_STATS</div><div class="line">RECEIVE_BOOT_COMPLETED</div><div class="line">REORDER_TASKS</div><div class="line">REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</div><div class="line">REQUEST_INSTALL_PACKAGES</div><div class="line">SET_ALARM</div><div class="line">SET_TIME_ZONE</div><div class="line">SET_WALLPAPER</div><div class="line">SET_WALLPAPER_HINTS</div><div class="line">TRANSMIT_IR</div><div class="line">UNINSTALL_SHORTCUT</div><div class="line">USE_FINGERPRINT</div><div class="line">VIBRATE</div><div class="line">WAKE_LOCK</div><div class="line">WRITE_SYNC_SETTINGS</div></pre></td></tr></table></figure>
 <h4 id="危险权限"><a href="#危险权限" class="headerlink" title="危险权限"></a>危险权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">CALENDAR	</div><div class="line">READ_CALENDAR</div><div class="line">WRITE_CALENDAR</div><div class="line"></div><div class="line">CAMERA	</div><div class="line">CAMERA</div><div class="line"></div><div class="line">CONTACTS	</div><div class="line">READ_CONTACTS</div><div class="line">WRITE_CONTACTS</div><div class="line">GET_ACCOUNTS</div><div class="line"></div><div class="line">LOCATION	</div><div class="line">ACCESS_FINE_LOCATION</div><div class="line">ACCESS_COARSE_LOCATION</div><div class="line"></div><div class="line">MICROPHONE	</div><div class="line">RECORD_AUDIO</div><div class="line"></div><div class="line">PHONE	</div><div class="line">READ_PHONE_STATE</div><div class="line">CALL_PHONE</div><div class="line">READ_CALL_LOG</div><div class="line">WRITE_CALL_LOG</div><div class="line">ADD_VOICEMAIL</div><div class="line">USE_SIP</div><div class="line">PROCESS_OUTGOING_CALLS</div><div class="line"></div><div class="line">SENSORS	</div><div class="line">BODY_SENSORS</div><div class="line"></div><div class="line">SMS	</div><div class="line">SEND_SMS</div><div class="line">RECEIVE_SMS</div><div class="line">READ_SMS</div><div class="line">RECEIVE_WAP_PUSH</div><div class="line">RECEIVE_MMS</div><div class="line"></div><div class="line">STORAGE	</div><div class="line">READ_EXTERNAL_STORAGE</div><div class="line">WRITE_EXTERNAL_STORAGE</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/yanzhenjie/AndPermission&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;开源项目 AndPermission&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http:
+&lt;li&gt;&lt;a href=&quot;https://github.com/yanzhenjie/AndPermission&quot;&gt;开源项目 AndPermission&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/lmj623565791/article/details/50709663&quot;&gt;Android 6.0 运行时权限处理完全解析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/dbe4d37731e6/&quot;&gt;Android 6.0 - 动态权限管理的解决方案&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/hotchemi/PermissionsDispatcher&quot;&gt;开源项目 PermissionsDispatcher&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/lovedise/PermissionGen&quot;&gt;PermissionGen&lt;/a&gt; &lt;a href=&quot;https://github.com/hongyangAndroid/MPermissions&quot;&gt;MPermissions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://p.codekk.com/&quot;&gt;codekk.com&lt;/a&gt; 搜权限&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/tbruyelle/RxPermissions&quot;&gt;https://github.com/tbruyelle/RxPermissions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/anthonycr/Grant&quot;&gt;https://github.com/anthonycr/Grant&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     
