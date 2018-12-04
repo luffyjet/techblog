@@ -2,6 +2,104 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2018/06/08/hotfix-framework-article/</loc>
+    
+    <lastmod>2018-12-04T09:01:12.593Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2017/05/12/spring-migration-mybatis%20/</loc>
+    
+    <lastmod>2018-12-04T08:57:38.536Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2018/03/15/android-interview/</loc>
+    
+    <lastmod>2018-12-04T08:53:23.944Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2016/05/09/android6.0-permissions/</loc>
+    
+    <lastmod>2018-12-04T08:45:52.320Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2017/12/08/android-device-type/</loc>
+    
+    <lastmod>2018-12-04T08:24:06.210Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2017/05/19/iOS-resource/</loc>
+    
+    <lastmod>2018-12-04T08:17:10.760Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2017/11/08/gitlab-setup-record/</loc>
+    
+    <lastmod>2018-12-04T08:03:15.149Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2017/07/08/about-web-security/</loc>
+    
+    <lastmod>2018-12-04T07:57:39.555Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2016/10/30/RxJava-Observer-Subscriber/</loc>
+    
+    <lastmod>2018-12-04T07:52:58.440Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2017/07/25/vlc_android_build_record/</loc>
+    
+    <lastmod>2018-12-04T07:52:06.574Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2017/08/13/rsa_demo/</loc>
+    
+    <lastmod>2018-12-04T07:50:55.408Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2018/03/02/RxJava-Agera-articles/</loc>
+    
+    <lastmod>2018-12-04T07:50:37.516Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2018/03/08/NB-IOT/</loc>
+    
+    <lastmod>2018-12-04T07:50:12.656Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.luffyjet.com/techblog/techblog/2018/04/01/about-face-detection/</loc>
+    
+    <lastmod>2018-12-04T07:49:39.053Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.luffyjet.com/techblog/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/</loc>
     
     <lastmod>2016-11-09T06:54:05.000Z</lastmod>

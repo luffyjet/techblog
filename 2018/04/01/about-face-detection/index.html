@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>人脸识别调研和部分应用场景 | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="人脸识别基本流程 
+人脸识别最难的部分是有充分适应各大光线环境的人脸预处理算法，需要在各种复杂的光线环境中提取到人脸信息，特别是移动互联网时代，摄像头拍照的地方可以在斑驳的树影下，也可以在昏暗的街灯下，以及深夜出租车内，这对算法的鲁棒性考验极大。同时还要考虑照片和视频欺诈，二次成像的光线污染等问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人脸识别调研和部分应用场景">
+<meta property="og:url" content="http://www.luffyjet.com/techblog/2018/04/01/about-face-detection/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="人脸识别基本流程 
+人脸识别最难的部分是有充分适应各大光线环境的人脸预处理算法，需要在各种复杂的光线环境中提取到人脸信息，特别是移动互联网时代，摄像头拍照的地方可以在斑驳的树影下，也可以在昏暗的街灯下，以及深夜出租车内，这对算法的鲁棒性考验极大。同时还要考虑照片和视频欺诈，二次成像的光线污染等问题。">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur2wu2oxj30mf0gqn0g.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxur3jkwh5j30pu0rjt9u.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur209blfj30qn0m4qa7.jpg">
+<meta property="og:updated_time" content="2018-12-04T07:49:39.053Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人脸识别调研和部分应用场景">
+<meta name="twitter:description" content="人脸识别基本流程 
+人脸识别最难的部分是有充分适应各大光线环境的人脸预处理算法，需要在各种复杂的光线环境中提取到人脸信息，特别是移动互联网时代，摄像头拍照的地方可以在斑驳的树影下，也可以在昏暗的街灯下，以及深夜出租车内，这对算法的鲁棒性考验极大。同时还要考虑照片和视频欺诈，二次成像的光线污染等问题。">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur2wu2oxj30mf0gqn0g.jpg">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/techblog/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/techblog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/techblog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/techblog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/techblog/css/style.css">
+
+    <script src="/techblog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/techblog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/techblog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/techblog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/techblog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/techblog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/techblog/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/techblog/',
+        CONTENT_URL: '/techblog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/techblog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/techblog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/techblog/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-about-face-detection" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            人脸识别调研和部分应用场景
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/techblog/2018/04/01/about-face-detection/">
+            <time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/techblog/tags/face-detection/">face detection</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="人脸识别基本流程"><a href="#人脸识别基本流程" class="headerlink" title="人脸识别基本流程"></a>人脸识别基本流程</h2><p> <img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur2wu2oxj30mf0gqn0g.jpg" alt=""></p>
+<p>人脸识别最难的部分是有充分适应各大光线环境的人脸预处理算法，需要在各种复杂的光线环境中提取到人脸信息，特别是移动互联网时代，摄像头拍照的地方可以在斑驳的树影下，也可以在昏暗的街灯下，以及深夜出租车内，这对算法的鲁棒性考验极大。同时还要考虑照片和视频欺诈，二次成像的光线污染等问题。<br><a id="more"></a><br>人脸识别应用分类派系：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxur3jkwh5j30pu0rjt9u.jpg" alt=""></p>
+<p>对应解决方案：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur209blfj30qn0m4qa7.jpg" alt=""></p>
+<h2 id="相关企业"><a href="#相关企业" class="headerlink" title="相关企业"></a>相关企业</h2><p>人脸识别公司有很多，大致分为这几类：</p>
+<ul>
+<li>一类是，专注算法这块，主要提供的是API，SDK。有的是自己做成了系统，软件。</li>
+<li>一类是，专注系统、软件这块，有针对不同行业的解决方案，不过不一定掌握了核心算法。</li>
+<li>一类是，人脸识别模块及硬件这块，比如人脸识别考勤机，人脸识别取款机。</li>
+</ul>
+<h4 id="国内主要的相关公司："><a href="#国内主要的相关公司：" class="headerlink" title="国内主要的相关公司："></a>国内主要的相关公司：</h4><ul>
+<li>北京：FACE++，商汤科技，北京可信网络有限公司，脸指，麒麟永盛，百度</li>
+<li>四川：凌感科技，四川蓉达，云从科技</li>
+<li>广东：颜鉴科技（ColorReco），洪森科技</li>
+<li>杭州：杭州微禾</li>
+<li>厦门：厦门瑞为</li>
+<li>上海：晶软，看看智能，腾讯优图，</li>
+</ul>
+<p>部分链接：</p>
+<pre><code>https://www.faceplusplus.com.cn/
+https://cloud.sensetime.com/
+https://www.linkface.cn/
+http://www.facecore.cn/
+http://colorreco.com/
+http://www.faceall.cn/
+http://www.facefinger.cn/
+</code></pre><h4 id="国外相关公司"><a href="#国外相关公司" class="headerlink" title="国外相关公司"></a>国外相关公司</h4><ul>
+<li>美国Identix公司</li>
+<li>美国Bioscrypt公司</li>
+<li>德国Cognitec Systems公司</li>
+<li>西班牙Herta Security公司</li>
+<li>日本NEC公司</li>
+<li>日本Softwise公司</li>
+</ul>
+<p>以上都是老牌人脸识别公司，美国Identix公司做的是多模认证（指纹、虹膜），而Bioscrypt公司早期起于指纹识别考勤，在政府市场的份额都不小，德国的Cognitec公司主要做政府项目的人脸识别系统，而NEC公司主要做机器人视觉识别系统，西班牙Herta公司是一家学术很浓厚的公司。此外的还有一些以色列公司技术也很不错。这些公司最强的一点是，几乎做的都是政府的安全项目，特别是CIA用的最多，此外还有Facebook等公司也在进入这个领域，互联网公司的加入主要是进行人群的分类和应用的优化（针对性的市场推广），项目都是作为公司原本业务的一种补充，这类几乎不用担心客户问题，因为这些公司本身就有很大的需求。随着人工智能的崛起，人脸识别未来会作为一个强大的功能补充，类似语音一样，成为机器人的标配。 关于算法核心研发情况的争论： 基本上国内每家公司都会说自己的算法牛，实际上有几家有人脸核心算法呢？国内在完全从事算法研究的总工程师人数到目前（2016年）总计不到100人，不过也没有现在问题也不大，中科院计算所山世光教授已经开源了算法模块，没有基础的公司不用太辛苦从零开始在OPENCV基础上做算法升级，相信很快google微软还会有新的算法发布。现在算法基本都是98%以上，这点差距已经不重要，算法核不核心也没有太大问题。大家不用太过于焦虑，产品到应用阶段，单单靠算法可不够，还要考虑实际的使用。 </p>
+<h4 id="目前人脸识别的常见问题"><a href="#目前人脸识别的常见问题" class="headerlink" title="目前人脸识别的常见问题"></a>目前人脸识别的常见问题</h4><p>1：1比对源采集的难度： 1vs1，主要用于快速的人脸识别比对，作为身份确认的一种新方式，比如考生身份确认、公司考勤确认、各种证件照和本人确认，由于这些照片源不一定有权威统一的接口调用，所以一直没有用起来。目前市面上做的都是用户自传照片，比如支付宝的人脸比对，用户自传的照片最大的问题是照片质量的合格率太低，拍照的光线、角度等因素会导致采集源的质量下降，不利于后期的大批量人脸特征码管理。 </p>
+<p>N:N模糊匹配查询：1vsN，这个主要用于排查犯罪嫌疑人、失踪人口的全库搜寻、一人多证的重复排查，以此相似度列出相应的结果，可以大大提高排查效率。类似的也可以用到走失儿童的项目中去</p>
+<p>N vs N 该算法实际上是基于视频流的帧处理所用，对服务器的计算环境要求严苛，目前的算法系统所支撑的输出率非常有限，需要等待下一代GPU算法，特别是基于CUDA架构的。该应用主要在一些高级赛事会议场合，以及安保公司的人脸警报系统。 </p>
+<p>人脸识别的算法能力：拒识率、误识率、通过率，准确率 </p>
+<p>人脸识别的技术发展方向： </p>
+<blockquote>
+<p>结合三维信息： 二维和三维信息融合使特征更加鲁棒</p>
+<p>多特征融合： 单一特征难以应对复杂的光照和姿态变化</p>
+<p>大规模人脸比对： 面向海量数据的人脸比对与搜索</p>
+<p>深度学习： 在大数据条件下充分发挥深度神经网络强大的学习能力 </p>
+</blockquote>
+<h2 id="可供选择的国产供应商"><a href="#可供选择的国产供应商" class="headerlink" title="可供选择的国产供应商"></a>可供选择的国产供应商</h2><p>国内的企业从估值、客户、产品都是 Face++ 远远胜出，综合能力非常突出。阿里巴巴采用了Face++的人脸识别技术，融资数量Face++最多。另外还有百度和腾讯优图也开放了人脸识别API。百度和腾讯看重的是他们的数据量和雄厚的资金，算法水平也有。</p>
+<p>所以综合来看有四家候选，4家全部提供了HTTP API的形式的服务：</p>
+<p>face++: <a href="https://megvii.com/" target="_blank" rel="external">https://megvii.com/</a></p>
+<p>商汤科技: <a href="https://cloud.sensetime.com/(https://www.linkface.cn/" target="_blank" rel="external">https://cloud.sensetime.com/(https://www.linkface.cn/</a>)</p>
+<p>百度: <a href="http://ai.baidu.com/docs#/Face-API/top" target="_blank" rel="external">http://ai.baidu.com/docs#/Face-API/top</a></p>
+<p>腾讯优图: <a href="http://open.youtu.qq.com/" target="_blank" rel="external">http://open.youtu.qq.com/</a></p>
+<h4 id="结合应用场景选择："><a href="#结合应用场景选择：" class="headerlink" title="结合应用场景选择："></a>结合应用场景选择：</h4><ul>
+<li>用于登录CC+,由于CC+暂时并没有涉及资金安全方面的问题，可以选用免费的服务，比如百度和腾讯。</li>
+<li>刷脸验人，比如考勤，安全门禁，这些安全要求较高，需要防止各种作弊，我们可以采用face++旗下的<a href="https://faceid.com/" target="_blank" rel="external">FaceID产品</a>，它是付费服务。</li>
+<li>以上几家除了商汤科技都有，开放平台和开放的API提供使用。都具备了人脸识别的各种基本能力。但是都没有免费提供活体检测等高端功能。FaceID，商汤，腾讯都可以通过商务合作购买高级能力。</li>
+<li>按行业按业务分类，face++都有<a href="https://megvii.com/customers/?type=jobs" target="_blank" rel="external">成功的案例</a>。另外还有<a href="https://megvii.com/smart-commerce/success-stories/" target="_blank" rel="external">智能地产解决方案</a>，非常契合智慧园区。我们能想到的需求，这一家基本能满足。</li>
+</ul>
+<h2 id="智慧园区相关应用"><a href="#智慧园区相关应用" class="headerlink" title="智慧园区相关应用"></a>智慧园区相关应用</h2><p>智慧园区和人脸识别的结合场景，有很多，比如：<br>出入口人脸门禁<br>，VIP迎宾<br>，远程访客邀约<br>，员工刷脸考勤<br>，会议室管理<br>，地库人脸门禁<br>，访客人证登记<br>，关键区域门禁管理<br>，证件识别<br>，人证比对等等。下面举一些具体的例子。</p>
+<h5 id="1-企服大堂，人力资源广场大厅，smart展厅的出入人员管理"><a href="#1-企服大堂，人力资源广场大厅，smart展厅的出入人员管理" class="headerlink" title="1.企服大堂，人力资源广场大厅，smart展厅的出入人员管理"></a>1.企服大堂，人力资源广场大厅，smart展厅的出入人员管理</h5><p>这些场所人员混杂，通过摄像头采集并分析人脸，可以区分重要领导，进行人脸识别迎宾。记录可疑人员，然后做出提示。摄像头采集的图像通过第三方的人脸识别API进行人脸比对。腾讯和百度都有免费的服务。</p>
+<h5 id="2-企服大堂，人力资源广场大厅等服务区的刷脸登记验证"><a href="#2-企服大堂，人力资源广场大厅等服务区的刷脸登记验证" class="headerlink" title="2.企服大堂，人力资源广场大厅等服务区的刷脸登记验证"></a>2.企服大堂，人力资源广场大厅等服务区的刷脸登记验证</h5><p>读取来访者身份证信息，然后与摄像头抓取的人脸直接对比，验证身份。硬件方面一个平板电脑和身份证读卡器即可实现，这两个设备一般都已经有了。或者你没带身份证，则通过采集的人脸和公安部身份证网上副本进行对比，来验证身份(<a href="http://news.qq.com/a/20160924/002581.htm" target="_blank" rel="external">相关文章</a>)。</p>
+<h5 id="3-停车场的安防"><a href="#3-停车场的安防" class="headerlink" title="3.停车场的安防"></a>3.停车场的安防</h5><p>通过摄像头读取停车场出入人员的人脸信息，结合市局人像数据支撑，进行人脸比对，并对视频流中同一人员行动轨迹进行追踪与分析。防范可疑人员。face++已经有解决方案。</p>
+<h5 id="4-办公室门禁"><a href="#4-办公室门禁" class="headerlink" title="4.办公室门禁"></a>4.办公室门禁</h5><p>保证办公室人员的安全，管理访客，外来人员，周边服务人员。在入口安装高清摄像头，记录人脸，并和我方图片库，进行比对，区分来人。可以采用免费的第三方人脸识别服务。摄像头可以选用海康。</p>
+<h5 id="5-办公室考勤"><a href="#5-办公室考勤" class="headerlink" title="5.办公室考勤"></a>5.办公室考勤</h5><p>办公室出入口安装高清摄像头，只需抬头眨眨眼，实现上下班自动考勤。为了防止作弊，需要引入活体检测。旷视，商汤，腾讯均有活体检测服务，旷视的产品较为成熟。</p>
+<h5 id="6-驾驶舱登录"><a href="#6-驾驶舱登录" class="headerlink" title="6.驾驶舱登录"></a>6.驾驶舱登录</h5><p>驾驶舱登录，目前其实就是CC+的登录。可以通过手机进行人脸识别，完成登录。处于演示阶段的话，可以暂时不用考虑过多安全问题，那么我们可以直接采用免费的人脸识别服务。如果对安全要求高，那么我们需要引入活体检测，防止黑客攻击。</p>
+<h5 id="7-作为CC-的一种新的登录方式"><a href="#7-作为CC-的一种新的登录方式" class="headerlink" title="7.作为CC+的一种新的登录方式"></a>7.作为CC+的一种新的登录方式</h5><p>第一次安装登录CC+需要使用密码登录，设置了刷脸登录之后，退出登录之后就可以使用刷脸进行登录。需要引入活体检测来增强安全性，防止人脸攻击，因此没有免费的方案。</p>
+<h5 id="8-社交方面的应用"><a href="#8-社交方面的应用" class="headerlink" title="8.社交方面的应用"></a>8.社交方面的应用</h5><p>CC+的社交部分，比如发图片的时候可以加入人脸识别，对图片上的人脸进行特殊处理。这部分目前主要也是收费的产品。比如face++。免费的服务目前好像还没有。</p>
+<h5 id="9-上下班班车刷脸上车"><a href="#9-上下班班车刷脸上车" class="headerlink" title="9.上下班班车刷脸上车"></a>9.上下班班车刷脸上车</h5><p>云谷的上下班班车，可以引入人脸识别，用来进行扣费和人员验证。增强了安全性和便捷性。这方面的解决方案可以和faceid进行商讨。他们目前在神州租车和滴滴出行都有类型的应用。</p>
+<p>总结，对安全性有要求的场景，都需要活体检测的引入，这块目前都是收费服务。都需要进行商务合作。</p>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><ul>
+<li>支付宝人脸识别安全吗？ <a href="https://www.zhihu.com/question/57158124" target="_blank" rel="external">https://www.zhihu.com/question/57158124</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/04/01/about-face-detection/" data-id="cjp9ir64o0008u6fb7tkp0m7t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/04/01/about-face-detection/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/techblog/2018/06/08/hotfix-framework-article/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    开源热补丁和插件化项目整理
+                
+            </div>
+        </a>
+    
+    
+        <a href="/techblog/2018/03/15/android-interview/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Android面试相关整理</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/06/08/hotfix-framework-article/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/06/08/hotfix-framework-article/" class="title">开源热补丁和插件化项目整理</a></p>
+                            <p class="item-date"><time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/04/01/about-face-detection/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a></p>
+                            <p class="item-title"><a href="/techblog/2018/04/01/about-face-detection/" class="title">人脸识别调研和部分应用场景</a></p>
+                            <p class="item-date"><time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/15/android-interview/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/15/android-interview/" class="title">Android面试相关整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/08/NB-IOT/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/08/NB-IOT/" class="title">了解一下窄带网联网NB-IoT</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="title">RxJava&amp;Agera资料整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/NB-IoT/">NB-IoT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/RxJava/">RxJava</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Web/">Web</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/encryption/">encryption</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/face-detection/">face detection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Interview/">Interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/NB-IoT/">NB-IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Permissions/">Permissions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/RxJava/">RxJava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/face-detection/">face detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hotfix/">hotfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/rsa/">rsa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/vlc/">vlc</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/techblog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/techblog/tags/Interview/" style="font-size: 10px;">Interview</a> <a href="/techblog/tags/NB-IoT/" style="font-size: 10px;">NB-IoT</a> <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Permissions/" style="font-size: 10px;">Permissions</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/techblog/tags/Web/" style="font-size: 10px;">Web</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/face-detection/" style="font-size: 10px;">face detection</a> <a href="/techblog/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/techblog/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/techblog/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/techblog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/techblog/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/techblog/tags/vlc/" style="font-size: 10px;">vlc</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/techblog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/techblog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/techblog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

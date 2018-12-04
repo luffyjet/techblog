@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Android机型判断整理 | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="如何识别小米设备/MIUI系统您在开发应用的过程中，可能针对小米手机/MIUI设备的用户有一些特殊的设计，本文档提供了如何识别设备、系统版本和浏览器UA的方法
+如何检测小米设备：
+请使用android.os.Build对象，查询MANUFACTURER和MODEL的值，MANUFACTURER值为Xiaomi即为小米设备
+如何检测MIUI V5：
+查询property: ro.miui.ui.ve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android机型判断整理">
+<meta property="og:url" content="http://www.luffyjet.com/techblog/2017/12/08/android-device-type/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="如何识别小米设备/MIUI系统您在开发应用的过程中，可能针对小米手机/MIUI设备的用户有一些特殊的设计，本文档提供了如何识别设备、系统版本和浏览器UA的方法
+如何检测小米设备：
+请使用android.os.Build对象，查询MANUFACTURER和MODEL的值，MANUFACTURER值为Xiaomi即为小米设备
+如何检测MIUI V5：
+查询property: ro.miui.ui.ve">
+<meta property="og:updated_time" content="2018-12-04T08:24:06.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android机型判断整理">
+<meta name="twitter:description" content="如何识别小米设备/MIUI系统您在开发应用的过程中，可能针对小米手机/MIUI设备的用户有一些特殊的设计，本文档提供了如何识别设备、系统版本和浏览器UA的方法
+如何检测小米设备：
+请使用android.os.Build对象，查询MANUFACTURER和MODEL的值，MANUFACTURER值为Xiaomi即为小米设备
+如何检测MIUI V5：
+查询property: ro.miui.ui.ve">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/techblog/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/techblog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/techblog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/techblog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/techblog/css/style.css">
+
+    <script src="/techblog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/techblog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/techblog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/techblog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/techblog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/techblog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/techblog/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/techblog/',
+        CONTENT_URL: '/techblog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/techblog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/techblog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/techblog/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-android-device-type" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Android机型判断整理
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/techblog/2017/12/08/android-device-type/">
+            <time datetime="2017-12-08T13:20:12.000Z" itemprop="datePublished">2017-12-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/techblog/categories/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/techblog/tags/Android/">Android</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="如何识别小米设备-MIUI系统"><a href="#如何识别小米设备-MIUI系统" class="headerlink" title="如何识别小米设备/MIUI系统"></a>如何识别小米设备/MIUI系统</h2><p>您在开发应用的过程中，可能针对小米手机/MIUI设备的用户有一些特殊的设计，本文档提供了如何识别设备、系统版本和浏览器UA的方法</p>
+<p>如何检测小米设备：</p>
+<p>请使用android.os.Build对象，查询MANUFACTURER和MODEL的值，MANUFACTURER值为Xiaomi即为小米设备</p>
+<p>如何检测MIUI V5：</p>
+<p>查询property: ro.miui.ui.version.name ，值是”V5″ 就是MIUI V5系统；值是”V6″就是MIUI 6系统。</p>
+<a id="more"></a>
+<p>User-Agent：<br>如果您从事WebApp开发， 可能需要识别浏览器，下面描述了MIUI浏览器的User-Agent</p>
+<p><andoird-version>: 系统版本号，如: 4.1.1</andoird-version></p>
+<p><location>: 系统的国家地区，如: 中国大陆是zh-cn</location></p>
+<p><model>: 设备型号，如: MI2</model></p>
+<p><productline>: 产品线，如: 小米手机2是JRO03L<br>Mozilla/5.0 (Linux; U; Android <android-version>; <location>; <model> Build/<productline>) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30 XiaoMi/MiuiBrowser/1.0</productline></model></location></android-version></productline></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MIUIUtils</span> </span>&#123;</div><div class="line">    <span class="comment">// 检测MIUI</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_MIUI_VERSION_CODE = <span class="string">"ro.miui.ui.version.code"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_MIUI_VERSION_NAME = <span class="string">"ro.miui.ui.version.name"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_MIUI_INTERNAL_STORAGE = <span class="string">"ro.miui.internal.storage"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMIUI</span><span class="params">()</span> </span>&#123;</div><div class="line">        Properties prop = <span class="keyword">new</span> Properties();</div><div class="line">        <span class="keyword">boolean</span> isMIUI;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            prop.load(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(Environment.getRootDirectory(), <span class="string">"build.prop"</span>)));</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        isMIUI = prop.getProperty(KEY_MIUI_VERSION_CODE, <span class="keyword">null</span>) != <span class="keyword">null</span></div><div class="line">                || prop.getProperty(KEY_MIUI_VERSION_NAME, <span class="keyword">null</span>) != <span class="keyword">null</span></div><div class="line">                || prop.getProperty(KEY_MIUI_INTERNAL_STORAGE, <span class="keyword">null</span>) != <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">return</span> isMIUI;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="其他机型"><a href="#其他机型" class="headerlink" title="其他机型"></a>其他机型</h2><p>引用自：<a href="https://www.jianshu.com/p/ba9347a5a05a" target="_blank" rel="external">https://www.jianshu.com/p/ba9347a5a05a</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rom</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"Rom"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_MIUI = <span class="string">"MIUI"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_EMUI = <span class="string">"EMUI"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_FLYME = <span class="string">"FLYME"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_OPPO = <span class="string">"OPPO"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_SMARTISAN = <span class="string">"SMARTISAN"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_VIVO = <span class="string">"VIVO"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_QIKU = <span class="string">"QIKU"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_MIUI = <span class="string">"ro.miui.ui.version.name"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_EMUI = <span class="string">"ro.build.version.emui"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_OPPO = <span class="string">"ro.build.version.opporom"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_SMARTISAN = <span class="string">"ro.smartisan.version"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_VIVO = <span class="string">"ro.vivo.os.version"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String sName;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String sVersion;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isEmui</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_EMUI);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMiui</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_MIUI);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isVivo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_VIVO);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOppo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_OPPO);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isFlyme</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_FLYME);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">is360</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_QIKU) || check(<span class="string">"360"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isSmartisan</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_SMARTISAN);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (sName == <span class="keyword">null</span>) &#123;</div><div class="line">            check(<span class="string">""</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sName;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getVersion</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (sVersion == <span class="keyword">null</span>) &#123;</div><div class="line">            check(<span class="string">""</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sVersion;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(String rom)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (sName != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> sName.equals(rom);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_MIUI))) &#123;</div><div class="line">            sName = ROM_MIUI;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_EMUI))) &#123;</div><div class="line">            sName = ROM_EMUI;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_OPPO))) &#123;</div><div class="line">            sName = ROM_OPPO;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_VIVO))) &#123;</div><div class="line">            sName = ROM_VIVO;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_SMARTISAN))) &#123;</div><div class="line">            sName = ROM_SMARTISAN;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            sVersion = Build.DISPLAY;</div><div class="line">            <span class="keyword">if</span> (sVersion.toUpperCase().contains(ROM_FLYME)) &#123;</div><div class="line">                sName = ROM_FLYME;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                sVersion = Build.UNKNOWN;</div><div class="line">                sName = Build.MANUFACTURER.toUpperCase();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sName.equals(rom);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getProp</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        String line = <span class="keyword">null</span>;</div><div class="line">        BufferedReader input = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Process p = Runtime.getRuntime().exec(<span class="string">"getprop "</span> + name);</div><div class="line">            input = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(p.getInputStream()), <span class="number">1024</span>);</div><div class="line">            line = input.readLine();</div><div class="line">            input.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Unable to read prop "</span> + name, ex);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (input != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    input.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> line;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2017/12/08/android-device-type/" data-id="cjp9ir64z000iu6fbw2zos7cm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.luffyjet.com/techblog/techblog/2017/12/08/android-device-type/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/techblog/2018/03/02/RxJava-Agera-articles/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    RxJava&amp;Agera资料整理
+                
+            </div>
+        </a>
+    
+    
+        <a href="/techblog/2017/11/08/gitlab-setup-record/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">gitlab安装配置过程记录</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/06/08/hotfix-framework-article/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/06/08/hotfix-framework-article/" class="title">开源热补丁和插件化项目整理</a></p>
+                            <p class="item-date"><time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/04/01/about-face-detection/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a></p>
+                            <p class="item-title"><a href="/techblog/2018/04/01/about-face-detection/" class="title">人脸识别调研和部分应用场景</a></p>
+                            <p class="item-date"><time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/15/android-interview/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/15/android-interview/" class="title">Android面试相关整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/08/NB-IOT/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/08/NB-IOT/" class="title">了解一下窄带网联网NB-IoT</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="title">RxJava&amp;Agera资料整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/NB-IoT/">NB-IoT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/RxJava/">RxJava</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Web/">Web</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/encryption/">encryption</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/face-detection/">face detection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Interview/">Interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/NB-IoT/">NB-IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Permissions/">Permissions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/RxJava/">RxJava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/face-detection/">face detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hotfix/">hotfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/rsa/">rsa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/vlc/">vlc</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/techblog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/techblog/tags/Interview/" style="font-size: 10px;">Interview</a> <a href="/techblog/tags/NB-IoT/" style="font-size: 10px;">NB-IoT</a> <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Permissions/" style="font-size: 10px;">Permissions</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/techblog/tags/Web/" style="font-size: 10px;">Web</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/face-detection/" style="font-size: 10px;">face detection</a> <a href="/techblog/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/techblog/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/techblog/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/techblog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/techblog/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/techblog/tags/vlc/" style="font-size: 10px;">vlc</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/techblog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/techblog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/techblog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

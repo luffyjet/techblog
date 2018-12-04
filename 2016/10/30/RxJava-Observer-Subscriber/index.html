@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>RxJava Observer与Subscriber | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="结论建议每次subscribe()都new一个新的Subscriber或者是使用Observer，也就是不要重复使用mSubscriber。
+为什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJava Observer与Subscriber">
+<meta property="og:url" content="http://www.luffyjet.com/techblog/2016/10/30/RxJava-Observer-Subscriber/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="结论建议每次subscribe()都new一个新的Subscriber或者是使用Observer，也就是不要重复使用mSubscriber。
+为什么">
+<meta property="og:updated_time" content="2018-12-04T07:52:58.440Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJava Observer与Subscriber">
+<meta name="twitter:description" content="结论建议每次subscribe()都new一个新的Subscriber或者是使用Observer，也就是不要重复使用mSubscriber。
+为什么">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/techblog/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/techblog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/techblog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/techblog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/techblog/css/style.css">
+
+    <script src="/techblog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/techblog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/techblog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/techblog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/techblog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/techblog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/techblog/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/techblog/',
+        CONTENT_URL: '/techblog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/techblog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/techblog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/techblog/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-RxJava-Observer-Subscriber" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            RxJava Observer与Subscriber
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/techblog/2016/10/30/RxJava-Observer-Subscriber/">
+            <time datetime="2016-10-30T02:43:23.000Z" itemprop="datePublished">2016-10-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/techblog/tags/RxJava/">RxJava</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>建议每次subscribe()都new一个新的Subscriber或者是使用Observer，也就是不要重复使用mSubscriber。</p>
+<h4 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h4><a id="more"></a>
+<p>Subscriber是Observer的实现类，Observer 和 Subscriber 具有相同的角色，而且 Observer 在 subscribe() 过程中最终会被转换成 Subscriber 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Subscription <span class="title">subscribe</span><span class="params">(<span class="keyword">final</span> Observer&lt;? <span class="keyword">super</span> T&gt; observer)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (observer <span class="keyword">instanceof</span> Subscriber) &#123;</div><div class="line">            <span class="keyword">return</span> subscribe((Subscriber&lt;? <span class="keyword">super</span> T&gt;)observer);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (observer == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"observer is null"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> subscribe(<span class="keyword">new</span> ObserverSubscriber&lt;T&gt;(observer));</div><div class="line">    &#125;</div><div class="line">   </div><div class="line">  -------------------------------------------------  </div><div class="line">    </div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ObserverSubscriber</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Subscriber</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">final</span> Observer&lt;? <span class="keyword">super</span> T&gt; observer;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ObserverSubscriber</span><span class="params">(Observer&lt;? <span class="keyword">super</span> T&gt; observer)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.observer = observer;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        observer.onNext(t);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">        observer.onError(e);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line">        observer.onCompleted();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Subscriber和Observer作为成员变量,比如 mSubscriber, mObserver传入 subscribe() 会有所区别。mSubscriber 传入之后，会被赋值成SafeSubscriber实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SafeSubscriber</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Subscriber</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Subscriber&lt;? <span class="keyword">super</span> T&gt; actual;</div><div class="line"></div><div class="line">    <span class="keyword">boolean</span> done;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SafeSubscriber</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> T&gt; actual)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(actual);</div><div class="line">        <span class="keyword">this</span>.actual = actual;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!done) &#123;</div><div class="line">            done = <span class="keyword">true</span>;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                actual.onCompleted();</div><div class="line">            &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">                <span class="comment">// we handle here instead of another method so we don't add stacks to the frame</span></div><div class="line">                <span class="comment">// which can prevent it from being able to handle StackOverflow</span></div><div class="line">                Exceptions.throwIfFatal(e);</div><div class="line">                RxJavaHooks.onError(e);</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> OnCompletedFailedException(e.getMessage(), e);</div><div class="line">            &#125; <span class="keyword">finally</span> &#123; <span class="comment">// NOPMD</span></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="comment">// Similarly to onError if failure occurs in unsubscribe then Rx contract is broken</span></div><div class="line">                    <span class="comment">// and we throw an UnsubscribeFailureException.</span></div><div class="line">                    unsubscribe();</div><div class="line">                &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">                    RxJavaHooks.onError(e);</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> UnsubscribeFailedException(e.getMessage(), e);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">        <span class="comment">// we handle here instead of another method so we don't add stacks to the frame</span></div><div class="line">        <span class="comment">// which can prevent it from being able to handle StackOverflow</span></div><div class="line">        Exceptions.throwIfFatal(e);</div><div class="line">        <span class="keyword">if</span> (!done) &#123;</div><div class="line">            done = <span class="keyword">true</span>;</div><div class="line">            _onError(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(T args)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (!done) &#123;</div><div class="line">                actual.onNext(args);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">            <span class="comment">// we handle here instead of another method so we don't add stacks to the frame</span></div><div class="line">            <span class="comment">// which can prevent it from being able to handle StackOverflow</span></div><div class="line">            Exceptions.throwOrReport(e, <span class="keyword">this</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过SafeSubscriber源码可知 onCompleted 执行后会给成员变量 done 赋值true,并自动unsubscribe(),<br>通过成员变量 done 判断是否执行 onNext(),onError()等，所以subscribe()传入mSubscriber只有第一次能正常使用。传入mObserver则没有这个问题，它每次都会自动创建新的Subscriber来包装它一次。如果使用subscribe(new Subscriber&lt; T&gt;(){}）方式实现订阅，也不会出现上面的问题。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2016/10/30/RxJava-Observer-Subscriber/" data-id="cjp9ir64l0006u6fb4vpyhc2o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.luffyjet.com/techblog/techblog/2016/10/30/RxJava-Observer-Subscriber/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/techblog/2017/05/12/spring-migration-mybatis /" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Spring 集成 Mybatis记录
+                
+            </div>
+        </a>
+    
+    
+        <a href="/techblog/2016/05/09/android6.0-permissions/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Android6.0权限处理</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/06/08/hotfix-framework-article/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/06/08/hotfix-framework-article/" class="title">开源热补丁和插件化项目整理</a></p>
+                            <p class="item-date"><time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/04/01/about-face-detection/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a></p>
+                            <p class="item-title"><a href="/techblog/2018/04/01/about-face-detection/" class="title">人脸识别调研和部分应用场景</a></p>
+                            <p class="item-date"><time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/15/android-interview/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/15/android-interview/" class="title">Android面试相关整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/08/NB-IOT/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/08/NB-IOT/" class="title">了解一下窄带网联网NB-IoT</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="title">RxJava&amp;Agera资料整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/NB-IoT/">NB-IoT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/RxJava/">RxJava</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Web/">Web</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/encryption/">encryption</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/face-detection/">face detection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Interview/">Interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/NB-IoT/">NB-IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Permissions/">Permissions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/RxJava/">RxJava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/face-detection/">face detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hotfix/">hotfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/rsa/">rsa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/vlc/">vlc</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/techblog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/techblog/tags/Interview/" style="font-size: 10px;">Interview</a> <a href="/techblog/tags/NB-IoT/" style="font-size: 10px;">NB-IoT</a> <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Permissions/" style="font-size: 10px;">Permissions</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/techblog/tags/Web/" style="font-size: 10px;">Web</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/face-detection/" style="font-size: 10px;">face detection</a> <a href="/techblog/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/techblog/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/techblog/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/techblog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/techblog/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/techblog/tags/vlc/" style="font-size: 10px;">vlc</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/techblog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/techblog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/techblog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

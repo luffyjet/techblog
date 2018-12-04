@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>了解一下窄带网联网NB-IoT | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="什么是窄带物联网（NB-IoT）？基于蜂窝的窄带物联网（Narrow Band Internet of Things, NB-IoT）俨然已成为万物互联网络的一个重要分支，作为 IoT 领一个新兴的技术，NB-IoT 构建于蜂窝网络，只消耗大约 180KHz 的带宽，可直接部署于 GSM 网络、UMTS 网络或 LTE 网络，以降低部署成本、实现平滑升级。
+NB-IoT 支持低功耗设备在广域网的蜂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="了解一下窄带网联网NB-IoT">
+<meta property="og:url" content="http://www.luffyjet.com/techblog/2018/03/08/NB-IOT/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="什么是窄带物联网（NB-IoT）？基于蜂窝的窄带物联网（Narrow Band Internet of Things, NB-IoT）俨然已成为万物互联网络的一个重要分支，作为 IoT 领一个新兴的技术，NB-IoT 构建于蜂窝网络，只消耗大约 180KHz 的带宽，可直接部署于 GSM 网络、UMTS 网络或 LTE 网络，以降低部署成本、实现平滑升级。
+NB-IoT 支持低功耗设备在广域网的蜂">
+<meta property="og:updated_time" content="2018-12-04T07:50:12.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="了解一下窄带网联网NB-IoT">
+<meta name="twitter:description" content="什么是窄带物联网（NB-IoT）？基于蜂窝的窄带物联网（Narrow Band Internet of Things, NB-IoT）俨然已成为万物互联网络的一个重要分支，作为 IoT 领一个新兴的技术，NB-IoT 构建于蜂窝网络，只消耗大约 180KHz 的带宽，可直接部署于 GSM 网络、UMTS 网络或 LTE 网络，以降低部署成本、实现平滑升级。
+NB-IoT 支持低功耗设备在广域网的蜂">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/techblog/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/techblog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/techblog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/techblog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/techblog/css/style.css">
+
+    <script src="/techblog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/techblog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/techblog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/techblog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/techblog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/techblog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/techblog/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/techblog/',
+        CONTENT_URL: '/techblog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/techblog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/techblog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/techblog/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-NB-IOT" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            了解一下窄带网联网NB-IoT
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/techblog/2018/03/08/NB-IOT/">
+            <time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/techblog/tags/NB-IoT/">NB-IoT</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="什么是窄带物联网（NB-IoT）？"><a href="#什么是窄带物联网（NB-IoT）？" class="headerlink" title="什么是窄带物联网（NB-IoT）？"></a>什么是窄带物联网（NB-IoT）？</h2><p>基于蜂窝的窄带物联网（Narrow Band Internet of Things, NB-IoT）俨然已成为万物互联网络的一个重要分支，作为 IoT 领一个新兴的技术，NB-IoT 构建于蜂窝网络，只消耗大约 180KHz 的带宽，可直接部署于 GSM 网络、UMTS 网络或 LTE 网络，以降低部署成本、实现平滑升级。</p>
+<p>NB-IoT 支持低功耗设备在广域网的蜂窝数据连接，也被叫作低功耗广域网(LPWA)，支持待机时间长、对网络连接要求较高设备的高效连接。据说 NB-IoT 设备电池寿命可以提高至至少 10 年，同时还能提供非常全面的室内蜂窝数据连接覆盖。<br><a id="more"></a></p>
+<h2 id="NB-IoT-的前景与优势"><a href="#NB-IoT-的前景与优势" class="headerlink" title="NB-IoT 的前景与优势"></a>NB-IoT 的前景与优势</h2><p>移动通信正在从人和人的连接，向人与物以及物与物的连接迈进，万物互联是必然趋势。然而当前的 4G 网络在物与物连接上能力不足。事实上，相比蓝牙、ZigBee 等短距离通信技术，移动蜂窝网络具备广覆盖、可移动以及大连接数等特性，能够带来更加丰富的应用场景，理应成为物联网的主要连接技术。作为 LTE 的演进型技术，4.5G 除了具有高达 1Gbps 的峰值速率，还意味着基于蜂窝物联网的更多连接数，支持海量 M2M 连接以及更低时延，将助推高清视频、VoLTE 以及物联网等应用快速普及。蜂窝物联网正在开启一个前所未有的广阔市场。</p>
+<p>对于电信运营商而言，车联网、智慧医疗、智能家居等物联网应用将产生海量连接，远远超过人与人之间的通信需求。</p>
+<p>NB-IoT 具备四大特点：一是广覆盖，将提供改进的室内覆盖，在同样的频段下，NB-IoT 比现有的网络增益 20dB，覆盖面积扩大 100 倍；二是具备支撑海量连接的能力，NB-IoT 一个扇区能够支持 10 万个连接，支持低延时敏感度、超低的设备成本、低设备功耗和优化的网络架构；三是更低功耗，NB-IoT 终端模块的待机时间可长达 10 年；四是更低的模块成本，企业预期的单个接连模块不超过 5 美元。</p>
+<p>NB-IoT 聚焦于低功耗广覆盖（LPWA）物联网（IoT）市场，是一种可在全球范围内广泛应用的新兴技术。其具有覆盖广、连接多、速率低、成本低、功耗低、架构优等特点。NB-IoT 使用 License 频段，可采取带内、保护带或独立载波三种部署方式，与现有网络共存。</p>
+<p>因为 NB-IoT 自身具备的低功耗、广覆盖、低成本、大容量等优势，使其可以广泛应用于多种垂直行业，如远程抄表、资产跟踪、智能停车、智慧农业等。3GPP 标准的首个版本预计在今年 6 月发布，到时候将有一批测试网络和小规模商用网络出现。</p>
+<h2 id="NB-IoT-的需求与发展"><a href="#NB-IoT-的需求与发展" class="headerlink" title="NB-IoT 的需求与发展"></a>NB-IoT 的需求与发展</h2><p>随着智能城市、大数据时代的来临，无线通信将实现万物连接。很多企业预计未来全球物联网连接数将是千亿级的时代。目前已经出现了大量物与物的联接， 然而这些联接大多通过蓝牙、Wi-Fi 等短距通信技术承载，但非运营商移动网络。为了满足不同物联网业务需求，根据物联网业务特征和移动通信网络特点，3GPP 根据窄带业务应用场景开展了增强移动通信网络功能的技术研究以适应蓬勃发展的物联网业务需求。</p>
+<p>我们正进入万物互联(IoT)的时代，这对于整个移动通信产业来说是一个巨大的机会。无论是运营商大咖，还是设备商巨头，都在展示各自的物联网解决方案和在不同垂直行业的应用。</p>
+<p>当然，实现这一切的基础，是要有无处不在的网络联接。运营商的网络是全球覆盖最为广泛的网络，因此在接入能力上有独特的优势。然而，一个不容忽视的现实情况是，真正承载到移动网络上的物与物联接只占到联接总数的 10%，大部分的物与物联接通过蓝牙、Wi-Fi 等技术来承载。</p>
+<p>为此，产业链从几年前就开始研究利用窄带 LTE 技术来承载 IoT 联接。历经几次更名和技术演进，2015 年 9 月，3GPP 正式将这一技术命名为 NB-IoT。MWC2016 上，NB-IoT 首次亮相，受到瞩目，运营商和设备商纷纷为其站台和背书。</p>
+<p>从技术层面上来讲，NB-IoT 有 4 大技术优势。首先是覆盖广，相比传统 GSM，一个基站可以提供 10 倍的面积覆盖;其次是海量连接，200KHz 的带宽可以提供 10 万个联接;第三是低功耗，使用 AA 电池便可以工作十年，无需充电；第四是低成本，模组成本小于 5 美金。</p>
+<p>据了解，NB-IoT 可以广泛应用于多种垂直行业，如远程抄表、资产跟踪、智能停车、智慧农业等。随着 3GPP 标准的首个版本在 6 月份发布，将有一批测试网络和小规模商用网络出现。NB-IoT 将在多个低功耗广域网技术中脱颖而出。</p>
+<p>此外，越来越多的行业已经在使用物联网技术提高效率，提升客户满意度并降低运营成本。例如，汽车零部件、家用电器及安全系统制造商博世已经将很多产品线连接起来，并从移动互联技术，尤其是车联网领域的崛起中直接获益。</p>
+<p>为了迎接物联网领域的巨大机遇，整个产业不仅需要推动技术创新，还需要推动商业模式创新和跨行业协作。由于用例、应用和商业模式纷繁多样，物联网市场将比移动市场更加碎片化。</p>
+<h2 id="NB-IoT标准的应用"><a href="#NB-IoT标准的应用" class="headerlink" title="NB-IoT标准的应用"></a>NB-IoT标准的应用</h2><p>NB-IoT标准具备四大特点：一是广覆盖，将提供改进的室内覆盖，在同样的频段下，NB-IoT比现有的网络增益20dB，覆盖面积扩大了100倍；二是具备支撑海量连接的能力，NB-IoT一个扇区能够支持10万个连接；三是更低功耗，NB-IoT终端模块的待机时间可长达10年；四是更低的模块成本，企业预期的单个接连模块不超过5美元。</p>
+<p>考虑NB-IoT的特性，此标准可可满足对低功耗/长待机、深覆盖、大容量有所要求的低速率业务；同时由于对于移动性支持较差，更适合静态业务场景或非连续移动、实时传输数据的业务场景，并且业务对时延低敏感。可考虑的业务类型如下：</p>
+<p>1) 自主异常报告业务类型。如烟雾报警探测器、智能电表停电的通知等，上行数据极小数据量需求（十字节量级），周期多以年、月为单位。 </p>
+<p>2) 自主周期报告业务类型。如智能公用事业（煤气/水/电）测量报告、智能农业、智能环境等，上行较小数据量需求（百字节量级），周期多以天、小时为单位。 </p>
+<p>3) 网络指令业务类型。如开启/关闭、设备触发发送上行报告、请求抄表，下行极小数据量需求（十字节量级），周期多以天、小时为单位。 </p>
+<p>4) 软件更新业务类型。如软件补丁/更新，上行下行较大数据量需求（千字节量级），周期多以天、小时为单位。</p>
+<p>迄今为止，华为已联合全球多家运营商在中国、德国、西班牙、阿联酋等国共同完成了基于NB-IoT技术的智能水表、智能停车、智能垃圾箱业务的功能验证。其中沃达丰和华为于2015年底在西班牙完成了NB-IoT预标准的第一个试商用测试，成功地将NB-IoT技术整合到沃达丰现有移动网络中，发送NB-IoT消息给水表中的物联网模块，水表的放置环境通常在壁橱等隐蔽环境，且水表无法外接电源，NB-IoT可有效解决覆盖及功耗等问题。</p>
+<p>2016年世界移动大会上，英特尔与爱立信联合中移动推了NB-IoT智能家庭环境监测系统。它采用了英特尔最新的NB-IoT芯片（XMM7115）。并且可以实时监测到环境的PM值、温度、湿度、光感亮度等。中兴通讯推出了基于NB-IoT技术的智能市政下水道管理系统，各种信息直接传到中兴手机上。</p>
+<p>另外，华为和上海联通也提出了基于NB-IoT技术的智能停车解决方案，通过现场演示，展示了基于NB-IoT这一新兴物联网接入技术的商业应用探索已经启动。此前，上海联通与华为合作建设了全球首个基于 4.5G NB-IoT的大规模连续覆盖区域—-上海国际旅游度假区，并率先在P1停车场部署了300多个基于NB-IoT技术的智能车检器，并提供从终端，基站，服务器，手机应用的端到端智能停车方案。用户可以在手机上实现车位查询、预定、导航、移动支付以及停车场管理等功能，解决了游客找车位难的问题，并一定程度缓解了交通拥堵。</p>
+<h2 id="面临的挑战与机遇"><a href="#面临的挑战与机遇" class="headerlink" title="面临的挑战与机遇"></a>面临的挑战与机遇</h2><p>NB-IoT相较于传统物联网技术有着自身的优势。不过，其仍旧有着自身的局限性。根据TR45.820中典型业务模型下的仿真测试数据，单小区可支持10万个NB-IoT终端接入。但是，这种纯中心的网络管理方式，可能会造成过长的轮询周期，像物联网这种高密度网络不一定适合采用中心管理模式，轮询一遍的时间成本可能令系统承受。物联网采用分层模式可能会效率更高。</p>
+<p>无线抄表始终都会面临一个问题，就是信号覆盖问题。面对无信号覆盖或者信号受干扰的情况，无线抄表即使优点再多也无用武之地。而且，我国国网已经基本完成了智能电表的改造，采用的是电力线载波通信(Power Line Communication, PLC)技术。智能电表行业已经被PLC占据，NB-IoT基本没有机会。目前，智能电表的需求也仅仅只是，若将来实施实时收费，NB-IoT技术恐怕不能满足实时性的要求。现有的水表和气表市场也面临着国网PLC和双模技术的竞争。国网在积极的推进电、水、热、气四表合一事项，未来NB-IoT到底在抄表市场能够分的多少市场份额实际上具备很大的未知数。</p>
+<p>此外，成本价格可能成为NB-IoT发展的阻碍。在成本方面，NB-IoT模组成本未来有望降至5美元之内，但目前支持蓝牙、ZigBee等标准的芯片价格仅在2美元左右，仅支持其中一种标准的芯片价格不到1美元。巨大的价格差距无疑将让企业部署NB-IoT产生顾虑。</p>
+<p>物联网应用还处于试验和示范性探索阶段，规模化应用少，创新活力不足。现阶段主要是运营商，华为、爱立信等设备制造商，高通等芯片供应商为代表的供应方比较热情，而需求方的应用主体，如水电气公共服务提供行业还没热络起来。</p>
+<p>据相关专家的猜测，物联网行业将会在2018至2019年因为NB-IoT技术和其芯片的商业化迎来再一次的热潮。</p>
+<h2 id="芯片厂商"><a href="#芯片厂商" class="headerlink" title="芯片厂商"></a>芯片厂商</h2><p>在底层芯片领域，当前华为海思、高通、英特尔、MTK、中兴微电子、大唐、展讯等厂商已有NB-IoT芯片的研发计划和实施步骤，原有LTE芯片能力的厂商均可参与，没法形成前2-3家垄断大部分市场，不过由于这一领域的厂商数量并不多，因此也不会形成大量市场参与者，市场集中度会保持在50%以下;而在LoRa阵营中，目前射频芯片供应集中在Semtech一家厂商，占据绝大多数市场份额，从而形成大于80%的市场集中度。</p>
+<h4 id="1、华为"><a href="#1、华为" class="headerlink" title="1、华为"></a>1、华为</h4><p>作为NB-IoT的积极参与者华为而言，NB-IoT是一个大战略，据说华为所有的部门都积极参与其中。</p>
+<p>其实早在2014年，华为就斥资2500万美元收购了英国领先的蜂窝物联网芯片和解决方案提供商Neul，还计划以Neul为中心，打造一个全球级物联网。</p>
+<p>不出所料，在标准公布后，Neul即将在本月底火速推出NB-IoT商用芯片，这将会是业内第一款正式商用的NB-IoT芯片，而且其芯片价格向短距离通信芯片价格靠近。</p>
+<p>据悉，华为推出的NB-IoT芯片在硬币大小的尺寸内集成了BB和AP、Flash和电池管理，并预留传感器集成功能。其中AP包含三个ARM-M0内核，每个M0内核分别负责应用、安全、通信功能，这样在方便进行功能管理的同时降低成本和功耗，后续推出的芯片还将会集成Soft SIM，进一步降低成本。</p>
+<p>另外，在九月底提供第一批芯片之后，华为还将会和ublox、移远合作提供第一批的商用模组，商用模组大概是在10月中旬或下旬发布。第一批提供的量并不大，明年年初将大规模商用。</p>
+<p>除了芯片以外，华为在NB-IoT领域的布局可谓是全方位覆盖式的。</p>
+<p>在今年的世界移动大会物联网峰会上，华为正式面向全球发布了端到端NB-IoT解决方案，主要包括：Huawei Lite OS与NB-IoT芯片使能的智能化终端方案、平滑演进到NB-IoT的eNodeB基站、可支持Core in a Box或NFV切片灵活部署的IoT Packet Core、基于云化架构并具有大数据能力的IoT联接管理平台等，满足了运营商IoT业务低功耗广域覆盖的核心需求。</p>
+<p>另外在第二届中国NB-IoT产业联盟高峰论坛上，华为的NB-IoT项目负责人许海平更是表示了华为正在建设的开放实验室将更好地为NB-IoT端到端业务服务。“从今年开始，华为在全球设立了七个开放实验室，现已开放了两个，一个是沃达丰，另外一个是华为的上研所。开放实验室主要是搭建整套的端到端NB-IoT环境，提供NB-IoT的芯片和模组，和一些关系比较密切的合作厂商一起来做端到端的对接，包括芯片模组的集成、后端的联接管理平台、业务服务器的对接等。沃达丰的开放实验室主要是针对的欧洲的合作厂商，上海的实验室主要是针对中国区的，九月份还将在韩国成立一个open lab，意大利等国家也会相继推进。”</p>
+<h4 id="2、高通"><a href="#2、高通" class="headerlink" title="2、高通"></a>2、高通</h4><p>高通认为在未来5年里，从物联网的角度来说，LTE依然是发展基础。3GPP Release 13下引入的NB-IoT将继续随着3GPP的发展而演进，大规模物联网(Massive IoT)所需的低成本、低功耗等将依靠LTE NB-IoT技术从蜂窝连接的方面推动其发展，为物联网5G技术发展打好基础。</p>
+<p>高通今年年初推了的MDM 9x07，支持Cat 4，最高支持150Mbps;另外一个是MDM 92071，支持Cat 1的标准;还有去年10月推出的MDM 9206，支持CatM1，后期通过软件升级可以支持NB-IoT。模块OEM厂商预计将于2017年初发布基于MDM 9206、支持Cat M1的模块，而对于Cat NB1的支持预计在此之后不久，通过软件升级的方式实现。另外，在目前的Release 13中，NB-IoT不支持VoLTE，不过在未来的Release 14中，高通就会尝试增加语音功能的支持。随着NBIoT不断演进，高通希望它能为适用于5G的物联网标准打下基础。</p>
+<h2 id="运营商"><a href="#运营商" class="headerlink" title="运营商"></a>运营商</h2><p>从去年开始，包括中国、韩国、欧洲、中东、北美的多家主流运营商已经开展了基于pre-standard 的NB-IoT技术的试点，并开启了端到端的技术和业务验证。</p>
+<h4 id="1、中国电信"><a href="#1、中国电信" class="headerlink" title="1、中国电信"></a>1、中国电信</h4><p>中国电信正在积极跟进NB-IoT技术发展，并正式立项对NB-IoT关键技术、终端和业务开展研发。在具体部署方案上，将基于全覆盖的800M LTE网络部署NB-IoT;基站同时支持LTE和NB-IoT与800MLTE基站共享基带、射频及天馈资源。同时，为了规避可能的频率干扰，并考虑LTE800后续演进的灵活性，优先考虑独立工作模式。</p>
+<p>另外，在今年7月召开的“2016年天翼智能终端交易博览会”上，中国电信联合高通、华为、中兴、英特尔、博世、SAP、IBM、爱立信、深创投、中科院上海微系统所、北邮和东南大学12家单位,共同发起成立“天翼物联产业联盟”。</p>
+<h4 id="2、中国移动"><a href="#2、中国移动" class="headerlink" title="2、中国移动"></a>2、中国移动</h4><p>对于中国移动来说，其公众物联网平台自2014年11月底正式商用,截至今年6月,用户已超过2700万。目前，中国移动正加快推进全球统一标准窄带物联网产业成熟和物联网应用创新，构建物联网开放实验室，促进芯片和模组成熟发展，打造一张低成本、低功耗、广覆盖、高可靠的公共物联网，力争2017年实现商用。为了建设NB-IoT物联网，预计在2016年年底至2017年年中，中移动将会获得FDD牌照，并且允许重耕现有的900MHz、1800MHz频段。</p>
+<h4 id="3、中国联通"><a href="#3、中国联通" class="headerlink" title="3、中国联通"></a>3、中国联通</h4><p>中国联通在2015年7月，建成并开放全球第一个NB-IoT新技术示范点;2016年上半年上海迪斯尼物联网启动商用; 2015年-2016年开展了NB-IoT业务试点及试验，目前正推进重点城市(北京、上海、广州、深圳、银川、长沙、福州)的NB-IoT商用部署，计划在2017年实现规模商用，2018年则将开始全面推进国家范围内的商用部署。</p>
+<p>中国联通部署在900MHz、1800MHz频段，用于NB-IoT和VoLTE。在900 MHz采用DSSS动态频谱解决方案，在1800MHz连续覆盖区域，部署5MHz带宽的LTE，在没有1800MHz连续覆盖的区域，带宽自动缩窄到 3MHz，但中心频点保持不变，两侧空出的频谱，自动部署14个GSM频点。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a href="http://www.3gpp.org/news-events/3gpp-news/1785-nb_iot_complete" target="_blank" rel="external">Standardization of NB-IOT completed</a></p>
+<p><a href="https://www.link-labs.com/blog/overview-of-narrowband-iot" target="_blank" rel="external">An Overview Of Narrowband IoT (NB-IoT)</a></p>
+<p><a href="http://developer.huawei.com/ict/cn/site-iot/product/nb-iot" target="_blank" rel="external">华为 NB-IoT</a> 　　</p>
+<p><a href="https://www.gsma.com/iot/narrow-band-internet-of-things-nb-iot/" target="_blank" rel="external">Narrow Band – Internet of Things (NB-IoT)</a></p>
+<p><a href="https://baike.baidu.com/item/NB-IoT/19420464" target="_blank" rel="external">百度百科</a>　　 </p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/03/08/NB-IOT/" data-id="cjp9ir64e0002u6fbkk367sg0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/03/08/NB-IOT/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/techblog/2018/03/15/android-interview/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Android面试相关整理
+                
+            </div>
+        </a>
+    
+    
+        <a href="/techblog/2018/03/02/RxJava-Agera-articles/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">RxJava&amp;Agera资料整理</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/06/08/hotfix-framework-article/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/06/08/hotfix-framework-article/" class="title">开源热补丁和插件化项目整理</a></p>
+                            <p class="item-date"><time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/04/01/about-face-detection/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a></p>
+                            <p class="item-title"><a href="/techblog/2018/04/01/about-face-detection/" class="title">人脸识别调研和部分应用场景</a></p>
+                            <p class="item-date"><time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/15/android-interview/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/15/android-interview/" class="title">Android面试相关整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/08/NB-IOT/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/08/NB-IOT/" class="title">了解一下窄带网联网NB-IoT</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="title">RxJava&amp;Agera资料整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/NB-IoT/">NB-IoT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/RxJava/">RxJava</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Web/">Web</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/encryption/">encryption</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/face-detection/">face detection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Interview/">Interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/NB-IoT/">NB-IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Permissions/">Permissions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/RxJava/">RxJava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/face-detection/">face detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hotfix/">hotfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/rsa/">rsa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/vlc/">vlc</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/techblog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/techblog/tags/Interview/" style="font-size: 10px;">Interview</a> <a href="/techblog/tags/NB-IoT/" style="font-size: 10px;">NB-IoT</a> <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Permissions/" style="font-size: 10px;">Permissions</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/techblog/tags/Web/" style="font-size: 10px;">Web</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/face-detection/" style="font-size: 10px;">face detection</a> <a href="/techblog/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/techblog/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/techblog/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/techblog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/techblog/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/techblog/tags/vlc/" style="font-size: 10px;">vlc</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/techblog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/techblog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/techblog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

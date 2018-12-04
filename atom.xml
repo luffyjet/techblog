@@ -5,7 +5,7 @@
   <link href="/techblog/atom.xml" rel="self"/>
   
   <link href="http://www.luffyjet.com/techblog/"/>
-  <updated>2016-11-09T06:54:05.000Z</updated>
+  <updated>2018-12-04T09:01:12.593Z</updated>
   <id>http://www.luffyjet.com/techblog/</id>
   
   <author>
@@ -14,6 +14,934 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开源热补丁和插件化项目整理</title>
+    <link href="http://www.luffyjet.com/techblog/2018/06/08/hotfix-framework-article/"/>
+    <id>http://www.luffyjet.com/techblog/2018/06/08/hotfix-framework-article/</id>
+    <published>2018-06-08T14:30:12.000Z</published>
+    <updated>2018-12-04T09:01:12.593Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="开源热补丁框架"><a href="#开源热补丁框架" class="headerlink" title="开源热补丁框架"></a>开源热补丁框架</h3><ol>
+<li>支付宝 <a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">AndFix</a></li>
+<li>QZone方案 (<a href="https://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;mid=400118620&amp;idx=1&amp;sn=b4fdd5055731290eef12ad0d17f39d4a&amp;scene=1&amp;srcid=1106Imu9ZgwybID13e7y2nEi#wechat_redirect" target="_blank" rel="external">原理</a> , <a href="http://www.cnblogs.com/codingWarrior/p/5111957.html" target="_blank" rel="external">dex分包方案</a>) <ul>
+<li><a href="https://github.com/dodola/HotFix" target="_blank" rel="external">HotFix</a> </li>
+<li><a href="https://github.com/jasonross/Nuwa" target="_blank" rel="external">Nuwa</a> </li>
+<li><a href="https://github.com/bunnyblue/DroidFix" target="_blank" rel="external">DroidFix</a>  </li>
+</ul>
+</li>
+<li>微信 <a href="https://github.com/Tencent/tinker" target="_blank" rel="external">Tinker</a> </li>
+<li>美团 <a href="https://github.com/Meituan-Dianping/Robust" target="_blank" rel="external">Robust</a></li>
+<li>其它 <a href="https://github.com/dodola/RocooFix" target="_blank" rel="external">RocooFix</a> <a href="https://github.com/dodola/AnoleFix" target="_blank" rel="external">AnoleFix</a></li>
+<li><a href="https://github.com/ManbangGroup/Phantom" target="_blank" rel="external">Phantom 零Hook稳定占坑 兼容Android 9.0</a>（2018.10月更新）</li>
+</ol>
+<h3 id="热补丁整合框架"><a href="#热补丁整合框架" class="headerlink" title="热补丁整合框架"></a>热补丁整合框架</h3><ol>
+<li><a href="https://github.com/baidao/tinker-manager" target="_blank" rel="external">tinker-manager</a> </li>
+<li><a href="https://github.com/zzz40500/Tinker_imitator" target="_blank" rel="external">Tinker_imitator</a></li>
+<li><a href="https://github.com/TangXiaoLv/Android-Easy-MultiDex" target="_blank" rel="external">Android 傻瓜式分包插件</a><a id="more"></a>
+</li>
+</ol>
+<h3 id="热补丁相关文章"><a href="#热补丁相关文章" class="headerlink" title="热补丁相关文章"></a>热补丁相关文章</h3><ol>
+<li>Instant Run英文原文 (<a href="https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f#.c088qhdxu" target="_blank" rel="external">https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f#.c088qhdxu</a>)        </li>
+<li>Instant Run工作原理及用法中文翻译稿 (<a href="http://www.jianshu.com/p/2e23ba9ff14b" target="_blank" rel="external">http://www.jianshu.com/p/2e23ba9ff14b</a>)        </li>
+<li>Buck exopackage 介绍 (<a href="https://buckbuild.com/article/exopackage.html" target="_blank" rel="external">https://buckbuild.com/article/exopackage.html</a>)   </li>
+<li>各大热补丁方案分析和比较 (<a href="http://blog.zhaiyifan.cn/2015/11/20/HotPatchCompare/" target="_blank" rel="external">http://blog.zhaiyifan.cn/2015/11/20/HotPatchCompare/</a>)  </li>
+<li><a href="https://github.com/WeMobileDev/article/blob/master/%E5%BE%AE%E4%BF%A1Android%E7%83%AD%E8%A1%A5%E4%B8%81%E5%AE%9E%E8%B7%B5%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.md" target="_blank" rel="external">微信Android热补丁实践演进之路</a>    </li>
+<li><a href="http://blog.csdn.net/lmj623565791/article/details/49883661/" target="_blank" rel="external">Android 热补丁动态修复框架小结</a></li>
+<li><a href="http://dev.qq.com/topic/57ff5832bb8fec206ce2185d" target="_blank" rel="external">QFix探索之路—手Q热补丁轻量级方案</a> </li>
+<li><a href="http://dev.qq.com/topic/57ad7a70eaed47bb2699e68e" target="_blank" rel="external">微信热补丁 Tinker 的实践演进之路</a></li>
+<li><a href="http://blog.csdn.net/hudan2714/article/details/52355805" target="_blank" rel="external"> Android热补丁技术，ClassLoader、dexposed、Andfix、smart app updates补丁技术收集整理</a></li>
+<li><a href="https://blog.csdn.net/wy12345432452/article/details/77482554" target="_blank" rel="external">关于Android热修复的几种解决方案</a></li>
+<li><a href="https://www.cnblogs.com/popfisher/p/8543973.html" target="_blank" rel="external">Android热修复技术原理详解</a></li>
+<li><a href="https://juejin.im/post/5b8959f96fb9a019fe685eb3" target="_blank" rel="external">Android P限制</a></li>
+<li><a href="https://blog.csdn.net/xinzhou201/article/details/80881604" target="_blank" rel="external">GMTC分享——当插件化遇到 Android P</a></li>
+<li><a href="http://www.infoq.com/cn/news/2018/04/Android-P-API" target="_blank" rel="external">突破Android P非公开API限制</a></li>
+<li><a href="https://www.jianshu.com/p/c41567b2c574" target="_blank" rel="external">破解Android P对非SDK接口限制</a></li>
+<li><a href="https://blog.csdn.net/lisdye2/article/details/80882180" target="_blank" rel="external">Android P非公开sdk适配指南</a></li>
+<li><a href="http://kaedea.com/2016/02/05/android-dynamical-loading-00-index/" target="_blank" rel="external">ANDROID 动态加载系列</a></li>
+</ol>
+<h3 id="插件化框架"><a href="#插件化框架" class="headerlink" title="插件化框架"></a>插件化框架</h3><ol>
+<li><a href="https://github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external">DynamicLoadApk</a></li>
+<li><a href="https://github.com/Qihoo360/DroidPlugin" target="_blank" rel="external">Qihoo360/DroidPlugin</a></li>
+<li><a href="https://github.com/houkx/android-pluginmgr" target="_blank" rel="external">houkx/android-pluginmgr</a></li>
+<li><a href="https://github.com/mmin18/AndroidDynamicLoader" target="_blank" rel="external">mmin18/AndroidDynamicLoader</a></li>
+<li><a href="https://github.com/wequick/Small" target="_blank" rel="external">wequick/Small</a></li>
+<li><a href="https://github.com/hongyangAndroid/AndroidChangeSkin" target="_blank" rel="external">换肤 不算插件</a></li>
+<li><a href="https://github.com/limpoxe/Android-Plugin-Framework" target="_blank" rel="external">limpoxe/Android-Plugin-Framework</a></li>
+<li><a href="https://github.com/iReaderAndroid/ZeusPlugin" target="_blank" rel="external">iReaderAndroid/ZeusPlugin</a></li>
+<li><a href="https://github.com/rickdynasty/TwsPluginFramework" target="_blank" rel="external">rickdynasty/TwsPluginFramework</a></li>
+<li><a href="https://github.com/didi/VirtualAPK" target="_blank" rel="external">didi/VirtualAPK</a></li>
+</ol>
+<h3 id="插件化文章"><a href="#插件化文章" class="headerlink" title="插件化文章"></a>插件化文章</h3><ol>
+<li><a href="http://www.androidblog.cn/index.php/Index/detail/id/16#" target="_blank" rel="external">Android博客周刊专题之＃插件化开发＃</a></li>
+<li><a href="http://www.trinea.cn/android/android-plugin/" target="_blank" rel="external">Android 插件化 动态升级</a></li>
+<li><a href="https://github.com/liaohuqiu/android-dynamic-load-awesome/blob/master/README-cn.md" target="_blank" rel="external">liaohuqiu/android-dynamic-load-awesome</a>  </li>
+<li><a href="https://github.com/kaedea/android-dynamical-loading" target="_blank" rel="external">kaedea/android-dynamical-loading</a> </li>
+<li><a href="http://tech.meituan.com/android_robust.html" target="_blank" rel="external">Android热更新方案Robust</a>    </li>
+<li><a href="http://blog.csdn.net/sbsujjbcy/article/details/52541803" target="_blank" rel="external">Android 热补丁技术——资源的热修复</a>     </li>
+<li><a href="http://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653578947&amp;idx=1&amp;sn=279f089c9fb86669b8ad2382a28af8ce&amp;chksm=84b3b4c4b3c43dd2904d68f380874d2967ee492f4325486376f26d53dd2c0818cc32c663d282&amp;mpshare=1&amp;scene=23&amp;srcid=0505wrdN9VWydyfdLr1gSl2s#rd" target="_blank" rel="external">Android 插件技术实战总结</a>                   </li>
+<li><a href="https://github.com/tiann/understand-plugin-framework" target="_blank" rel="external">Android插件化原理解析</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;开源热补丁框架&quot;&gt;&lt;a href=&quot;#开源热补丁框架&quot; class=&quot;headerlink&quot; title=&quot;开源热补丁框架&quot;&gt;&lt;/a&gt;开源热补丁框架&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;支付宝 &lt;a href=&quot;https://github.com/alibaba/AndFix&quot;&gt;AndFix&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;QZone方案 (&lt;a href=&quot;https://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;amp;mid=400118620&amp;amp;idx=1&amp;amp;sn=b4fdd5055731290eef12ad0d17f39d4a&amp;amp;scene=1&amp;amp;srcid=1106Imu9ZgwybID13e7y2nEi#wechat_redirect&quot;&gt;原理&lt;/a&gt; , &lt;a href=&quot;http://www.cnblogs.com/codingWarrior/p/5111957.html&quot;&gt;dex分包方案&lt;/a&gt;) &lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/dodola/HotFix&quot;&gt;HotFix&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jasonross/Nuwa&quot;&gt;Nuwa&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/bunnyblue/DroidFix&quot;&gt;DroidFix&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;微信 &lt;a href=&quot;https://github.com/Tencent/tinker&quot;&gt;Tinker&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;美团 &lt;a href=&quot;https://github.com/Meituan-Dianping/Robust&quot;&gt;Robust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;其它 &lt;a href=&quot;https://github.com/dodola/RocooFix&quot;&gt;RocooFix&lt;/a&gt; &lt;a href=&quot;https://github.com/dodola/AnoleFix&quot;&gt;AnoleFix&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/ManbangGroup/Phantom&quot;&gt;Phantom 零Hook稳定占坑 兼容Android 9.0&lt;/a&gt;（2018.10月更新）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;热补丁整合框架&quot;&gt;&lt;a href=&quot;#热补丁整合框架&quot; class=&quot;headerlink&quot; title=&quot;热补丁整合框架&quot;&gt;&lt;/a&gt;热补丁整合框架&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/baidao/tinker-manager&quot;&gt;tinker-manager&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/zzz40500/Tinker_imitator&quot;&gt;Tinker_imitator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/TangXiaoLv/Android-Easy-MultiDex&quot;&gt;Android 傻瓜式分包插件&lt;/a&gt;
+    
+    </summary>
+    
+      <category term="android" scheme="http://www.luffyjet.com/techblog/categories/android/"/>
+    
+    
+      <category term="hotfix" scheme="http://www.luffyjet.com/techblog/tags/hotfix/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>人脸识别调研和部分应用场景</title>
+    <link href="http://www.luffyjet.com/techblog/2018/04/01/about-face-detection/"/>
+    <id>http://www.luffyjet.com/techblog/2018/04/01/about-face-detection/</id>
+    <published>2018-04-01T04:30:12.000Z</published>
+    <updated>2018-12-04T07:49:39.053Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="人脸识别基本流程"><a href="#人脸识别基本流程" class="headerlink" title="人脸识别基本流程"></a>人脸识别基本流程</h2><p> <img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur2wu2oxj30mf0gqn0g.jpg" alt=""></p>
+<p>人脸识别最难的部分是有充分适应各大光线环境的人脸预处理算法，需要在各种复杂的光线环境中提取到人脸信息，特别是移动互联网时代，摄像头拍照的地方可以在斑驳的树影下，也可以在昏暗的街灯下，以及深夜出租车内，这对算法的鲁棒性考验极大。同时还要考虑照片和视频欺诈，二次成像的光线污染等问题。<br><a id="more"></a><br>人脸识别应用分类派系：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxur3jkwh5j30pu0rjt9u.jpg" alt=""></p>
+<p>对应解决方案：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur209blfj30qn0m4qa7.jpg" alt=""></p>
+<h2 id="相关企业"><a href="#相关企业" class="headerlink" title="相关企业"></a>相关企业</h2><p>人脸识别公司有很多，大致分为这几类：</p>
+<ul>
+<li>一类是，专注算法这块，主要提供的是API，SDK。有的是自己做成了系统，软件。</li>
+<li>一类是，专注系统、软件这块，有针对不同行业的解决方案，不过不一定掌握了核心算法。</li>
+<li>一类是，人脸识别模块及硬件这块，比如人脸识别考勤机，人脸识别取款机。</li>
+</ul>
+<h4 id="国内主要的相关公司："><a href="#国内主要的相关公司：" class="headerlink" title="国内主要的相关公司："></a>国内主要的相关公司：</h4><ul>
+<li>北京：FACE++，商汤科技，北京可信网络有限公司，脸指，麒麟永盛，百度</li>
+<li>四川：凌感科技，四川蓉达，云从科技</li>
+<li>广东：颜鉴科技（ColorReco），洪森科技</li>
+<li>杭州：杭州微禾</li>
+<li>厦门：厦门瑞为</li>
+<li>上海：晶软，看看智能，腾讯优图，</li>
+</ul>
+<p>部分链接：</p>
+<pre><code>https://www.faceplusplus.com.cn/
+https://cloud.sensetime.com/
+https://www.linkface.cn/
+http://www.facecore.cn/
+http://colorreco.com/
+http://www.faceall.cn/
+http://www.facefinger.cn/
+</code></pre><h4 id="国外相关公司"><a href="#国外相关公司" class="headerlink" title="国外相关公司"></a>国外相关公司</h4><ul>
+<li>美国Identix公司</li>
+<li>美国Bioscrypt公司</li>
+<li>德国Cognitec Systems公司</li>
+<li>西班牙Herta Security公司</li>
+<li>日本NEC公司</li>
+<li>日本Softwise公司</li>
+</ul>
+<p>以上都是老牌人脸识别公司，美国Identix公司做的是多模认证（指纹、虹膜），而Bioscrypt公司早期起于指纹识别考勤，在政府市场的份额都不小，德国的Cognitec公司主要做政府项目的人脸识别系统，而NEC公司主要做机器人视觉识别系统，西班牙Herta公司是一家学术很浓厚的公司。此外的还有一些以色列公司技术也很不错。这些公司最强的一点是，几乎做的都是政府的安全项目，特别是CIA用的最多，此外还有Facebook等公司也在进入这个领域，互联网公司的加入主要是进行人群的分类和应用的优化（针对性的市场推广），项目都是作为公司原本业务的一种补充，这类几乎不用担心客户问题，因为这些公司本身就有很大的需求。随着人工智能的崛起，人脸识别未来会作为一个强大的功能补充，类似语音一样，成为机器人的标配。 关于算法核心研发情况的争论： 基本上国内每家公司都会说自己的算法牛，实际上有几家有人脸核心算法呢？国内在完全从事算法研究的总工程师人数到目前（2016年）总计不到100人，不过也没有现在问题也不大，中科院计算所山世光教授已经开源了算法模块，没有基础的公司不用太辛苦从零开始在OPENCV基础上做算法升级，相信很快google微软还会有新的算法发布。现在算法基本都是98%以上，这点差距已经不重要，算法核不核心也没有太大问题。大家不用太过于焦虑，产品到应用阶段，单单靠算法可不够，还要考虑实际的使用。 </p>
+<h4 id="目前人脸识别的常见问题"><a href="#目前人脸识别的常见问题" class="headerlink" title="目前人脸识别的常见问题"></a>目前人脸识别的常见问题</h4><p>1：1比对源采集的难度： 1vs1，主要用于快速的人脸识别比对，作为身份确认的一种新方式，比如考生身份确认、公司考勤确认、各种证件照和本人确认，由于这些照片源不一定有权威统一的接口调用，所以一直没有用起来。目前市面上做的都是用户自传照片，比如支付宝的人脸比对，用户自传的照片最大的问题是照片质量的合格率太低，拍照的光线、角度等因素会导致采集源的质量下降，不利于后期的大批量人脸特征码管理。 </p>
+<p>N:N模糊匹配查询：1vsN，这个主要用于排查犯罪嫌疑人、失踪人口的全库搜寻、一人多证的重复排查，以此相似度列出相应的结果，可以大大提高排查效率。类似的也可以用到走失儿童的项目中去</p>
+<p>N vs N 该算法实际上是基于视频流的帧处理所用，对服务器的计算环境要求严苛，目前的算法系统所支撑的输出率非常有限，需要等待下一代GPU算法，特别是基于CUDA架构的。该应用主要在一些高级赛事会议场合，以及安保公司的人脸警报系统。 </p>
+<p>人脸识别的算法能力：拒识率、误识率、通过率，准确率 </p>
+<p>人脸识别的技术发展方向： </p>
+<blockquote>
+<p>结合三维信息： 二维和三维信息融合使特征更加鲁棒</p>
+<p>多特征融合： 单一特征难以应对复杂的光照和姿态变化</p>
+<p>大规模人脸比对： 面向海量数据的人脸比对与搜索</p>
+<p>深度学习： 在大数据条件下充分发挥深度神经网络强大的学习能力 </p>
+</blockquote>
+<h2 id="可供选择的国产供应商"><a href="#可供选择的国产供应商" class="headerlink" title="可供选择的国产供应商"></a>可供选择的国产供应商</h2><p>国内的企业从估值、客户、产品都是 Face++ 远远胜出，综合能力非常突出。阿里巴巴采用了Face++的人脸识别技术，融资数量Face++最多。另外还有百度和腾讯优图也开放了人脸识别API。百度和腾讯看重的是他们的数据量和雄厚的资金，算法水平也有。</p>
+<p>所以综合来看有四家候选，4家全部提供了HTTP API的形式的服务：</p>
+<p>face++: <a href="https://megvii.com/" target="_blank" rel="external">https://megvii.com/</a></p>
+<p>商汤科技: <a href="https://cloud.sensetime.com/(https://www.linkface.cn/" target="_blank" rel="external">https://cloud.sensetime.com/(https://www.linkface.cn/</a>)</p>
+<p>百度: <a href="http://ai.baidu.com/docs#/Face-API/top" target="_blank" rel="external">http://ai.baidu.com/docs#/Face-API/top</a></p>
+<p>腾讯优图: <a href="http://open.youtu.qq.com/" target="_blank" rel="external">http://open.youtu.qq.com/</a></p>
+<h4 id="结合应用场景选择："><a href="#结合应用场景选择：" class="headerlink" title="结合应用场景选择："></a>结合应用场景选择：</h4><ul>
+<li>用于登录CC+,由于CC+暂时并没有涉及资金安全方面的问题，可以选用免费的服务，比如百度和腾讯。</li>
+<li>刷脸验人，比如考勤，安全门禁，这些安全要求较高，需要防止各种作弊，我们可以采用face++旗下的<a href="https://faceid.com/" target="_blank" rel="external">FaceID产品</a>，它是付费服务。</li>
+<li>以上几家除了商汤科技都有，开放平台和开放的API提供使用。都具备了人脸识别的各种基本能力。但是都没有免费提供活体检测等高端功能。FaceID，商汤，腾讯都可以通过商务合作购买高级能力。</li>
+<li>按行业按业务分类，face++都有<a href="https://megvii.com/customers/?type=jobs" target="_blank" rel="external">成功的案例</a>。另外还有<a href="https://megvii.com/smart-commerce/success-stories/" target="_blank" rel="external">智能地产解决方案</a>，非常契合智慧园区。我们能想到的需求，这一家基本能满足。</li>
+</ul>
+<h2 id="智慧园区相关应用"><a href="#智慧园区相关应用" class="headerlink" title="智慧园区相关应用"></a>智慧园区相关应用</h2><p>智慧园区和人脸识别的结合场景，有很多，比如：<br>出入口人脸门禁<br>，VIP迎宾<br>，远程访客邀约<br>，员工刷脸考勤<br>，会议室管理<br>，地库人脸门禁<br>，访客人证登记<br>，关键区域门禁管理<br>，证件识别<br>，人证比对等等。下面举一些具体的例子。</p>
+<h5 id="1-企服大堂，人力资源广场大厅，smart展厅的出入人员管理"><a href="#1-企服大堂，人力资源广场大厅，smart展厅的出入人员管理" class="headerlink" title="1.企服大堂，人力资源广场大厅，smart展厅的出入人员管理"></a>1.企服大堂，人力资源广场大厅，smart展厅的出入人员管理</h5><p>这些场所人员混杂，通过摄像头采集并分析人脸，可以区分重要领导，进行人脸识别迎宾。记录可疑人员，然后做出提示。摄像头采集的图像通过第三方的人脸识别API进行人脸比对。腾讯和百度都有免费的服务。</p>
+<h5 id="2-企服大堂，人力资源广场大厅等服务区的刷脸登记验证"><a href="#2-企服大堂，人力资源广场大厅等服务区的刷脸登记验证" class="headerlink" title="2.企服大堂，人力资源广场大厅等服务区的刷脸登记验证"></a>2.企服大堂，人力资源广场大厅等服务区的刷脸登记验证</h5><p>读取来访者身份证信息，然后与摄像头抓取的人脸直接对比，验证身份。硬件方面一个平板电脑和身份证读卡器即可实现，这两个设备一般都已经有了。或者你没带身份证，则通过采集的人脸和公安部身份证网上副本进行对比，来验证身份(<a href="http://news.qq.com/a/20160924/002581.htm" target="_blank" rel="external">相关文章</a>)。</p>
+<h5 id="3-停车场的安防"><a href="#3-停车场的安防" class="headerlink" title="3.停车场的安防"></a>3.停车场的安防</h5><p>通过摄像头读取停车场出入人员的人脸信息，结合市局人像数据支撑，进行人脸比对，并对视频流中同一人员行动轨迹进行追踪与分析。防范可疑人员。face++已经有解决方案。</p>
+<h5 id="4-办公室门禁"><a href="#4-办公室门禁" class="headerlink" title="4.办公室门禁"></a>4.办公室门禁</h5><p>保证办公室人员的安全，管理访客，外来人员，周边服务人员。在入口安装高清摄像头，记录人脸，并和我方图片库，进行比对，区分来人。可以采用免费的第三方人脸识别服务。摄像头可以选用海康。</p>
+<h5 id="5-办公室考勤"><a href="#5-办公室考勤" class="headerlink" title="5.办公室考勤"></a>5.办公室考勤</h5><p>办公室出入口安装高清摄像头，只需抬头眨眨眼，实现上下班自动考勤。为了防止作弊，需要引入活体检测。旷视，商汤，腾讯均有活体检测服务，旷视的产品较为成熟。</p>
+<h5 id="6-驾驶舱登录"><a href="#6-驾驶舱登录" class="headerlink" title="6.驾驶舱登录"></a>6.驾驶舱登录</h5><p>驾驶舱登录，目前其实就是CC+的登录。可以通过手机进行人脸识别，完成登录。处于演示阶段的话，可以暂时不用考虑过多安全问题，那么我们可以直接采用免费的人脸识别服务。如果对安全要求高，那么我们需要引入活体检测，防止黑客攻击。</p>
+<h5 id="7-作为CC-的一种新的登录方式"><a href="#7-作为CC-的一种新的登录方式" class="headerlink" title="7.作为CC+的一种新的登录方式"></a>7.作为CC+的一种新的登录方式</h5><p>第一次安装登录CC+需要使用密码登录，设置了刷脸登录之后，退出登录之后就可以使用刷脸进行登录。需要引入活体检测来增强安全性，防止人脸攻击，因此没有免费的方案。</p>
+<h5 id="8-社交方面的应用"><a href="#8-社交方面的应用" class="headerlink" title="8.社交方面的应用"></a>8.社交方面的应用</h5><p>CC+的社交部分，比如发图片的时候可以加入人脸识别，对图片上的人脸进行特殊处理。这部分目前主要也是收费的产品。比如face++。免费的服务目前好像还没有。</p>
+<h5 id="9-上下班班车刷脸上车"><a href="#9-上下班班车刷脸上车" class="headerlink" title="9.上下班班车刷脸上车"></a>9.上下班班车刷脸上车</h5><p>云谷的上下班班车，可以引入人脸识别，用来进行扣费和人员验证。增强了安全性和便捷性。这方面的解决方案可以和faceid进行商讨。他们目前在神州租车和滴滴出行都有类型的应用。</p>
+<p>总结，对安全性有要求的场景，都需要活体检测的引入，这块目前都是收费服务。都需要进行商务合作。</p>
+<h2 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h2><ul>
+<li>支付宝人脸识别安全吗？ <a href="https://www.zhihu.com/question/57158124" target="_blank" rel="external">https://www.zhihu.com/question/57158124</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;人脸识别基本流程&quot;&gt;&lt;a href=&quot;#人脸识别基本流程&quot; class=&quot;headerlink&quot; title=&quot;人脸识别基本流程&quot;&gt;&lt;/a&gt;人脸识别基本流程&lt;/h2&gt;&lt;p&gt; &lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNbRwgy1fxur2wu2oxj30mf0gqn0g.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;人脸识别最难的部分是有充分适应各大光线环境的人脸预处理算法，需要在各种复杂的光线环境中提取到人脸信息，特别是移动互联网时代，摄像头拍照的地方可以在斑驳的树影下，也可以在昏暗的街灯下，以及深夜出租车内，这对算法的鲁棒性考验极大。同时还要考虑照片和视频欺诈，二次成像的光线污染等问题。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="face detection" scheme="http://www.luffyjet.com/techblog/categories/face-detection/"/>
+    
+    
+      <category term="face detection" scheme="http://www.luffyjet.com/techblog/tags/face-detection/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android面试相关整理</title>
+    <link href="http://www.luffyjet.com/techblog/2018/03/15/android-interview/"/>
+    <id>http://www.luffyjet.com/techblog/2018/03/15/android-interview/</id>
+    <published>2018-03-15T15:28:55.000Z</published>
+    <updated>2018-12-04T08:53:23.944Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ol>
+<li><p>[Android 开发工程师面试指南]<br>(<a href="https://www.diycode.cc/wiki/androidinterview" target="_blank" rel="external">https://www.diycode.cc/wiki/androidinterview</a>)</p>
+</li>
+<li><p><a href="https://github.com/hadyang/interview" target="_blank" rel="external">Java / Android 笔试、面试 知识整理</a></p>
+</li>
+<li><p><a href="http://www.jackywang.tech/AndroidInterview-Q-A/" target="_blank" rel="external">国内一线互联网公司内部面试题库</a></p>
+</li>
+<li><a href="https://yuchengkai.cn/docs/zh/" target="_blank" rel="external">InterviewMap 面试图谱</a></li>
+<li><a href="https://github.com/crossoverJie/JCSprout" target="_blank" rel="external">Java Core Sprout </a></li>
+<li><a href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="external">设计模式(菜鸟学院)</a></li>
+<li><a href="https://leetcode-cn.com" target="_blank" rel="external">LeetCode算法题</a></li>
+<li><a href="https://www.jianshu.com/p/d1efe2f31b6d" target="_blank" rel="external">史上最全 Android 面试资料集合</a></li>
+<li><a href="https://blog.csdn.net/qq_27053103/article/details/79564062?utm_source=blogxgwz4" target="_blank" rel="external">2018 Android面试心得</a></li>
+<li><a href="https://www.jianshu.com/p/375ad14096b3" target="_blank" rel="external">Android&amp;Java面试题大全</a></li>
+</ol>
+<a id="more"></a>
+<h2 id="简历"><a href="#简历" class="headerlink" title="简历"></a>简历</h2><ol>
+<li><a href="https://github.com/geekcompany/ResumeSample/blob/master/android.md" target="_blank" rel="external">Android程序员简历模板</a></li>
+<li><a href="https://blog.csdn.net/job51bbs/article/details/70224740" target="_blank" rel="external">这样投简历才有效</a></li>
+</ol>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><ol>
+<li><a href="http://keeganlee.me/post/android/20150605" target="_blank" rel="external">ANDROID项目重构之路:架构篇</a></li>
+<li><a href="http://blog.zhaiyifan.cn/2016/01/29/android-app-architecture-2015/" target="_blank" rel="external">Android应用架构 (Android Dev Summit 2015)</a></li>
+<li><a href="http://blog.zhaiyifan.cn/categories/Android-Project-From-0/" target="_blank" rel="external">从零开始的Android新项目</a></li>
+<li><a href="https://github.com/JuHonggang/SimpleProject" target="_blank" rel="external">模块化通用框架</a></li>
+</ol>
+<h2 id="插件化"><a href="#插件化" class="headerlink" title="插件化"></a>插件化</h2><p>详见 <a href="/techblog/2018/06/08/hotfix-framework-article/">热补丁与插件化项目整理</a></p>
+<h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁</h2><p>详见 <a href="/techblog/2018/06/08/hotfix-framework-article/">热补丁与插件化项目整理</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li><a href="https://www.jianshu.com/p/1fc7130eb2c2" target="_blank" rel="external">TLS详解</a></li>
+<li><a href="https://www.jianshu.com/p/626b2087e2b1" target="_blank" rel="external">深入浅出Dagger2 : 从入门到爱不释手</a></li>
+<li><a href="https://my.oschina.net/u/2320245/blog/711594" target="_blank" rel="external">RxJava 常用的几种方法</a></li>
+<li><a href="http://blog.zhaiyifan.cn/2015/09/10/Android%E6%8D%A2%E8%82%A4%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" target="_blank" rel="external">Android换肤技术总结</a></li>
+<li><a href="https://blog.csdn.net/u011271348/article/details/69946650" target="_blank" rel="external">RxBus在rxjava2.0 的使用</a></li>
+<li><a href="https://blog.csdn.net/a19891024/article/details/54342799" target="_blank" rel="external">Android instrumentation原理</a></li>
+<li><a href="https://blog.csdn.net/chaoyu168/article/details/49407459" target="_blank" rel="external">String、StringBuffer、StringBuilder区别</a></li>
+<li><a href="http://flyou.ren/2017/01/13/Dagger2%E5%85%A5%E9%97%A8/" target="_blank" rel="external">Dagger2入门</a></li>
+<li><a href="http://flyou.ren/2017/04/05/%E5%85%B3%E4%BA%8ERxJava%E8%83%8C%E5%8E%8B/" target="_blank" rel="external">关于RxJava背压</a></li>
+<li><a href="https://blog.csdn.net/carson_ho/article/details/79168723" target="_blank" rel="external">Android RxJava实际应用案例</a></li>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0523/7963.html" target="_blank" rel="external">App开发架构指南</a></li>
+<li><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0523/7964.html" target="_blank" rel="external">在项目中添加添加Architecture Components</a></li>
+<li><a href="https://blog.csdn.net/u011240877/article/details/72765136" target="_blank" rel="external">Android 进阶7：进程通信之 AIDL 的使用</a></li>
+<li><a href="https://juejin.im/book/5a124b29f265da431d3c472e/section/5a124c1f6fb9a0450b65fd3e" target="_blank" rel="external">Git原理详解及实用指南</a></li>
+<li><a href="https://juejin.im/post/5b8f536c5188255c352d3528" target="_blank" rel="external">RxJava 沉思录</a></li>
+<li><a href="http://www.androidblog.cn/" target="_blank" rel="external">http://www.androidblog.cn/</a> </li>
+<li><a href="https://blog.csdn.net/cankingapp/article/details/78773838" target="_blank" rel="external">Lifecycle+Retrofit+Room完美结合 领略架构之美</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;基础知识&quot;&gt;&lt;a href=&quot;#基础知识&quot; class=&quot;headerlink&quot; title=&quot;基础知识&quot;&gt;&lt;/a&gt;基础知识&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;[Android 开发工程师面试指南]&lt;br&gt;(&lt;a href=&quot;https://www.diycode.cc/wiki/androidinterview&quot;&gt;https://www.diycode.cc/wiki/androidinterview&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/hadyang/interview&quot;&gt;Java / Android 笔试、面试 知识整理&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.jackywang.tech/AndroidInterview-Q-A/&quot;&gt;国内一线互联网公司内部面试题库&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://yuchengkai.cn/docs/zh/&quot;&gt;InterviewMap 面试图谱&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/crossoverJie/JCSprout&quot;&gt;Java Core Sprout &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.runoob.com/design-pattern/design-pattern-tutorial.html&quot;&gt;设计模式(菜鸟学院)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://leetcode-cn.com&quot;&gt;LeetCode算法题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/d1efe2f31b6d&quot;&gt;史上最全 Android 面试资料集合&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/qq_27053103/article/details/79564062?utm_source=blogxgwz4&quot;&gt;2018 Android面试心得&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/375ad14096b3&quot;&gt;Android&amp;amp;Java面试题大全&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://www.luffyjet.com/techblog/categories/Android/"/>
+    
+    
+      <category term="Interview" scheme="http://www.luffyjet.com/techblog/tags/Interview/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>了解一下窄带网联网NB-IoT</title>
+    <link href="http://www.luffyjet.com/techblog/2018/03/08/NB-IOT/"/>
+    <id>http://www.luffyjet.com/techblog/2018/03/08/NB-IOT/</id>
+    <published>2018-03-08T04:30:12.000Z</published>
+    <updated>2018-12-04T07:50:12.656Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是窄带物联网（NB-IoT）？"><a href="#什么是窄带物联网（NB-IoT）？" class="headerlink" title="什么是窄带物联网（NB-IoT）？"></a>什么是窄带物联网（NB-IoT）？</h2><p>基于蜂窝的窄带物联网（Narrow Band Internet of Things, NB-IoT）俨然已成为万物互联网络的一个重要分支，作为 IoT 领一个新兴的技术，NB-IoT 构建于蜂窝网络，只消耗大约 180KHz 的带宽，可直接部署于 GSM 网络、UMTS 网络或 LTE 网络，以降低部署成本、实现平滑升级。</p>
+<p>NB-IoT 支持低功耗设备在广域网的蜂窝数据连接，也被叫作低功耗广域网(LPWA)，支持待机时间长、对网络连接要求较高设备的高效连接。据说 NB-IoT 设备电池寿命可以提高至至少 10 年，同时还能提供非常全面的室内蜂窝数据连接覆盖。<br><a id="more"></a></p>
+<h2 id="NB-IoT-的前景与优势"><a href="#NB-IoT-的前景与优势" class="headerlink" title="NB-IoT 的前景与优势"></a>NB-IoT 的前景与优势</h2><p>移动通信正在从人和人的连接，向人与物以及物与物的连接迈进，万物互联是必然趋势。然而当前的 4G 网络在物与物连接上能力不足。事实上，相比蓝牙、ZigBee 等短距离通信技术，移动蜂窝网络具备广覆盖、可移动以及大连接数等特性，能够带来更加丰富的应用场景，理应成为物联网的主要连接技术。作为 LTE 的演进型技术，4.5G 除了具有高达 1Gbps 的峰值速率，还意味着基于蜂窝物联网的更多连接数，支持海量 M2M 连接以及更低时延，将助推高清视频、VoLTE 以及物联网等应用快速普及。蜂窝物联网正在开启一个前所未有的广阔市场。</p>
+<p>对于电信运营商而言，车联网、智慧医疗、智能家居等物联网应用将产生海量连接，远远超过人与人之间的通信需求。</p>
+<p>NB-IoT 具备四大特点：一是广覆盖，将提供改进的室内覆盖，在同样的频段下，NB-IoT 比现有的网络增益 20dB，覆盖面积扩大 100 倍；二是具备支撑海量连接的能力，NB-IoT 一个扇区能够支持 10 万个连接，支持低延时敏感度、超低的设备成本、低设备功耗和优化的网络架构；三是更低功耗，NB-IoT 终端模块的待机时间可长达 10 年；四是更低的模块成本，企业预期的单个接连模块不超过 5 美元。</p>
+<p>NB-IoT 聚焦于低功耗广覆盖（LPWA）物联网（IoT）市场，是一种可在全球范围内广泛应用的新兴技术。其具有覆盖广、连接多、速率低、成本低、功耗低、架构优等特点。NB-IoT 使用 License 频段，可采取带内、保护带或独立载波三种部署方式，与现有网络共存。</p>
+<p>因为 NB-IoT 自身具备的低功耗、广覆盖、低成本、大容量等优势，使其可以广泛应用于多种垂直行业，如远程抄表、资产跟踪、智能停车、智慧农业等。3GPP 标准的首个版本预计在今年 6 月发布，到时候将有一批测试网络和小规模商用网络出现。</p>
+<h2 id="NB-IoT-的需求与发展"><a href="#NB-IoT-的需求与发展" class="headerlink" title="NB-IoT 的需求与发展"></a>NB-IoT 的需求与发展</h2><p>随着智能城市、大数据时代的来临，无线通信将实现万物连接。很多企业预计未来全球物联网连接数将是千亿级的时代。目前已经出现了大量物与物的联接， 然而这些联接大多通过蓝牙、Wi-Fi 等短距通信技术承载，但非运营商移动网络。为了满足不同物联网业务需求，根据物联网业务特征和移动通信网络特点，3GPP 根据窄带业务应用场景开展了增强移动通信网络功能的技术研究以适应蓬勃发展的物联网业务需求。</p>
+<p>我们正进入万物互联(IoT)的时代，这对于整个移动通信产业来说是一个巨大的机会。无论是运营商大咖，还是设备商巨头，都在展示各自的物联网解决方案和在不同垂直行业的应用。</p>
+<p>当然，实现这一切的基础，是要有无处不在的网络联接。运营商的网络是全球覆盖最为广泛的网络，因此在接入能力上有独特的优势。然而，一个不容忽视的现实情况是，真正承载到移动网络上的物与物联接只占到联接总数的 10%，大部分的物与物联接通过蓝牙、Wi-Fi 等技术来承载。</p>
+<p>为此，产业链从几年前就开始研究利用窄带 LTE 技术来承载 IoT 联接。历经几次更名和技术演进，2015 年 9 月，3GPP 正式将这一技术命名为 NB-IoT。MWC2016 上，NB-IoT 首次亮相，受到瞩目，运营商和设备商纷纷为其站台和背书。</p>
+<p>从技术层面上来讲，NB-IoT 有 4 大技术优势。首先是覆盖广，相比传统 GSM，一个基站可以提供 10 倍的面积覆盖;其次是海量连接，200KHz 的带宽可以提供 10 万个联接;第三是低功耗，使用 AA 电池便可以工作十年，无需充电；第四是低成本，模组成本小于 5 美金。</p>
+<p>据了解，NB-IoT 可以广泛应用于多种垂直行业，如远程抄表、资产跟踪、智能停车、智慧农业等。随着 3GPP 标准的首个版本在 6 月份发布，将有一批测试网络和小规模商用网络出现。NB-IoT 将在多个低功耗广域网技术中脱颖而出。</p>
+<p>此外，越来越多的行业已经在使用物联网技术提高效率，提升客户满意度并降低运营成本。例如，汽车零部件、家用电器及安全系统制造商博世已经将很多产品线连接起来，并从移动互联技术，尤其是车联网领域的崛起中直接获益。</p>
+<p>为了迎接物联网领域的巨大机遇，整个产业不仅需要推动技术创新，还需要推动商业模式创新和跨行业协作。由于用例、应用和商业模式纷繁多样，物联网市场将比移动市场更加碎片化。</p>
+<h2 id="NB-IoT标准的应用"><a href="#NB-IoT标准的应用" class="headerlink" title="NB-IoT标准的应用"></a>NB-IoT标准的应用</h2><p>NB-IoT标准具备四大特点：一是广覆盖，将提供改进的室内覆盖，在同样的频段下，NB-IoT比现有的网络增益20dB，覆盖面积扩大了100倍；二是具备支撑海量连接的能力，NB-IoT一个扇区能够支持10万个连接；三是更低功耗，NB-IoT终端模块的待机时间可长达10年；四是更低的模块成本，企业预期的单个接连模块不超过5美元。</p>
+<p>考虑NB-IoT的特性，此标准可可满足对低功耗/长待机、深覆盖、大容量有所要求的低速率业务；同时由于对于移动性支持较差，更适合静态业务场景或非连续移动、实时传输数据的业务场景，并且业务对时延低敏感。可考虑的业务类型如下：</p>
+<p>1) 自主异常报告业务类型。如烟雾报警探测器、智能电表停电的通知等，上行数据极小数据量需求（十字节量级），周期多以年、月为单位。 </p>
+<p>2) 自主周期报告业务类型。如智能公用事业（煤气/水/电）测量报告、智能农业、智能环境等，上行较小数据量需求（百字节量级），周期多以天、小时为单位。 </p>
+<p>3) 网络指令业务类型。如开启/关闭、设备触发发送上行报告、请求抄表，下行极小数据量需求（十字节量级），周期多以天、小时为单位。 </p>
+<p>4) 软件更新业务类型。如软件补丁/更新，上行下行较大数据量需求（千字节量级），周期多以天、小时为单位。</p>
+<p>迄今为止，华为已联合全球多家运营商在中国、德国、西班牙、阿联酋等国共同完成了基于NB-IoT技术的智能水表、智能停车、智能垃圾箱业务的功能验证。其中沃达丰和华为于2015年底在西班牙完成了NB-IoT预标准的第一个试商用测试，成功地将NB-IoT技术整合到沃达丰现有移动网络中，发送NB-IoT消息给水表中的物联网模块，水表的放置环境通常在壁橱等隐蔽环境，且水表无法外接电源，NB-IoT可有效解决覆盖及功耗等问题。</p>
+<p>2016年世界移动大会上，英特尔与爱立信联合中移动推了NB-IoT智能家庭环境监测系统。它采用了英特尔最新的NB-IoT芯片（XMM7115）。并且可以实时监测到环境的PM值、温度、湿度、光感亮度等。中兴通讯推出了基于NB-IoT技术的智能市政下水道管理系统，各种信息直接传到中兴手机上。</p>
+<p>另外，华为和上海联通也提出了基于NB-IoT技术的智能停车解决方案，通过现场演示，展示了基于NB-IoT这一新兴物联网接入技术的商业应用探索已经启动。此前，上海联通与华为合作建设了全球首个基于 4.5G NB-IoT的大规模连续覆盖区域—-上海国际旅游度假区，并率先在P1停车场部署了300多个基于NB-IoT技术的智能车检器，并提供从终端，基站，服务器，手机应用的端到端智能停车方案。用户可以在手机上实现车位查询、预定、导航、移动支付以及停车场管理等功能，解决了游客找车位难的问题，并一定程度缓解了交通拥堵。</p>
+<h2 id="面临的挑战与机遇"><a href="#面临的挑战与机遇" class="headerlink" title="面临的挑战与机遇"></a>面临的挑战与机遇</h2><p>NB-IoT相较于传统物联网技术有着自身的优势。不过，其仍旧有着自身的局限性。根据TR45.820中典型业务模型下的仿真测试数据，单小区可支持10万个NB-IoT终端接入。但是，这种纯中心的网络管理方式，可能会造成过长的轮询周期，像物联网这种高密度网络不一定适合采用中心管理模式，轮询一遍的时间成本可能令系统承受。物联网采用分层模式可能会效率更高。</p>
+<p>无线抄表始终都会面临一个问题，就是信号覆盖问题。面对无信号覆盖或者信号受干扰的情况，无线抄表即使优点再多也无用武之地。而且，我国国网已经基本完成了智能电表的改造，采用的是电力线载波通信(Power Line Communication, PLC)技术。智能电表行业已经被PLC占据，NB-IoT基本没有机会。目前，智能电表的需求也仅仅只是，若将来实施实时收费，NB-IoT技术恐怕不能满足实时性的要求。现有的水表和气表市场也面临着国网PLC和双模技术的竞争。国网在积极的推进电、水、热、气四表合一事项，未来NB-IoT到底在抄表市场能够分的多少市场份额实际上具备很大的未知数。</p>
+<p>此外，成本价格可能成为NB-IoT发展的阻碍。在成本方面，NB-IoT模组成本未来有望降至5美元之内，但目前支持蓝牙、ZigBee等标准的芯片价格仅在2美元左右，仅支持其中一种标准的芯片价格不到1美元。巨大的价格差距无疑将让企业部署NB-IoT产生顾虑。</p>
+<p>物联网应用还处于试验和示范性探索阶段，规模化应用少，创新活力不足。现阶段主要是运营商，华为、爱立信等设备制造商，高通等芯片供应商为代表的供应方比较热情，而需求方的应用主体，如水电气公共服务提供行业还没热络起来。</p>
+<p>据相关专家的猜测，物联网行业将会在2018至2019年因为NB-IoT技术和其芯片的商业化迎来再一次的热潮。</p>
+<h2 id="芯片厂商"><a href="#芯片厂商" class="headerlink" title="芯片厂商"></a>芯片厂商</h2><p>在底层芯片领域，当前华为海思、高通、英特尔、MTK、中兴微电子、大唐、展讯等厂商已有NB-IoT芯片的研发计划和实施步骤，原有LTE芯片能力的厂商均可参与，没法形成前2-3家垄断大部分市场，不过由于这一领域的厂商数量并不多，因此也不会形成大量市场参与者，市场集中度会保持在50%以下;而在LoRa阵营中，目前射频芯片供应集中在Semtech一家厂商，占据绝大多数市场份额，从而形成大于80%的市场集中度。</p>
+<h4 id="1、华为"><a href="#1、华为" class="headerlink" title="1、华为"></a>1、华为</h4><p>作为NB-IoT的积极参与者华为而言，NB-IoT是一个大战略，据说华为所有的部门都积极参与其中。</p>
+<p>其实早在2014年，华为就斥资2500万美元收购了英国领先的蜂窝物联网芯片和解决方案提供商Neul，还计划以Neul为中心，打造一个全球级物联网。</p>
+<p>不出所料，在标准公布后，Neul即将在本月底火速推出NB-IoT商用芯片，这将会是业内第一款正式商用的NB-IoT芯片，而且其芯片价格向短距离通信芯片价格靠近。</p>
+<p>据悉，华为推出的NB-IoT芯片在硬币大小的尺寸内集成了BB和AP、Flash和电池管理，并预留传感器集成功能。其中AP包含三个ARM-M0内核，每个M0内核分别负责应用、安全、通信功能，这样在方便进行功能管理的同时降低成本和功耗，后续推出的芯片还将会集成Soft SIM，进一步降低成本。</p>
+<p>另外，在九月底提供第一批芯片之后，华为还将会和ublox、移远合作提供第一批的商用模组，商用模组大概是在10月中旬或下旬发布。第一批提供的量并不大，明年年初将大规模商用。</p>
+<p>除了芯片以外，华为在NB-IoT领域的布局可谓是全方位覆盖式的。</p>
+<p>在今年的世界移动大会物联网峰会上，华为正式面向全球发布了端到端NB-IoT解决方案，主要包括：Huawei Lite OS与NB-IoT芯片使能的智能化终端方案、平滑演进到NB-IoT的eNodeB基站、可支持Core in a Box或NFV切片灵活部署的IoT Packet Core、基于云化架构并具有大数据能力的IoT联接管理平台等，满足了运营商IoT业务低功耗广域覆盖的核心需求。</p>
+<p>另外在第二届中国NB-IoT产业联盟高峰论坛上，华为的NB-IoT项目负责人许海平更是表示了华为正在建设的开放实验室将更好地为NB-IoT端到端业务服务。“从今年开始，华为在全球设立了七个开放实验室，现已开放了两个，一个是沃达丰，另外一个是华为的上研所。开放实验室主要是搭建整套的端到端NB-IoT环境，提供NB-IoT的芯片和模组，和一些关系比较密切的合作厂商一起来做端到端的对接，包括芯片模组的集成、后端的联接管理平台、业务服务器的对接等。沃达丰的开放实验室主要是针对的欧洲的合作厂商，上海的实验室主要是针对中国区的，九月份还将在韩国成立一个open lab，意大利等国家也会相继推进。”</p>
+<h4 id="2、高通"><a href="#2、高通" class="headerlink" title="2、高通"></a>2、高通</h4><p>高通认为在未来5年里，从物联网的角度来说，LTE依然是发展基础。3GPP Release 13下引入的NB-IoT将继续随着3GPP的发展而演进，大规模物联网(Massive IoT)所需的低成本、低功耗等将依靠LTE NB-IoT技术从蜂窝连接的方面推动其发展，为物联网5G技术发展打好基础。</p>
+<p>高通今年年初推了的MDM 9x07，支持Cat 4，最高支持150Mbps;另外一个是MDM 92071，支持Cat 1的标准;还有去年10月推出的MDM 9206，支持CatM1，后期通过软件升级可以支持NB-IoT。模块OEM厂商预计将于2017年初发布基于MDM 9206、支持Cat M1的模块，而对于Cat NB1的支持预计在此之后不久，通过软件升级的方式实现。另外，在目前的Release 13中，NB-IoT不支持VoLTE，不过在未来的Release 14中，高通就会尝试增加语音功能的支持。随着NBIoT不断演进，高通希望它能为适用于5G的物联网标准打下基础。</p>
+<h2 id="运营商"><a href="#运营商" class="headerlink" title="运营商"></a>运营商</h2><p>从去年开始，包括中国、韩国、欧洲、中东、北美的多家主流运营商已经开展了基于pre-standard 的NB-IoT技术的试点，并开启了端到端的技术和业务验证。</p>
+<h4 id="1、中国电信"><a href="#1、中国电信" class="headerlink" title="1、中国电信"></a>1、中国电信</h4><p>中国电信正在积极跟进NB-IoT技术发展，并正式立项对NB-IoT关键技术、终端和业务开展研发。在具体部署方案上，将基于全覆盖的800M LTE网络部署NB-IoT;基站同时支持LTE和NB-IoT与800MLTE基站共享基带、射频及天馈资源。同时，为了规避可能的频率干扰，并考虑LTE800后续演进的灵活性，优先考虑独立工作模式。</p>
+<p>另外，在今年7月召开的“2016年天翼智能终端交易博览会”上，中国电信联合高通、华为、中兴、英特尔、博世、SAP、IBM、爱立信、深创投、中科院上海微系统所、北邮和东南大学12家单位,共同发起成立“天翼物联产业联盟”。</p>
+<h4 id="2、中国移动"><a href="#2、中国移动" class="headerlink" title="2、中国移动"></a>2、中国移动</h4><p>对于中国移动来说，其公众物联网平台自2014年11月底正式商用,截至今年6月,用户已超过2700万。目前，中国移动正加快推进全球统一标准窄带物联网产业成熟和物联网应用创新，构建物联网开放实验室，促进芯片和模组成熟发展，打造一张低成本、低功耗、广覆盖、高可靠的公共物联网，力争2017年实现商用。为了建设NB-IoT物联网，预计在2016年年底至2017年年中，中移动将会获得FDD牌照，并且允许重耕现有的900MHz、1800MHz频段。</p>
+<h4 id="3、中国联通"><a href="#3、中国联通" class="headerlink" title="3、中国联通"></a>3、中国联通</h4><p>中国联通在2015年7月，建成并开放全球第一个NB-IoT新技术示范点;2016年上半年上海迪斯尼物联网启动商用; 2015年-2016年开展了NB-IoT业务试点及试验，目前正推进重点城市(北京、上海、广州、深圳、银川、长沙、福州)的NB-IoT商用部署，计划在2017年实现规模商用，2018年则将开始全面推进国家范围内的商用部署。</p>
+<p>中国联通部署在900MHz、1800MHz频段，用于NB-IoT和VoLTE。在900 MHz采用DSSS动态频谱解决方案，在1800MHz连续覆盖区域，部署5MHz带宽的LTE，在没有1800MHz连续覆盖的区域，带宽自动缩窄到 3MHz，但中心频点保持不变，两侧空出的频谱，自动部署14个GSM频点。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a href="http://www.3gpp.org/news-events/3gpp-news/1785-nb_iot_complete" target="_blank" rel="external">Standardization of NB-IOT completed</a></p>
+<p><a href="https://www.link-labs.com/blog/overview-of-narrowband-iot" target="_blank" rel="external">An Overview Of Narrowband IoT (NB-IoT)</a></p>
+<p><a href="http://developer.huawei.com/ict/cn/site-iot/product/nb-iot" target="_blank" rel="external">华为 NB-IoT</a> 　　</p>
+<p><a href="https://www.gsma.com/iot/narrow-band-internet-of-things-nb-iot/" target="_blank" rel="external">Narrow Band – Internet of Things (NB-IoT)</a></p>
+<p><a href="https://baike.baidu.com/item/NB-IoT/19420464" target="_blank" rel="external">百度百科</a>　　 </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是窄带物联网（NB-IoT）？&quot;&gt;&lt;a href=&quot;#什么是窄带物联网（NB-IoT）？&quot; class=&quot;headerlink&quot; title=&quot;什么是窄带物联网（NB-IoT）？&quot;&gt;&lt;/a&gt;什么是窄带物联网（NB-IoT）？&lt;/h2&gt;&lt;p&gt;基于蜂窝的窄带物联网（Narrow Band Internet of Things, NB-IoT）俨然已成为万物互联网络的一个重要分支，作为 IoT 领一个新兴的技术，NB-IoT 构建于蜂窝网络，只消耗大约 180KHz 的带宽，可直接部署于 GSM 网络、UMTS 网络或 LTE 网络，以降低部署成本、实现平滑升级。&lt;/p&gt;
+&lt;p&gt;NB-IoT 支持低功耗设备在广域网的蜂窝数据连接，也被叫作低功耗广域网(LPWA)，支持待机时间长、对网络连接要求较高设备的高效连接。据说 NB-IoT 设备电池寿命可以提高至至少 10 年，同时还能提供非常全面的室内蜂窝数据连接覆盖。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="NB-IoT" scheme="http://www.luffyjet.com/techblog/categories/NB-IoT/"/>
+    
+    
+      <category term="NB-IoT" scheme="http://www.luffyjet.com/techblog/tags/NB-IoT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RxJava&amp;Agera资料整理</title>
+    <link href="http://www.luffyjet.com/techblog/2018/03/02/RxJava-Agera-articles/"/>
+    <id>http://www.luffyjet.com/techblog/2018/03/02/RxJava-Agera-articles/</id>
+    <published>2018-03-02T02:43:23.000Z</published>
+    <updated>2018-12-04T07:50:37.516Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><p><a href="http://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;mid=2649796857&amp;idx=1&amp;sn=ed8325aeddac7fd2bd81a0717c010e98&amp;mpshare=1&amp;scene=23&amp;srcid=11286ayNT2eeDyDzzSRbS9rg#rd" target="_blank" rel="external">RxJava &amp; Agera 从源码简要分析基本调用流程</a></p>
+</li>
+<li><p><a href="http://gank.io/post/560e15be2dca930e00da1083" target="_blank" rel="external">给 Android 开发者的 RxJava 详解</a></p>
+</li>
+<li><a href="http://gank.io/post/56e80c2c677659311bed9841" target="_blank" rel="external">RxJava 与 Retrofit 结合的最佳实践</a></li>
+<li><a href="http://blog.csdn.net/lzyzsd/article/details/41833541/" target="_blank" rel="external">深入浅出RxJava（一：基础篇）</a>  系列文章</li>
+<li><a href="https://github.com/kaushikgopal/RxJava-Android-Samples" target="_blank" rel="external">Learning RxJava for Android by example</a></li>
+<li><a href="https://github.com/lzyzsd/Awesome-RxJava" target="_blank" rel="external">Awesome-RxJava</a> 资料整理<a id="more"></a></li>
+<li><a href="https://github.com/mcxiaoke/RxDocs" target="_blank" rel="external">ReactiveX/RxJava文档中文版</a></li>
+<li><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">RxJava</a> <a href="http://reactivex.io/" target="_blank" rel="external">ReactiveX</a>  <a href="https://github.com/ReactiveX/RxJava/wiki" target="_blank" rel="external">RxJava/wiki</a></li>
+<li><a href="http://www.jianshu.com/p/3a4fb0cf6533" target="_blank" rel="external">我们为什么要在Android中使用RxJava</a></li>
+<li><a href="http://blog.csdn.net/bboyfeiyu/article/details/50509307" target="_blank" rel="external">RxJava开发精要1-从.NET到RxJava</a></li>
+<li><a href="http://www.cnblogs.com/zhaoyanjun/p/5175502.html" target="_blank" rel="external">RxJava 和 RxAndroid 系列文章</a></li>
+<li><a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">googlesamples/android-architecture</a></li>
+<li><a href="https://juejin.im/post/580103f20e3dd90057fc3e6d" target="_blank" rel="external">关于RxJava最友好的文章</a></li>
+<li><a href="https://juejin.im/post/5b8f536c5188255c352d3528" target="_blank" rel="external">RxJava 沉思录</a></li>
+<li><a href="http://reactivex.io/tutorials.html" target="_blank" rel="external">reactivex.io/tutorials</a></li>
+<li><a href="http://www.andreamaglie.com/2015/rxjava-android-where-to-start/" target="_blank" rel="external">ReactiveX, RxJava and RxAndroid - where to start</a></li>
+<li><a href="https://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/" target="_blank" rel="external">grokking-rxjava</a></li>
+<li><a href="https://www.jianshu.com/p/c820afafd94b" target="_blank" rel="external">Rxjava操作符之辩解map和flatmap的区别，以及应用场景</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;amp;mid=2649796857&amp;amp;idx=1&amp;amp;sn=ed8325aeddac7fd2bd81a0717c010e98&amp;amp;mpshare=1&amp;amp;scene=23&amp;amp;srcid=11286ayNT2eeDyDzzSRbS9rg#rd&quot;&gt;RxJava &amp;amp; Agera 从源码简要分析基本调用流程&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://gank.io/post/560e15be2dca930e00da1083&quot;&gt;给 Android 开发者的 RxJava 详解&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://gank.io/post/56e80c2c677659311bed9841&quot;&gt;RxJava 与 Retrofit 结合的最佳实践&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/lzyzsd/article/details/41833541/&quot;&gt;深入浅出RxJava（一：基础篇）&lt;/a&gt;  系列文章&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/kaushikgopal/RxJava-Android-Samples&quot;&gt;Learning RxJava for Android by example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/lzyzsd/Awesome-RxJava&quot;&gt;Awesome-RxJava&lt;/a&gt; 资料整理
+    
+    </summary>
+    
+      <category term="RxJava" scheme="http://www.luffyjet.com/techblog/categories/RxJava/"/>
+    
+    
+      <category term="RxJava" scheme="http://www.luffyjet.com/techblog/tags/RxJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android机型判断整理</title>
+    <link href="http://www.luffyjet.com/techblog/2017/12/08/android-device-type/"/>
+    <id>http://www.luffyjet.com/techblog/2017/12/08/android-device-type/</id>
+    <published>2017-12-08T13:20:12.000Z</published>
+    <updated>2018-12-04T08:24:06.210Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="如何识别小米设备-MIUI系统"><a href="#如何识别小米设备-MIUI系统" class="headerlink" title="如何识别小米设备/MIUI系统"></a>如何识别小米设备/MIUI系统</h2><p>您在开发应用的过程中，可能针对小米手机/MIUI设备的用户有一些特殊的设计，本文档提供了如何识别设备、系统版本和浏览器UA的方法</p>
+<p>如何检测小米设备：</p>
+<p>请使用android.os.Build对象，查询MANUFACTURER和MODEL的值，MANUFACTURER值为Xiaomi即为小米设备</p>
+<p>如何检测MIUI V5：</p>
+<p>查询property: ro.miui.ui.version.name ，值是”V5″ 就是MIUI V5系统；值是”V6″就是MIUI 6系统。</p>
+<a id="more"></a>
+<p>User-Agent：<br>如果您从事WebApp开发， 可能需要识别浏览器，下面描述了MIUI浏览器的User-Agent</p>
+<p><andoird-version>: 系统版本号，如: 4.1.1</andoird-version></p>
+<p><location>: 系统的国家地区，如: 中国大陆是zh-cn</location></p>
+<p><model>: 设备型号，如: MI2</model></p>
+<p><productline>: 产品线，如: 小米手机2是JRO03L<br>Mozilla/5.0 (Linux; U; Android <android-version>; <location>; <model> Build/<productline>) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30 XiaoMi/MiuiBrowser/1.0</productline></model></location></android-version></productline></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MIUIUtils</span> </span>&#123;</div><div class="line">    <span class="comment">// 检测MIUI</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_MIUI_VERSION_CODE = <span class="string">"ro.miui.ui.version.code"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_MIUI_VERSION_NAME = <span class="string">"ro.miui.ui.version.name"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_MIUI_INTERNAL_STORAGE = <span class="string">"ro.miui.internal.storage"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMIUI</span><span class="params">()</span> </span>&#123;</div><div class="line">        Properties prop = <span class="keyword">new</span> Properties();</div><div class="line">        <span class="keyword">boolean</span> isMIUI;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            prop.load(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(Environment.getRootDirectory(), <span class="string">"build.prop"</span>)));</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        isMIUI = prop.getProperty(KEY_MIUI_VERSION_CODE, <span class="keyword">null</span>) != <span class="keyword">null</span></div><div class="line">                || prop.getProperty(KEY_MIUI_VERSION_NAME, <span class="keyword">null</span>) != <span class="keyword">null</span></div><div class="line">                || prop.getProperty(KEY_MIUI_INTERNAL_STORAGE, <span class="keyword">null</span>) != <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">return</span> isMIUI;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="其他机型"><a href="#其他机型" class="headerlink" title="其他机型"></a>其他机型</h2><p>引用自：<a href="https://www.jianshu.com/p/ba9347a5a05a" target="_blank" rel="external">https://www.jianshu.com/p/ba9347a5a05a</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Rom</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"Rom"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_MIUI = <span class="string">"MIUI"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_EMUI = <span class="string">"EMUI"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_FLYME = <span class="string">"FLYME"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_OPPO = <span class="string">"OPPO"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_SMARTISAN = <span class="string">"SMARTISAN"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_VIVO = <span class="string">"VIVO"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ROM_QIKU = <span class="string">"QIKU"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_MIUI = <span class="string">"ro.miui.ui.version.name"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_EMUI = <span class="string">"ro.build.version.emui"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_OPPO = <span class="string">"ro.build.version.opporom"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_SMARTISAN = <span class="string">"ro.smartisan.version"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String KEY_VERSION_VIVO = <span class="string">"ro.vivo.os.version"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String sName;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String sVersion;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isEmui</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_EMUI);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMiui</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_MIUI);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isVivo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_VIVO);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isOppo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_OPPO);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isFlyme</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_FLYME);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">is360</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_QIKU) || check(<span class="string">"360"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isSmartisan</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> check(ROM_SMARTISAN);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (sName == <span class="keyword">null</span>) &#123;</div><div class="line">            check(<span class="string">""</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sName;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getVersion</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (sVersion == <span class="keyword">null</span>) &#123;</div><div class="line">            check(<span class="string">""</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sVersion;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(String rom)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (sName != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> sName.equals(rom);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_MIUI))) &#123;</div><div class="line">            sName = ROM_MIUI;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_EMUI))) &#123;</div><div class="line">            sName = ROM_EMUI;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_OPPO))) &#123;</div><div class="line">            sName = ROM_OPPO;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_VIVO))) &#123;</div><div class="line">            sName = ROM_VIVO;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!TextUtils.isEmpty(sVersion = getProp(KEY_VERSION_SMARTISAN))) &#123;</div><div class="line">            sName = ROM_SMARTISAN;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            sVersion = Build.DISPLAY;</div><div class="line">            <span class="keyword">if</span> (sVersion.toUpperCase().contains(ROM_FLYME)) &#123;</div><div class="line">                sName = ROM_FLYME;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                sVersion = Build.UNKNOWN;</div><div class="line">                sName = Build.MANUFACTURER.toUpperCase();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sName.equals(rom);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getProp</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        String line = <span class="keyword">null</span>;</div><div class="line">        BufferedReader input = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Process p = Runtime.getRuntime().exec(<span class="string">"getprop "</span> + name);</div><div class="line">            input = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(p.getInputStream()), <span class="number">1024</span>);</div><div class="line">            line = input.readLine();</div><div class="line">            input.close();</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Unable to read prop "</span> + name, ex);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (input != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    input.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> line;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;如何识别小米设备-MIUI系统&quot;&gt;&lt;a href=&quot;#如何识别小米设备-MIUI系统&quot; class=&quot;headerlink&quot; title=&quot;如何识别小米设备/MIUI系统&quot;&gt;&lt;/a&gt;如何识别小米设备/MIUI系统&lt;/h2&gt;&lt;p&gt;您在开发应用的过程中，可能针对小米手机/MIUI设备的用户有一些特殊的设计，本文档提供了如何识别设备、系统版本和浏览器UA的方法&lt;/p&gt;
+&lt;p&gt;如何检测小米设备：&lt;/p&gt;
+&lt;p&gt;请使用android.os.Build对象，查询MANUFACTURER和MODEL的值，MANUFACTURER值为Xiaomi即为小米设备&lt;/p&gt;
+&lt;p&gt;如何检测MIUI V5：&lt;/p&gt;
+&lt;p&gt;查询property: ro.miui.ui.version.name ，值是”V5″ 就是MIUI V5系统；值是”V6″就是MIUI 6系统。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://www.luffyjet.com/techblog/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="http://www.luffyjet.com/techblog/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gitlab安装配置过程记录</title>
+    <link href="http://www.luffyjet.com/techblog/2017/11/08/gitlab-setup-record/"/>
+    <id>http://www.luffyjet.com/techblog/2017/11/08/gitlab-setup-record/</id>
+    <published>2017-11-08T04:30:12.000Z</published>
+    <updated>2018-12-04T08:03:15.149Z</updated>
+    
+    <content type="html"><![CDATA[<p>官方安装指导地址:<br><a href="https://about.gitlab.com/downloads/" target="_blank" rel="external">https://about.gitlab.com/downloads/</a></p>
+<p>也许会用到的国内镜像<a href="https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/" target="_blank" rel="external">https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/</a></p>
+<p>按照官方流程执行到下面这一部之前之前，如果需要修改配置，则先修改配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl reconfigure</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>下面的配置可以将gitlab默认监听的80，8080端口修改为4000，8020端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">vi /etc/gitlab/gitlab.rb</div><div class="line"></div><div class="line">添加如下配置，修改nginx监听端口为4000</div><div class="line">unicorn监听8020</div><div class="line"></div><div class="line">unicorn[&apos;listen&apos;] = &apos;127.0.0.1&apos;</div><div class="line">unicorn[&apos;port&apos;] = 8020 </div><div class="line">nginx[&apos;listen_port&apos;] = 4000</div></pre></td></tr></table></figure>
+<p>如果修改的端口没有开启允许对外访问，执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/sbin/iptables -I INPUT -p tcp --dport 4000 -j ACCEPT #开启4000端口 </div><div class="line"></div><div class="line">/etc/rc.d/init.d/iptables save #保存配置 </div><div class="line"></div><div class="line">/etc/rc.d/init.d/iptables restart #重启服务 </div><div class="line"></div><div class="line">查看端口是否已经开放 </div><div class="line"></div><div class="line">/etc/init.d/iptables status</div></pre></td></tr></table></figure>
+<p>然后继续执行，改命令会自动修改相对应的其他配置文件，并重启各项服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl reconfigure</div></pre></td></tr></table></figure>
+<p>然后还有头像问题，需要修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">vi /var/opt/gitlab/gitlab-rails/etc/gitlab.yml</div><div class="line"></div><div class="line">找到下面的内容，上面的命令默认会生成为80，需要将其端口改成我们设置的 4000</div><div class="line"></div><div class="line">gitlab:</div><div class="line">    ## Web server settings (note: host is the FQDN, do not include http://)</div><div class="line">    host: 192.168.1.184</div><div class="line">    port: 4000</div><div class="line">    https: false</div></pre></td></tr></table></figure>
+<p>然后重启服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo gitlab-ctl restart //重启所有服务</div><div class="line">sudo gitlab-ctl stop //停止所有服务命令</div><div class="line">sudo gitlab-ctl start //启动所有服务命令</div></pre></td></tr></table></figure>
+<p>最后检查端口占用情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -apn | grep 4000</div></pre></td></tr></table></figure>
+<p>打开对应的 服务地址 <a href="http://yourhost:4000" target="_blank" rel="external">http://yourhost:4000</a><br>第一次要求输入密码，然后会转向到登录页。<br>到此完成gitlab安装配置。</p>
+<h3 id="gitlab-ci-runner"><a href="#gitlab-ci-runner" class="headerlink" title="gitlab ci runner"></a>gitlab ci runner</h3><p>修改runner<br>vi /etc/gitlab-runner/config.toml<br>注册runner<br>gitlab-ci-multi-runner register</p>
+<p>更多命令和配置信息，请前往<br><a href="https://gitlab.com/gitlab-org/omnibus-gitlab/tree/master/doc" target="_blank" rel="external">官方文档</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;官方安装指导地址:&lt;br&gt;&lt;a href=&quot;https://about.gitlab.com/downloads/&quot;&gt;https://about.gitlab.com/downloads/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;也许会用到的国内镜像&lt;a href=&quot;https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/&quot;&gt;https://mirror.tuna.tsinghua.edu.cn/help/gitlab-ce/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;按照官方流程执行到下面这一部之前之前，如果需要修改配置，则先修改配置&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo gitlab-ctl reconfigure&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="Git" scheme="http://www.luffyjet.com/techblog/categories/Git/"/>
+    
+    
+      <category term="gitlab" scheme="http://www.luffyjet.com/techblog/tags/gitlab/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前后端数据传输加密简单总结</title>
+    <link href="http://www.luffyjet.com/techblog/2017/08/13/rsa_demo/"/>
+    <id>http://www.luffyjet.com/techblog/2017/08/13/rsa_demo/</id>
+    <published>2017-08-13T13:12:20.000Z</published>
+    <updated>2018-12-04T07:50:55.408Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。"><a href="#结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。" class="headerlink" title="结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。"></a>结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。</h3><h5 id="写了一个简单的-RSA加密DEMO-包含-Java后台，web前端，Android，iOS"><a href="#写了一个简单的-RSA加密DEMO-包含-Java后台，web前端，Android，iOS" class="headerlink" title="写了一个简单的 RSA加密DEMO(包含 Java后台，web前端，Android，iOS)"></a>写了一个简单的 RSA加密DEMO(包含 Java后台，web前端，Android，iOS)</h5><p><a href="https://github.com/luffyjet/RSAEncSignDemo" target="_blank" rel="external">https://github.com/luffyjet/RSAEncSignDemo</a><br><a id="more"></a></p>
+<h2 id="密码加密传输的一些意义。"><a href="#密码加密传输的一些意义。" class="headerlink" title="密码加密传输的一些意义。"></a>密码加密传输的一些意义。</h2><p>1、数据库不存原密码，也防止被存原密码；</p>
+<p>2、防止数据库被黑后造成密码泄露的问题；</p>
+<p>3、hash后的密码格式统一，减少麻烦；</p>
+<p>4、防止原密码被利用在其他平台，减少在其他平台的信息泄露（很多用户习惯在其他平台注册时使用相同的密码，太多密码时怕忘记。被抓的hash密码，也就只能在我网站用，其他网站也用不了）；</p>
+<p>5、防止原密码暴露，伤害了用户感情（谁都不想自己的密码被人知道）。</p>
+<h2 id="web前端的加密手段"><a href="#web前端的加密手段" class="headerlink" title="web前端的加密手段"></a>web前端的加密手段</h2><p>1.前后端使用RSA加密关键数据。支付类应用使用较为常见。<a href="http://travistidwell.com/jsencrypt/" target="_blank" rel="external">开源RSA加密库jsencrypt</a></p>
+<p>2.验证码结合密码进行MD5加密，可以有效的解决重放问题。<a href="https://zhuanlan.zhihu.com/p/22289839" target="_blank" rel="external">参考</a></p>
+<p>3.以上的方式都要配合前端js的混淆加密，增加破解的复杂度，才有意义。<a href="http://div.io/topic/1220#" target="_blank" rel="external">参考</a></p>
+<h2 id="Android端的加密手段"><a href="#Android端的加密手段" class="headerlink" title="Android端的加密手段"></a>Android端的加密手段</h2><p>1.对代码混淆，增加破解难度</p>
+<p>2.套壳加固，进一步增加破解难度</p>
+<p>3.关键加密代码，用c++编写封装到so,增加破解难度</p>
+<p>4.使用加密算法加密请求参数，如：MD5，RSA等，<a href="http://www.cnblogs.com/whoislcj/p/5470095.html" target="_blank" rel="external">RSA参考</a></p>
+<p>5.使用 HTTPS</p>
+<h2 id="iOS加密"><a href="#iOS加密" class="headerlink" title="iOS加密"></a>iOS加密</h2><p>1.对代码混淆，增加破解难度</p>
+<p>2.套壳加固，进一步增加破解难度</p>
+<p>3.使用加密算法加密请求参数，如：MD5，RSA等</p>
+<p>4.使用 HTTPS</p>
+<h2 id="几个讨论："><a href="#几个讨论：" class="headerlink" title="几个讨论："></a>几个讨论：</h2><p><a href="https://www.zhihu.com/question/25539382" target="_blank" rel="external">Web前端密码加密是否有意义？</a></p>
+<p><a href="https://www.zhihu.com/question/47047191" target="_blank" rel="external">前端如何给 JavaScript 加密</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。&quot;&gt;&lt;a href=&quot;#结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。&quot; class=&quot;headerlink&quot; title=&quot;结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。&quot;&gt;&lt;/a&gt;结论：不使用HTTPS，单纯对密码加密传输，是无法保证安全的。&lt;/h3&gt;&lt;h5 id=&quot;写了一个简单的-RSA加密DEMO-包含-Java后台，web前端，Android，iOS&quot;&gt;&lt;a href=&quot;#写了一个简单的-RSA加密DEMO-包含-Java后台，web前端，Android，iOS&quot; class=&quot;headerlink&quot; title=&quot;写了一个简单的 RSA加密DEMO(包含 Java后台，web前端，Android，iOS)&quot;&gt;&lt;/a&gt;写了一个简单的 RSA加密DEMO(包含 Java后台，web前端，Android，iOS)&lt;/h5&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/luffyjet/RSAEncSignDemo&quot;&gt;https://github.com/luffyjet/RSAEncSignDemo&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="encryption" scheme="http://www.luffyjet.com/techblog/categories/encryption/"/>
+    
+    
+      <category term="rsa" scheme="http://www.luffyjet.com/techblog/tags/rsa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VLC Android 编译流程记录</title>
+    <link href="http://www.luffyjet.com/techblog/2017/07/25/vlc_android_build_record/"/>
+    <id>http://www.luffyjet.com/techblog/2017/07/25/vlc_android_build_record/</id>
+    <published>2017-07-25T14:03:41.000Z</published>
+    <updated>2018-12-04T07:52:06.574Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>此文基于 VLC-Android 2.1.13</strong></p>
+<p>系统环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">系统：MacOS 10.12.5 (16F73)</div><div class="line">虚拟机软件：VMware Fusion 专业版 8.0.0 (2985594)</div><div class="line">Linux镜像：ubuntu-16.04.2-desktop-amd64.iso</div></pre></td></tr></table></figure>
+<p>官方编译文档：<a href="https://wiki.videolan.org/AndroidCompile/" target="_blank" rel="external">https://wiki.videolan.org/AndroidCompile/</a></p>
+<p>操作流程：</p>
+<ul>
+<li>安装好VMtools</li>
+<li>更新系统库<a id="more"></a>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get upgrade</div></pre></td></tr></table></figure>
+<ul>
+<li>安装编译VLC所需要的工具</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install automake ant autopoint cmake build-essential libtool \</div><div class="line">    patch pkg-config protobuf-compiler ragel subversion unzip git</div></pre></td></tr></table></figure>
+<ul>
+<li>安装32位支持</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo dpkg --add-architecture i386</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get dist-upgrade</div><div class="line"></div><div class="line">#安装gcc multilab</div><div class="line">apt-get install gcc-multilib g++-multilib</div></pre></td></tr></table></figure>
+<ul>
+<li>升级gettext到最新版 v0.19.8.1</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">下载最新版 latest：http://ftp.gnu.org/gnu/gettext/</div><div class="line">解压之后编译安装：</div><div class="line"></div><div class="line">./configure </div><div class="line"> </div><div class="line">make </div><div class="line"></div><div class="line">sudo make install</div></pre></td></tr></table></figure>
+<ul>
+<li>升级protobuf到最新 v3.3.0</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">下载C++版： https://github.com/google/protobuf</div><div class="line"></div><div class="line">确保编译工具已安装</div><div class="line">$ sudo apt-get install autoconf automake libtool curl make g++ unzip</div><div class="line"></div><div class="line">执行安装流程：</div><div class="line">$ ./autogen.sh</div><div class="line">$ ./configure</div><div class="line">$ make</div><div class="line">$ make check</div><div class="line">$ sudo make install</div><div class="line">$ sudo ldconfig # refresh shared library cache.</div></pre></td></tr></table></figure>
+<ul>
+<li>安装JDK</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">我使用的是32位jdk: jdk-8u131-linux-i586.tar.gz</div><div class="line">解压之后设置环境变量：</div><div class="line"></div><div class="line">sudo gedit ~/.bashrc</div><div class="line"></div><div class="line">添加下文：</div><div class="line">#set oracle jdk environment</div><div class="line">export JAVA_HOME=/home/lzc/Android/jdk8</div><div class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre  </div><div class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib  </div><div class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH </div><div class="line">刷新环境变量：</div><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure>
+<ul>
+<li>安装Android SDK, NDK</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">先下载AndroidStudio，我用的：</div><div class="line">android-studio-ide-162.4069837-linux.zip</div><div class="line">运行AndroidStudio，然后更新最基本的SDK（level 26，)</div><div class="line"></div><div class="line">下载 NDK r13b 即可，无需如文档说的 r14b: </div><div class="line">https://developer.android.com/ndk/downloads/older_releases.html</div><div class="line"></div><div class="line">之后配置环境变量：</div><div class="line">#android sdk ndk</div><div class="line">export ANDROID_SDK=/home/lzc/Android/Sdk</div><div class="line">export ANDROID_NDK=/home/lzc/Android/android-ndk-r13b</div><div class="line">export PATH=$PATH:$ANDROID_SDK/platform-tools:$ANDROID_SDK/tools</div><div class="line">刷新环境变量：</div><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure>
+<ul>
+<li>开始下载源码进行编译</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git clone https://code.videolan.org/videolan/vlc-android.git</div><div class="line">cd vlc-android</div><div class="line">./compile.sh -a armeabi-v7a</div><div class="line"></div><div class="line">编译过程中会下载大量依赖(主要是clone VLC项目)，而且其中一些依赖访问需要翻墙。</div><div class="line">第一次编译量非常大，会出现失败多次，重复运行编译sh即可。</div><div class="line">编译成功之后，可以将整个目录导入AndroidStudio</div><div class="line"></div><div class="line">X86架构的没有需求，暂时没有尝试。</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;此文基于 VLC-Android 2.1.13&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;系统环境&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;系统：MacOS 10.12.5 (16F73)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;虚拟机软件：VMware Fusion 专业版 8.0.0 (2985594)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Linux镜像：ubuntu-16.04.2-desktop-amd64.iso&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;官方编译文档：&lt;a href=&quot;https://wiki.videolan.org/AndroidCompile/&quot;&gt;https://wiki.videolan.org/AndroidCompile/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;操作流程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安装好VMtools&lt;/li&gt;
+&lt;li&gt;更新系统库
+    
+    </summary>
+    
+      <category term="android" scheme="http://www.luffyjet.com/techblog/categories/android/"/>
+    
+    
+      <category term="vlc" scheme="http://www.luffyjet.com/techblog/tags/vlc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Web安全整理</title>
+    <link href="http://www.luffyjet.com/techblog/2017/07/08/about-web-security/"/>
+    <id>http://www.luffyjet.com/techblog/2017/07/08/about-web-security/</id>
+    <published>2017-07-08T14:10:09.000Z</published>
+    <updated>2018-12-04T07:57:39.555Z</updated>
+    
+    <content type="html"><![CDATA[<p>Web技术的成熟使得Web应用的功能越来越强大，最终成为了互联网的主流。黑客们的目光，也渐渐转移到了Web这块大蛋糕上。</p>
+<h5 id="安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。"><a href="#安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。" class="headerlink" title="安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。"></a>安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。</h5><h4 id="安全三要素，机密性，完整性，可用性"><a href="#安全三要素，机密性，完整性，可用性" class="headerlink" title="安全三要素，机密性，完整性，可用性"></a>安全三要素，机密性，完整性，可用性</h4><ul>
+<li>机密性要去保护数据内容不能泄露，加密是实现机密性要求的常见手段。</li>
+<li>完整性则要求保护数据内容是完整、没有被篡改的。常见的保证一致性的技术手段是数字签名。</li>
+<li>可用性要求保护资源是“随需而得”。<a id="more"></a>
+</li>
+</ul>
+<h4 id="实施安全评估"><a href="#实施安全评估" class="headerlink" title="实施安全评估"></a>实施安全评估</h4><p>一个安全评估的过程，可以简单地分为4个阶段：资产等级划分，威胁分析，风险分析，确认解决方案。实施的过程是层层递进，前后之间有因果关系。</p>
+<ul>
+<li>资产等级划分，帮助我们明确目标是什么，要保护什么。对互联网公司拥有的资产进行等级划分，就是对数据做等级划分。每家公司的侧重点可能不同。<strong>互联网安全的核心问题，是数据安全的问题。</strong></li>
+<li>威胁分析，就是把所有的威胁都找出来。可以参考微软的<a href="http://onlinehelp.microsoft.com/zh-cn/mdop/ff648644.aspx" target="_blank" rel="external">STRIDE模型</a>。</li>
+<li>风险分析，可以参考微软的 <a href="http://www.aiuxian.com/article/p-1962153.html" target="_blank" rel="external">DREAD模型</a>。</li>
+<li>安全评估的产出物，就是安全解决方案。一个优秀的安全方案应该具备：能有效的解决问题，用户体验好，高兴呢，低耦合，易于扩展和升级。</li>
+</ul>
+<h2 id="客户端脚本安全"><a href="#客户端脚本安全" class="headerlink" title="客户端脚本安全"></a>客户端脚本安全</h2><p>包含</p>
+<ul>
+<li>浏览器安全</li>
+<li>跨站脚本攻击(XSS)</li>
+<li>跨站点请求伪造(CSRF)</li>
+<li>点击劫持(ClickJacking)</li>
+<li>HTML5安全</li>
+</ul>
+<h3 id="1-浏览器安全"><a href="#1-浏览器安全" class="headerlink" title="1.浏览器安全"></a>1.浏览器安全</h3><p>浏览器是目前互联网最大的入口。浏览器具备许多安全功能。</p>
+<h5 id="同源策略-same-origin-policy"><a href="#同源策略-same-origin-policy" class="headerlink" title="同源策略(same origin policy)"></a>同源策略(same origin policy)</h5><p>是一种约定，是浏览器最核心也是最基本的安全功能。浏览器的同源策略，限制了不同源的document或JavaScript脚本，对当前document读取或设置某些属性。</p>
+<p>对于JavaScript，影响源的因素有：host(域名或IP，ip地址当做根域名)、子域名、端口、协议(例如http和https)。</p>
+<p>浏览器中，“script img iframe link” 等标签都能可以跨域加载资源，不受同源策略限制。XMLHttpRequest受到同源策略的约束，不能跨域访问资源。跨域访问方案的安全基础就是信任 “JavaScript无法控制该HTTP头”。</p>
+<h5 id="浏览器沙箱-Sandbox"><a href="#浏览器沙箱-Sandbox" class="headerlink" title="浏览器沙箱 Sandbox"></a>浏览器沙箱 Sandbox</h5><p>采用沙箱技术，无疑可以让不受信任的网页代码、JavaScript代码运行在一个受限制的环境中，从而保护本地桌面系统的安全。</p>
+<h5 id="恶意网站拦截"><a href="#恶意网站拦截" class="headerlink" title="恶意网站拦截"></a>恶意网站拦截</h5><p>浏览器周期性的从服务器获取一份最新的恶意网址黑名单，如果用户上网时访问的网址存在于此黑名单中，浏览器就会弹出一个警告页面。除了恶意网站拦截功能外，主流浏览器都开始支持EVSSL证书(Extended Validation SSL Certificate)，以增强对安全网站的识别。EV证书在浏览器上会有特殊的效果，比如绿色的标识。</p>
+<p>浏览器的安全以同源策略为基础，加深理解同源策略，才能把握住浏览器安全的本质。</p>
+<h3 id="2-跨站脚本攻击-XSS"><a href="#2-跨站脚本攻击-XSS" class="headerlink" title="2.跨站脚本攻击(XSS)"></a>2.跨站脚本攻击(XSS)</h3><p>跨站脚本攻击，全称Cross Site Script。为了和层叠样式表有所区别，所以在安全领域叫做XSS。XSS攻击，通常指黑客通过“html 注入”篡改了网页，插入了恶意脚本，从而在用户浏览器网页是，控制用户浏览器的一种攻击。XSS根据效果可以分成3种类型：</p>
+<ul>
+<li>反射型XSS，反射型XSS只是简单的把用户输入的数据“反射”给浏览器。也就是说，黑客往往需要诱使用户点击一个恶意链接，才能攻击成功。反射型XSS也叫做“非持久型XSS”。</li>
+<li>存储型XSS，存储型XSS会把用户输入的数据“存储”在服务端，这种XSS有很强的稳定性。存储型XSS通常也叫做“持久型XSS”。</li>
+<li>DOM Based XSS,通过修改页面的DOM节点形成的XSS，称之为DOM Based XSS。</li>
+</ul>
+<p>XSS进阶攻击：</p>
+<ul>
+<li><p>XSS playload ，XSS攻击成功后，攻击者能够对用户当前浏览的页面植入恶意脚本，通过恶意脚本，控制用户浏览器。XSS playload实际上就是JavaScript脚本，所以任何JavaScript脚本能做的事，XSS playload都能做到。</p>
+</li>
+<li><p>XSS蠕虫</p>
+</li>
+</ul>
+<p>XSS 实例查看：</p>
+<p><a href="http://www.cnblogs.com/leestar54/p/5798937.html#top" target="_blank" rel="external">http://www.cnblogs.com/leestar54/p/5798937.html#top</a></p>
+<p><a href="http://blog.csdn.net/kevon_sun/article/details/51135880" target="_blank" rel="external">http://blog.csdn.net/kevon_sun/article/details/51135880</a></p>
+<p><strong>XSS攻击平台</strong><br>这些平台的主要目的是演示XSS的危害,有助于深入理解XSS的原理和危害：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/milantgh/p/3645166.html" target="_blank" rel="external">Attack API</a></li>
+<li><a href="http://beefproject.com/" target="_blank" rel="external">BeEF</a></li>
+<li><a href="http://xss-proxy.sourceforge.net/" target="_blank" rel="external">XSS-Proxy</a></li>
+</ul>
+<p>XSS的攻击手段和技巧，还有很多，具体可以参考《白帽子讲web安全》一书。</p>
+<h5 id="XSS防御"><a href="#XSS防御" class="headerlink" title="XSS防御"></a>XSS防御</h5><ul>
+<li>设置HttpOnly，禁止JavaScript访问带有httponly属性的cookie。</li>
+<li>输入输出检查</li>
+<li>安全的编码函数</li>
+<li>处理富文本</li>
+<li>防御DOM Based XSS</li>
+</ul>
+<p>实例参考：<a href="http://www.cnblogs.com/digdeep/p/4695348.html" target="_blank" rel="external">http://www.cnblogs.com/digdeep/p/4695348.html</a></p>
+<h3 id="3-跨站点请求伪造-CSRF"><a href="#3-跨站点请求伪造-CSRF" class="headerlink" title="3.跨站点请求伪造(CSRF)"></a>3.跨站点请求伪造(CSRF)</h3><p>CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。<br>原理和防御方法参考：<a href="http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html" target="_blank" rel="external">http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html</a></p>
+<h3 id="4-点击劫持"><a href="#4-点击劫持" class="headerlink" title="4.点击劫持"></a>4.点击劫持</h3><p>点击劫持，clickjacking，也被称为UI-覆盖攻击。这个词首次出现在2008年，是由互联网安全专家罗伯特·汉森和耶利米·格劳斯曼首创的。<br>它是通过覆盖不可见的框架误导受害者点击。<br>虽然受害者点击的是他所看到的网页，但其实他所点击的是被黑客精心构建的另一个置于原网页上面的透明页面。<br>这种攻击利用了HTML中 iframe 标签的透明属性。</p>
+<p>攻击和防御参考实例：<br><a href="http://www.freebuf.com/articles/web/67843.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/67843.html</a></p>
+<h3 id="5-HTML5安全"><a href="#5-HTML5安全" class="headerlink" title="5.HTML5安全"></a>5.HTML5安全</h3><p>HTML5新增的标签和功能，可能带来新的XSS攻击。<br>该网站 <a href="http://html5sec.org/" target="_blank" rel="external">http://html5sec.org/</a> 列举了大部分的攻击方式。</p>
+<h2 id="服务器端应用安全"><a href="#服务器端应用安全" class="headerlink" title="服务器端应用安全"></a>服务器端应用安全</h2><ul>
+<li>注入攻击</li>
+<li>文件上传漏洞</li>
+<li>认证与会话管理</li>
+<li>访问控制</li>
+<li>加密算法与随机数</li>
+<li>Web框架安全</li>
+<li>应用层拒绝服务攻击</li>
+<li>webserver 配置安全</li>
+</ul>
+<h3 id="1-注入攻击"><a href="#1-注入攻击" class="headerlink" title="1.注入攻击"></a>1.注入攻击</h3><h5 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h5><p>SQL注入是比较常见的网络攻击方式之一，它不是利用操作系统的BUG来实现攻击，而是针对程序员编程时的疏忽，通过SQL语句，实现无帐号登录，甚至篡改数据库。<br>攻击手段示例和防御方法参考：<a href="http://www.cnblogs.com/baizhanshi/p/6002898.html" target="_blank" rel="external">http://www.cnblogs.com/baizhanshi/p/6002898.html</a></p>
+<h5 id="XML注入"><a href="#XML注入" class="headerlink" title="XML注入"></a>XML注入</h5><p><a href="http://blog.csdn.net/mevicky/article/details/48239481" target="_blank" rel="external">http://blog.csdn.net/mevicky/article/details/48239481</a></p>
+<h5 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h5><p><a href="http://blog.csdn.net/hitwangpeng/article/details/45716821" target="_blank" rel="external">http://blog.csdn.net/hitwangpeng/article/details/45716821</a></p>
+<h5 id="CRLF注入"><a href="#CRLF注入" class="headerlink" title="CRLF注入"></a>CRLF注入</h5><p><a href="http://www.2cto.com/article/201406/312590.html" target="_blank" rel="external">http://www.2cto.com/article/201406/312590.html</a></p>
+<h3 id="2-文件上传漏洞"><a href="#2-文件上传漏洞" class="headerlink" title="2.文件上传漏洞"></a>2.文件上传漏洞</h3><p>文件上传漏洞是指用户上传了一个可执行的脚本文件，并通过此脚本获得了执行服务器端命令的能力。文件上传后导致的常见安全问题一般有：</p>
+<ul>
+<li>上传文件是web脚本语言，服务器的web容器解释并执行了用户上传的脚本，导致代码执行；</li>
+<li>上传文件是Flash的策略文件crossdomain.xml,黑客用以控制flash在该域下的行为(其他通过类似方式控制策略文件的情况类似)；</li>
+<li>上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行；</li>
+<li>上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈。</li>
+</ul>
+<p>大多数情况下，文件上传漏洞一般都是指“上传web脚本能够被服务器解析”的问题,也就是通常所说的webshell，要完成这个攻击，要满足几个条件：</p>
+<ul>
+<li>首先，上传的文件能够被web容器解释执行；</li>
+<li>其次，用户能够从web上访问这个文件；</li>
+<li>最后，用户上传的文件若被安全检查，格式化，图片压缩等功能改变了内容，则也可能导致攻击不成功。</li>
+</ul>
+<p>攻击实例：<a href="http://www.cnblogs.com/crazylocust/p/6759529.html" target="_blank" rel="external">http://www.cnblogs.com/crazylocust/p/6759529.html</a></p>
+<p><strong>防御手段</strong>：</p>
+<ul>
+<li>文件上传的目录设置为不可执行</li>
+<li>判断文件类型</li>
+<li>使用随机数改写文件名和文件路径</li>
+<li>单独设置文件服务器的域名</li>
+</ul>
+<h3 id="3-认证与会话管理"><a href="#3-认证与会话管理" class="headerlink" title="3.认证与会话管理"></a>3.认证与会话管理</h3><p>认证的目的是为了认出用户是谁，而授权的目的是为了决定用户能够做什么。</p>
+<p><strong>密码的合理保存方式</strong>：将明文密码经过哈希后再保存到数据库，在计算哈希值时，增加一个“salt”，salt是一个字符串，作用是增加明文哈希值的复杂度，并使得彩虹表一类的攻击失效。</p>
+<p><strong>多因素认证</strong>：对于很多重要的系统，如果只有密码作为唯一的认证手段，从安全上看会略显不足，因此为了增强安全性， 大多数网上银行和网上支付平台都会采用双因素认证或多因素认证。</p>
+<p><strong>session fixation 攻击</strong>：用户登录网站的过程中，如果登录前后用户的sessionID没有发生变化，则会存在session fixation问题。</p>
+<p><strong>session 保持攻击</strong>:一般来说session是有生命周期的，当用户长时间未活动，或者用户退出，服务器将销毁session。如果攻击者能一直持有一个有效的session，而服务器对于活动的session一直不销毁的话，攻击者就能通过此有效session一直使用用户的账号，成为一个永久的后门。攻击者可以通过不停的发起访问请求，让session一直活下去，比如不停的刷新页面。如何对抗这种session保持攻击，常见的做法是在一定的时间后， 强制销毁session。但是强制销毁可能会影响到一些正常的用户，还可以选择的方法是在当用户客户端发生变化时，要求用户重新登录。比如用户的IP、useragent等信息发生了变化，就可以强制销毁当前的session，并要求用户重新登录。</p>
+<p><strong>单点登录(SSO)</strong>:英文全称，single sign on，简称sso。它希望用户只需要登录一次，就可以访问所有系统。从用户体验的角度看，sso无疑让用户的使用更加的方便，从安全角度看，sso把风险集中在单点上，这样做是有利有弊的。利是风险集中，缺点是风险集中了，所以单点一旦被攻破，后果会非常严重。</p>
+<h3 id="4-访问控制"><a href="#4-访问控制" class="headerlink" title="4.访问控制"></a>4.访问控制</h3><p>web安全领域中，权限控制的问题都可以归纳为访问控制的问题。</p>
+<p>访问控制实际上是建立用户与权限之间的对应关系，现在应用广泛的一种方法，就是基于角色的访问控制(Role-Based Access Control)，简称RBAC。RBAC事先会在系统中定义出不同的角色，不同的角色拥有不同的权限，一个角色实际上就是一个权限的集合，而系统的所有用户都会被分配到不同的角色中，一用户可能拥有多个角色，角色之间有权限高低之分。在系统验证权限时，只需要验证用户所属角色，然后就可以根据角色所拥有的权限进行授权了。</p>
+<p>RBAC属于垂直权限管理，在RBAC下，系统只会验证用户A是否属于角色RoleX，而不会判断用户A是否能否访问只属于用户B的数据DataB，用户B和用户A是属于同一角色的。因此发生了越权访问。这种问题，我们就称之为“水平权限管理问题”。此问题难以在统一框架下解决。</p>
+<p><strong>OAuth</strong> 是一个在不提供用户名和密码的情况下，授权第三方应用访问web资源的安全协议。</p>
+<p>具体说明和参考：</p>
+<p><a href="http://www.tuicool.com/articles/qqeuE3" target="_blank" rel="external">http://www.tuicool.com/articles/qqeuE3</a></p>
+<p><a href="http://blog.jobbole.com/49211/" target="_blank" rel="external">http://blog.jobbole.com/49211/</a></p>
+<h3 id="5-加密算法和随机数"><a href="#5-加密算法和随机数" class="headerlink" title="5.加密算法和随机数"></a>5.加密算法和随机数</h3><p>常见的加密算法通常分为分组加密算法与流密码加密算法两种，两者实现原理不同。<br>分组加密算法基于“分组”(block)进行操作，根据算法的不同， 每个分组的长度可能不同。分组加密算法的代表有DES，3-DES，Blowfish，IDEA，AES等。流密码加密算法，则每次只处理一个字节，密钥独立于消息之外，两者通过异或实现加密与解密。流密码加密算法的代表有RC4,ORYX，SEAL等。</p>
+<p>针对加密算法的攻击，一般根据攻击者能获得的信息，可以分为：</p>
+<ul>
+<li>唯密码攻击，攻击者有一些密文，它们是使用同一加密算法和同一密钥加密的。这种攻击是最难的。</li>
+<li>已知明文攻击，攻击者除了能得到一些密文外，还能得到这些密文对应的明文。本章中针对流密码的一些攻击为已知明文攻击。</li>
+<li>选择明文攻击，攻击者不仅能得到一些密文和明文，还能选择用于加密的明文。</li>
+<li>选择密文攻击，攻击者可以选择不同的密文来解密。</li>
+</ul>
+<h4 id="Reused-Key-Attack"><a href="#Reused-Key-Attack" class="headerlink" title="Reused Key Attack"></a>Reused Key Attack</h4><p>在流密码的使用中，最常见的错误便是使用同一个密钥进行多次加/解密。这将使得破解流密码变得非常简单。在这种攻击下，攻击者不需要知道，密钥，即可还原出明文。</p>
+<p>常见的加密模式有：ECB，CBC，CFB，OFB，CTR等。</p>
+<p>对于web应用来说，密钥管理，常见的做法是将密钥(包括密码)保存在配置文件或者数据库中。</p>
+<p>其他更多的攻击手段和案例参考《白帽子讲web安全》。</p>
+<p>加密算法的选择和使用的最佳实践：</p>
+<p>1.不要使用ECB模式</p>
+<p>2.不要使用流密码(比如RC4)</p>
+<p>3.使用HMAC-SHA1代替MD5(甚至是代替SHA1)</p>
+<p>4.不要使用相同的key做不同的时期</p>
+<p>5.salt与IV需要随机产生</p>
+<p>6.不要自己实现加密算法，尽量使用安全专家已经实现好的库</p>
+<p>7.不要依赖系统的保密性</p>
+<p>当你不知道如何选择时，有一下建议：</p>
+<p>1.使用CBC模式的AES256用于加密</p>
+<p>2.使用HMAC-SHA512用于完整性检查</p>
+<p>3.使用带salt的SHA-256或SHA-512用于Hashing。</p>
+<h3 id="6-web框架安全"><a href="#6-web框架安全" class="headerlink" title="6.web框架安全"></a>6.web框架安全</h3><p>在框架中实施安全方案，比由程序员在业务中修复一个个具体的bug,有着更多的优势。</p>
+<p>模板引擎与XSS防御，在View层，可以解决XSS问题。使用“输出编码” 的防御方法，针对不同的情况使用不同的编码函数。</p>
+<p>在web框架中可以使用security token解决CSRF攻击，在web开发中，对“读操作”和“写操作”予以区分，比如所有的“写操作”都使用Http post。</p>
+<p>参考：<a href="http://www.cnblogs.com/Mainz/archive/2012/11/01/2749874.html" target="_blank" rel="external">Spring MVC防御CSRF、XSS和SQL注入攻击</a></p>
+<p>此外还有web框架本身的安全漏洞。</p>
+<p><a href="https://www.ibm.com/developerworks/cn/rational/r-cn-appscanusage/" target="_blank" rel="external">Web 应用安全利器：IBM Rational AppScan</a>IBM Rational AppScan 是一个全面的 Web 应用安全解决方案，为 Web 及 Web 2.0 应用提供了安全漏洞扫描、报告和修复建议等功能，可以帮助开发者全面准确地发现并解决安全问题。</p>
+<h3 id="7-应用层拒绝服务攻击"><a href="#7-应用层拒绝服务攻击" class="headerlink" title="7.应用层拒绝服务攻击"></a>7.应用层拒绝服务攻击</h3><p>DDOS又称为分布式拒绝服务，常见的DDOS攻击有SYN flood，UDP flood，ICMP flood等。应用层DDOS攻击是针对服务器性能的一种攻击，那么许多优化服务器性能的方法，或多或少地能缓解此种攻击。常见的防御措施：</p>
+<ul>
+<li>限制请求频率，在应用中，针对每个“客户端”做一个请求频率的限制。</li>
+<li>应用代码做好性能优化</li>
+<li>网络架构上做好优化，利用好负载均衡和CDN。</li>
+<li>实现一些对抗手段，比如限制每个IP的请求频率</li>
+<li>加入验证码</li>
+</ul>
+<p><strong>CC攻击</strong>：Challenge Collapasar,意值在黑洞(一款反DDOS设备)的防御下，仍然能有效的完成拒绝服务攻击。CC攻击的原理就是对一些消耗资源较大的应用页面不断的发起正常的请求，以达到消耗服务器资源的目的。</p>
+<p><strong>资源耗尽攻击</strong></p>
+<p>slowloris攻击，原理是以极低的速度往服务器发送http请求，由于webserver对于并发的连接数都有一定的上限，因此若是恶意的占用住这些连接不放，那么webserver的所有连接都将被恶意连接占用，从而无法接受新的请求，导致拒绝服务。</p>
+<p>http post dos,原理是在发送http post包时，指定一个非常大的content-length值，然后以很低的速度发包，比如10~100s发一个字节，保持住这个连接不断开。这样客户端连接数多了以后，占用住了webserver的所有可用连接，从而导致DOS。</p>
+<p><a href="https://www.zhihu.com/question/19581905" target="_blank" rel="external">如何防御DDOS攻击?</a></p>
+<h3 id="8-WebServer配置安全"><a href="#8-WebServer配置安全" class="headerlink" title="8.WebServer配置安全"></a>8.WebServer配置安全</h3><p>web服务器是web应用的载体，如果这个载体出现安全问题，那么运行在其中的web应用程序的安全也无法得到保障。</p>
+<p><a href="http://blog.csdn.net/carechere/article/details/52346776" target="_blank" rel="external">Apache安全</a></p>
+<p><a href="http://blog.csdn.net/vivid_110/article/details/51809019" target="_blank" rel="external">Nginx安全</a></p>
+<p><a href="http://blog.csdn.net/earbao/article/details/48677143" target="_blank" rel="external">Tomcat安全配置</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Web技术的成熟使得Web应用的功能越来越强大，最终成为了互联网的主流。黑客们的目光，也渐渐转移到了Web这块大蛋糕上。&lt;/p&gt;
+&lt;h5 id=&quot;安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。&quot;&gt;&lt;a href=&quot;#安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。&quot; class=&quot;headerlink&quot; title=&quot;安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。&quot;&gt;&lt;/a&gt;安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。&lt;/h5&gt;&lt;h4 id=&quot;安全三要素，机密性，完整性，可用性&quot;&gt;&lt;a href=&quot;#安全三要素，机密性，完整性，可用性&quot; class=&quot;headerlink&quot; title=&quot;安全三要素，机密性，完整性，可用性&quot;&gt;&lt;/a&gt;安全三要素，机密性，完整性，可用性&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;机密性要去保护数据内容不能泄露，加密是实现机密性要求的常见手段。&lt;/li&gt;
+&lt;li&gt;完整性则要求保护数据内容是完整、没有被篡改的。常见的保证一致性的技术手段是数字签名。&lt;/li&gt;
+&lt;li&gt;可用性要求保护资源是“随需而得”。
+    
+    </summary>
+    
+      <category term="Web" scheme="http://www.luffyjet.com/techblog/categories/Web/"/>
+    
+    
+      <category term="Web" scheme="http://www.luffyjet.com/techblog/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iOS资源整理</title>
+    <link href="http://www.luffyjet.com/techblog/2017/05/19/iOS-resource/"/>
+    <id>http://www.luffyjet.com/techblog/2017/05/19/iOS-resource/</id>
+    <published>2017-05-19T14:12:02.000Z</published>
+    <updated>2018-12-04T08:17:10.760Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Blog"><a href="#Blog" class="headerlink" title="Blog"></a>Blog</h2><p><a href="http://blog.devtang.com/" target="_blank" rel="external">http://blog.devtang.com/</a></p>
+<p><a href="https://onevcat.com/#blog" target="_blank" rel="external">https://onevcat.com/#blog</a></p>
+<p><a href="http://blog.cnbang.net/" target="_blank" rel="external">http://blog.cnbang.net/</a></p>
+<p><a href="http://blog.ibireme.com/" target="_blank" rel="external">http://blog.ibireme.com/</a></p>
+<h2 id="开源库"><a href="#开源库" class="headerlink" title="开源库"></a>开源库</h2><p><a href="http://awesomeios.com/" target="_blank" rel="external">http://awesomeios.com/</a></p>
+<p><a href="https://github.com/dkhamsing/open-source-ios-apps" target="_blank" rel="external">https://github.com/dkhamsing/open-source-ios-apps</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Blog&quot;&gt;&lt;a href=&quot;#Blog&quot; class=&quot;headerlink&quot; title=&quot;Blog&quot;&gt;&lt;/a&gt;Blog&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.devtang.com/&quot; target=&quot;_blank&quot; rel=&quot;extern
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://www.luffyjet.com/techblog/categories/iOS/"/>
+    
+    
+      <category term="iOS" scheme="http://www.luffyjet.com/techblog/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring 集成 Mybatis记录</title>
+    <link href="http://www.luffyjet.com/techblog/2017/05/12/spring-migration-mybatis%20/"/>
+    <id>http://www.luffyjet.com/techblog/2017/05/12/spring-migration-mybatis /</id>
+    <published>2017-05-12T13:23:15.000Z</published>
+    <updated>2018-12-04T08:57:38.536Z</updated>
+    
+    <content type="html"><![CDATA[<p>基于IDEA+Gradle构建</p>
+<ul>
+<li>首先需要依赖 </li>
+</ul>
+<p><code>compile &quot;org.mybatis:mybatis-spring:${mybatisSpringVersion}&quot;</code></p>
+<ul>
+<li>Spring配置数据源,有三种，选择dbcp库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;</div><div class="line">        &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driverClassName&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line">&lt;context:property-placeholder location=&quot;jdbc.properties&quot;/&gt;    </div><div class="line">    </div><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot; destroy-method=&quot;close&quot;&gt;</div><div class="line">    &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.driverClassName&#125;&quot;/&gt;</div><div class="line">    &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;</div><div class="line">    &lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;</div><div class="line">    &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line">&lt;context:property-placeholder location=&quot;jdbc.properties&quot;/&gt;</div><div class="line"></div><div class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;</div><div class="line">    &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driverClassName&#125;&quot;/&gt;</div><div class="line">    &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;</div><div class="line">    &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;</div><div class="line">    &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line">&lt;context:property-placeholder location=&quot;jdbc.properties&quot;/&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>配置mapper和xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;!--获取sqlSession，并指定sqlmapper目录--&gt;</div><div class="line">&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</div><div class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</div><div class="line">        &lt;property name=&quot;mapperLocations&quot; value=&quot;config/mybatis/mapper/*.xml&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;!--自动扫描mapper--&gt;</div><div class="line">&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;</div><div class="line">        &lt;property name=&quot;basePackage&quot; value=&quot;com.luffyjet.gweb.mapper&quot; /&gt;</div><div class="line">        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line"></div><div class="line">&lt;!--事务--&gt;</div><div class="line">&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</div><div class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;</div><div class="line">&lt;/bean&gt;</div><div class="line">&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot; /&gt;</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://blog.mybatis.org/" target="_blank" rel="external">mybatis blog</a></p>
+<p><a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="external">MyBatis 文档中文版</a></p>
+<p><a href="http://www.mybatis.org/spring/zh/index.html" target="_blank" rel="external">MyBatis-Spring 中文文档</a></p>
+<p><a href="https://github.com/mybatis/jpetstore-6" target="_blank" rel="external">官方Demo/jpetstore-6</a></p>
+<p><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html" target="_blank" rel="external">spring-framework-reference/jdbc</a></p>
+<p><a href="http://blog.csdn.net/jiuqiyuliang/article/details/45132493/" target="_blank" rel="external">http://blog.csdn.net/jiuqiyuliang/article/details/45132493/</a></p>
+<h2 id="自动生成代码"><a href="#自动生成代码" class="headerlink" title="自动生成代码"></a>自动生成代码</h2><p><a href="http://mbg.cndocs.tk/index.html" target="_blank" rel="external">MyBatis Generator 中文文档</a></p>
+<p><a href="https://github.com/abel533/Mapper" target="_blank" rel="external">MyBatis通用Mapper3</a></p>
+<p><a href="https://github.com/abel533/Mybatis-Spring" target="_blank" rel="external">Mybatis-Spring 示例</a></p>
+<p><a href="https://github.com/pagehelper/Mybatis-PageHelper" target="_blank" rel="external">Mybatis通用分页插件 Mybatis-PageHelper</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;基于IDEA+Gradle构建&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;首先需要依赖 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;compile &amp;quot;org.mybatis:mybatis-spring:${mybatisSpringVersion}&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Spring配置数据源,有三种，选择dbcp库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;org.apache.commons.dbcp.BasicDataSource&amp;quot; destroy-method=&amp;quot;close&amp;quot;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;property name=&amp;quot;driverClassName&amp;quot; value=&amp;quot;$&amp;#123;jdbc.driverClassName&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;property name=&amp;quot;url&amp;quot; value=&amp;quot;$&amp;#123;jdbc.url&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;property name=&amp;quot;username&amp;quot; value=&amp;quot;$&amp;#123;jdbc.username&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        &amp;lt;property name=&amp;quot;password&amp;quot; value=&amp;quot;$&amp;#123;jdbc.password&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;context:property-placeholder location=&amp;quot;jdbc.properties&amp;quot;/&amp;gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;com.mchange.v2.c3p0.ComboPooledDataSource&amp;quot; destroy-method=&amp;quot;close&amp;quot;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;driverClass&amp;quot; value=&amp;quot;$&amp;#123;jdbc.driverClassName&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;jdbcUrl&amp;quot; value=&amp;quot;$&amp;#123;jdbc.url&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;user&amp;quot; value=&amp;quot;$&amp;#123;jdbc.username&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;password&amp;quot; value=&amp;quot;$&amp;#123;jdbc.password&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;context:property-placeholder location=&amp;quot;jdbc.properties&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;bean id=&amp;quot;dataSource&amp;quot; class=&amp;quot;org.springframework.jdbc.datasource.DriverManagerDataSource&amp;quot;&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;driverClassName&amp;quot; value=&amp;quot;$&amp;#123;jdbc.driverClassName&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;url&amp;quot; value=&amp;quot;$&amp;#123;jdbc.url&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;username&amp;quot; value=&amp;quot;$&amp;#123;jdbc.username&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &amp;lt;property name=&amp;quot;password&amp;quot; value=&amp;quot;$&amp;#123;jdbc.password&amp;#125;&amp;quot;/&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;/bean&amp;gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;lt;context:property-placeholder location=&amp;quot;jdbc.properties&amp;quot;/&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="Spring" scheme="http://www.luffyjet.com/techblog/categories/Spring/"/>
+    
+    
+      <category term="mybatis" scheme="http://www.luffyjet.com/techblog/tags/mybatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RxJava Observer与Subscriber</title>
+    <link href="http://www.luffyjet.com/techblog/2016/10/30/RxJava-Observer-Subscriber/"/>
+    <id>http://www.luffyjet.com/techblog/2016/10/30/RxJava-Observer-Subscriber/</id>
+    <published>2016-10-30T02:43:23.000Z</published>
+    <updated>2018-12-04T07:52:58.440Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>建议每次subscribe()都new一个新的Subscriber或者是使用Observer，也就是不要重复使用mSubscriber。</p>
+<h4 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h4><a id="more"></a>
+<p>Subscriber是Observer的实现类，Observer 和 Subscriber 具有相同的角色，而且 Observer 在 subscribe() 过程中最终会被转换成 Subscriber 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Subscription <span class="title">subscribe</span><span class="params">(<span class="keyword">final</span> Observer&lt;? <span class="keyword">super</span> T&gt; observer)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (observer <span class="keyword">instanceof</span> Subscriber) &#123;</div><div class="line">            <span class="keyword">return</span> subscribe((Subscriber&lt;? <span class="keyword">super</span> T&gt;)observer);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (observer == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"observer is null"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> subscribe(<span class="keyword">new</span> ObserverSubscriber&lt;T&gt;(observer));</div><div class="line">    &#125;</div><div class="line">   </div><div class="line">  -------------------------------------------------  </div><div class="line">    </div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ObserverSubscriber</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Subscriber</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">final</span> Observer&lt;? <span class="keyword">super</span> T&gt; observer;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ObserverSubscriber</span><span class="params">(Observer&lt;? <span class="keyword">super</span> T&gt; observer)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.observer = observer;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        observer.onNext(t);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">        observer.onError(e);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line">        observer.onCompleted();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Subscriber和Observer作为成员变量,比如 mSubscriber, mObserver传入 subscribe() 会有所区别。mSubscriber 传入之后，会被赋值成SafeSubscriber实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SafeSubscriber</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Subscriber</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Subscriber&lt;? <span class="keyword">super</span> T&gt; actual;</div><div class="line"></div><div class="line">    <span class="keyword">boolean</span> done;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SafeSubscriber</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> T&gt; actual)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(actual);</div><div class="line">        <span class="keyword">this</span>.actual = actual;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!done) &#123;</div><div class="line">            done = <span class="keyword">true</span>;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                actual.onCompleted();</div><div class="line">            &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">                <span class="comment">// we handle here instead of another method so we don't add stacks to the frame</span></div><div class="line">                <span class="comment">// which can prevent it from being able to handle StackOverflow</span></div><div class="line">                Exceptions.throwIfFatal(e);</div><div class="line">                RxJavaHooks.onError(e);</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> OnCompletedFailedException(e.getMessage(), e);</div><div class="line">            &#125; <span class="keyword">finally</span> &#123; <span class="comment">// NOPMD</span></div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="comment">// Similarly to onError if failure occurs in unsubscribe then Rx contract is broken</span></div><div class="line">                    <span class="comment">// and we throw an UnsubscribeFailureException.</span></div><div class="line">                    unsubscribe();</div><div class="line">                &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">                    RxJavaHooks.onError(e);</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> UnsubscribeFailedException(e.getMessage(), e);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">        <span class="comment">// we handle here instead of another method so we don't add stacks to the frame</span></div><div class="line">        <span class="comment">// which can prevent it from being able to handle StackOverflow</span></div><div class="line">        Exceptions.throwIfFatal(e);</div><div class="line">        <span class="keyword">if</span> (!done) &#123;</div><div class="line">            done = <span class="keyword">true</span>;</div><div class="line">            _onError(e);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(T args)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (!done) &#123;</div><div class="line">                actual.onNext(args);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">            <span class="comment">// we handle here instead of another method so we don't add stacks to the frame</span></div><div class="line">            <span class="comment">// which can prevent it from being able to handle StackOverflow</span></div><div class="line">            Exceptions.throwOrReport(e, <span class="keyword">this</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过SafeSubscriber源码可知 onCompleted 执行后会给成员变量 done 赋值true,并自动unsubscribe(),<br>通过成员变量 done 判断是否执行 onNext(),onError()等，所以subscribe()传入mSubscriber只有第一次能正常使用。传入mObserver则没有这个问题，它每次都会自动创建新的Subscriber来包装它一次。如果使用subscribe(new Subscriber&lt; T&gt;(){}）方式实现订阅，也不会出现上面的问题。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;结论&quot;&gt;&lt;a href=&quot;#结论&quot; class=&quot;headerlink&quot; title=&quot;结论&quot;&gt;&lt;/a&gt;结论&lt;/h4&gt;&lt;p&gt;建议每次subscribe()都new一个新的Subscriber或者是使用Observer，也就是不要重复使用mSubscriber。&lt;/p&gt;
+&lt;h4 id=&quot;为什么&quot;&gt;&lt;a href=&quot;#为什么&quot; class=&quot;headerlink&quot; title=&quot;为什么&quot;&gt;&lt;/a&gt;为什么&lt;/h4&gt;
+    
+    </summary>
+    
+      <category term="RxJava" scheme="http://www.luffyjet.com/techblog/categories/RxJava/"/>
+    
+    
+      <category term="RxJava" scheme="http://www.luffyjet.com/techblog/tags/RxJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android6.0权限处理</title>
+    <link href="http://www.luffyjet.com/techblog/2016/05/09/android6.0-permissions/"/>
+    <id>http://www.luffyjet.com/techblog/2016/05/09/android6.0-permissions/</id>
+    <published>2016-05-09T04:30:33.000Z</published>
+    <updated>2018-12-04T08:45:52.320Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><a href="https://github.com/yanzhenjie/AndPermission" target="_blank" rel="external">开源项目 AndPermission</a></li>
+<li><a href="http://blog.csdn.net/lmj623565791/article/details/50709663" target="_blank" rel="external">Android 6.0 运行时权限处理完全解析</a></li>
+<li><a href="http://www.jianshu.com/p/dbe4d37731e6/" target="_blank" rel="external">Android 6.0 - 动态权限管理的解决方案</a></li>
+<li><a href="https://github.com/hotchemi/PermissionsDispatcher" target="_blank" rel="external">开源项目 PermissionsDispatcher</a></li>
+<li><a href="https://github.com/lovedise/PermissionGen" target="_blank" rel="external">PermissionGen</a> <a href="https://github.com/hongyangAndroid/MPermissions" target="_blank" rel="external">MPermissions</a></li>
+<li><a href="http://p.codekk.com/" target="_blank" rel="external">codekk.com</a> 搜权限</li>
+<li><a href="https://github.com/tbruyelle/RxPermissions" target="_blank" rel="external">https://github.com/tbruyelle/RxPermissions</a></li>
+<li><a href="https://github.com/anthonycr/Grant" target="_blank" rel="external">https://github.com/anthonycr/Grant</a></li>
+</ol>
+<h4 id="正常权限"><a href="#正常权限" class="headerlink" title="正常权限"></a>正常权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">As of API level 23, the following permissions are classified as PROTECTION_NORMAL:</div><div class="line"></div><div class="line">ACCESS_LOCATION_EXTRA_COMMANDS</div><div class="line">ACCESS_NETWORK_STATE</div><div class="line">ACCESS_NOTIFICATION_POLICY</div><div class="line">ACCESS_WIFI_STATE</div><div class="line">BLUETOOTH</div><div class="line">BLUETOOTH_ADMIN</div><div class="line">BROADCAST_STICKY</div><div class="line">CHANGE_NETWORK_STATE</div><div class="line">CHANGE_WIFI_MULTICAST_STATE</div><div class="line">CHANGE_WIFI_STATE</div><div class="line">DISABLE_KEYGUARD</div><div class="line">EXPAND_STATUS_BAR</div><div class="line">GET_PACKAGE_SIZE</div><div class="line">INSTALL_SHORTCUT</div><div class="line">INTERNET</div><div class="line">KILL_BACKGROUND_PROCESSES</div><div class="line">MODIFY_AUDIO_SETTINGS</div><div class="line">NFC</div><div class="line">READ_SYNC_SETTINGS</div><div class="line">READ_SYNC_STATS</div><div class="line">RECEIVE_BOOT_COMPLETED</div><div class="line">REORDER_TASKS</div><div class="line">REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</div><div class="line">REQUEST_INSTALL_PACKAGES</div><div class="line">SET_ALARM</div><div class="line">SET_TIME_ZONE</div><div class="line">SET_WALLPAPER</div><div class="line">SET_WALLPAPER_HINTS</div><div class="line">TRANSMIT_IR</div><div class="line">UNINSTALL_SHORTCUT</div><div class="line">USE_FINGERPRINT</div><div class="line">VIBRATE</div><div class="line">WAKE_LOCK</div><div class="line">WRITE_SYNC_SETTINGS</div></pre></td></tr></table></figure>
+<h4 id="危险权限"><a href="#危险权限" class="headerlink" title="危险权限"></a>危险权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">CALENDAR	</div><div class="line">READ_CALENDAR</div><div class="line">WRITE_CALENDAR</div><div class="line"></div><div class="line">CAMERA	</div><div class="line">CAMERA</div><div class="line"></div><div class="line">CONTACTS	</div><div class="line">READ_CONTACTS</div><div class="line">WRITE_CONTACTS</div><div class="line">GET_ACCOUNTS</div><div class="line"></div><div class="line">LOCATION	</div><div class="line">ACCESS_FINE_LOCATION</div><div class="line">ACCESS_COARSE_LOCATION</div><div class="line"></div><div class="line">MICROPHONE	</div><div class="line">RECORD_AUDIO</div><div class="line"></div><div class="line">PHONE	</div><div class="line">READ_PHONE_STATE</div><div class="line">CALL_PHONE</div><div class="line">READ_CALL_LOG</div><div class="line">WRITE_CALL_LOG</div><div class="line">ADD_VOICEMAIL</div><div class="line">USE_SIP</div><div class="line">PROCESS_OUTGOING_CALLS</div><div class="line"></div><div class="line">SENSORS	</div><div class="line">BODY_SENSORS</div><div class="line"></div><div class="line">SMS	</div><div class="line">SEND_SMS</div><div class="line">RECEIVE_SMS</div><div class="line">READ_SMS</div><div class="line">RECEIVE_WAP_PUSH</div><div class="line">RECEIVE_MMS</div><div class="line"></div><div class="line">STORAGE	</div><div class="line">READ_EXTERNAL_STORAGE</div><div class="line">WRITE_EXTERNAL_STORAGE</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/yanzhenjie/AndPermission&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;开源项目 AndPermission&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http:
+    
+    </summary>
+    
+      <category term="Android" scheme="http://www.luffyjet.com/techblog/categories/Android/"/>
+    
+    
+      <category term="Permissions" scheme="http://www.luffyjet.com/techblog/tags/Permissions/"/>
+    
+  </entry>
   
   <entry>
     <title>Android调试自测工具01 (Hugo、Timber、Scalpel)</title>

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>开源热补丁和插件化项目整理 | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="开源热补丁框架
+支付宝 AndFix
+QZone方案 (原理 , dex分包方案) 
+HotFix 
+Nuwa 
+DroidFix  
+
+
+微信 Tinker 
+美团 Robust
+其它 RocooFix AnoleFix
+Phantom 零Hook稳定占坑 兼容Android 9.0（2018.10月更新）
+
+热补丁整合框架
+tinker-manager 
+Tinker_imitator
+And">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源热补丁和插件化项目整理">
+<meta property="og:url" content="http://www.luffyjet.com/techblog/2018/06/08/hotfix-framework-article/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="开源热补丁框架
+支付宝 AndFix
+QZone方案 (原理 , dex分包方案) 
+HotFix 
+Nuwa 
+DroidFix  
+
+
+微信 Tinker 
+美团 Robust
+其它 RocooFix AnoleFix
+Phantom 零Hook稳定占坑 兼容Android 9.0（2018.10月更新）
+
+热补丁整合框架
+tinker-manager 
+Tinker_imitator
+And">
+<meta property="og:updated_time" content="2018-12-04T09:01:12.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源热补丁和插件化项目整理">
+<meta name="twitter:description" content="开源热补丁框架
+支付宝 AndFix
+QZone方案 (原理 , dex分包方案) 
+HotFix 
+Nuwa 
+DroidFix  
+
+
+微信 Tinker 
+美团 Robust
+其它 RocooFix AnoleFix
+Phantom 零Hook稳定占坑 兼容Android 9.0（2018.10月更新）
+
+热补丁整合框架
+tinker-manager 
+Tinker_imitator
+And">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/techblog/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/techblog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/techblog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/techblog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/techblog/css/style.css">
+
+    <script src="/techblog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/techblog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/techblog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/techblog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/techblog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/techblog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/techblog/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/techblog/',
+        CONTENT_URL: '/techblog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/techblog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/techblog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/techblog/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-hotfix-framework-article" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            开源热补丁和插件化项目整理
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/techblog/2018/06/08/hotfix-framework-article/">
+            <time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/techblog/categories/android/">android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/techblog/tags/hotfix/">hotfix</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="开源热补丁框架"><a href="#开源热补丁框架" class="headerlink" title="开源热补丁框架"></a>开源热补丁框架</h3><ol>
+<li>支付宝 <a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">AndFix</a></li>
+<li>QZone方案 (<a href="https://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;mid=400118620&amp;idx=1&amp;sn=b4fdd5055731290eef12ad0d17f39d4a&amp;scene=1&amp;srcid=1106Imu9ZgwybID13e7y2nEi#wechat_redirect" target="_blank" rel="external">原理</a> , <a href="http://www.cnblogs.com/codingWarrior/p/5111957.html" target="_blank" rel="external">dex分包方案</a>) <ul>
+<li><a href="https://github.com/dodola/HotFix" target="_blank" rel="external">HotFix</a> </li>
+<li><a href="https://github.com/jasonross/Nuwa" target="_blank" rel="external">Nuwa</a> </li>
+<li><a href="https://github.com/bunnyblue/DroidFix" target="_blank" rel="external">DroidFix</a>  </li>
+</ul>
+</li>
+<li>微信 <a href="https://github.com/Tencent/tinker" target="_blank" rel="external">Tinker</a> </li>
+<li>美团 <a href="https://github.com/Meituan-Dianping/Robust" target="_blank" rel="external">Robust</a></li>
+<li>其它 <a href="https://github.com/dodola/RocooFix" target="_blank" rel="external">RocooFix</a> <a href="https://github.com/dodola/AnoleFix" target="_blank" rel="external">AnoleFix</a></li>
+<li><a href="https://github.com/ManbangGroup/Phantom" target="_blank" rel="external">Phantom 零Hook稳定占坑 兼容Android 9.0</a>（2018.10月更新）</li>
+</ol>
+<h3 id="热补丁整合框架"><a href="#热补丁整合框架" class="headerlink" title="热补丁整合框架"></a>热补丁整合框架</h3><ol>
+<li><a href="https://github.com/baidao/tinker-manager" target="_blank" rel="external">tinker-manager</a> </li>
+<li><a href="https://github.com/zzz40500/Tinker_imitator" target="_blank" rel="external">Tinker_imitator</a></li>
+<li><a href="https://github.com/TangXiaoLv/Android-Easy-MultiDex" target="_blank" rel="external">Android 傻瓜式分包插件</a><a id="more"></a>
+</li>
+</ol>
+<h3 id="热补丁相关文章"><a href="#热补丁相关文章" class="headerlink" title="热补丁相关文章"></a>热补丁相关文章</h3><ol>
+<li>Instant Run英文原文 (<a href="https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f#.c088qhdxu" target="_blank" rel="external">https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f#.c088qhdxu</a>)        </li>
+<li>Instant Run工作原理及用法中文翻译稿 (<a href="http://www.jianshu.com/p/2e23ba9ff14b" target="_blank" rel="external">http://www.jianshu.com/p/2e23ba9ff14b</a>)        </li>
+<li>Buck exopackage 介绍 (<a href="https://buckbuild.com/article/exopackage.html" target="_blank" rel="external">https://buckbuild.com/article/exopackage.html</a>)   </li>
+<li>各大热补丁方案分析和比较 (<a href="http://blog.zhaiyifan.cn/2015/11/20/HotPatchCompare/" target="_blank" rel="external">http://blog.zhaiyifan.cn/2015/11/20/HotPatchCompare/</a>)  </li>
+<li><a href="https://github.com/WeMobileDev/article/blob/master/%E5%BE%AE%E4%BF%A1Android%E7%83%AD%E8%A1%A5%E4%B8%81%E5%AE%9E%E8%B7%B5%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.md" target="_blank" rel="external">微信Android热补丁实践演进之路</a>    </li>
+<li><a href="http://blog.csdn.net/lmj623565791/article/details/49883661/" target="_blank" rel="external">Android 热补丁动态修复框架小结</a></li>
+<li><a href="http://dev.qq.com/topic/57ff5832bb8fec206ce2185d" target="_blank" rel="external">QFix探索之路—手Q热补丁轻量级方案</a> </li>
+<li><a href="http://dev.qq.com/topic/57ad7a70eaed47bb2699e68e" target="_blank" rel="external">微信热补丁 Tinker 的实践演进之路</a></li>
+<li><a href="http://blog.csdn.net/hudan2714/article/details/52355805" target="_blank" rel="external"> Android热补丁技术，ClassLoader、dexposed、Andfix、smart app updates补丁技术收集整理</a></li>
+<li><a href="https://blog.csdn.net/wy12345432452/article/details/77482554" target="_blank" rel="external">关于Android热修复的几种解决方案</a></li>
+<li><a href="https://www.cnblogs.com/popfisher/p/8543973.html" target="_blank" rel="external">Android热修复技术原理详解</a></li>
+<li><a href="https://juejin.im/post/5b8959f96fb9a019fe685eb3" target="_blank" rel="external">Android P限制</a></li>
+<li><a href="https://blog.csdn.net/xinzhou201/article/details/80881604" target="_blank" rel="external">GMTC分享——当插件化遇到 Android P</a></li>
+<li><a href="http://www.infoq.com/cn/news/2018/04/Android-P-API" target="_blank" rel="external">突破Android P非公开API限制</a></li>
+<li><a href="https://www.jianshu.com/p/c41567b2c574" target="_blank" rel="external">破解Android P对非SDK接口限制</a></li>
+<li><a href="https://blog.csdn.net/lisdye2/article/details/80882180" target="_blank" rel="external">Android P非公开sdk适配指南</a></li>
+<li><a href="http://kaedea.com/2016/02/05/android-dynamical-loading-00-index/" target="_blank" rel="external">ANDROID 动态加载系列</a></li>
+</ol>
+<h3 id="插件化框架"><a href="#插件化框架" class="headerlink" title="插件化框架"></a>插件化框架</h3><ol>
+<li><a href="https://github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external">DynamicLoadApk</a></li>
+<li><a href="https://github.com/Qihoo360/DroidPlugin" target="_blank" rel="external">Qihoo360/DroidPlugin</a></li>
+<li><a href="https://github.com/houkx/android-pluginmgr" target="_blank" rel="external">houkx/android-pluginmgr</a></li>
+<li><a href="https://github.com/mmin18/AndroidDynamicLoader" target="_blank" rel="external">mmin18/AndroidDynamicLoader</a></li>
+<li><a href="https://github.com/wequick/Small" target="_blank" rel="external">wequick/Small</a></li>
+<li><a href="https://github.com/hongyangAndroid/AndroidChangeSkin" target="_blank" rel="external">换肤 不算插件</a></li>
+<li><a href="https://github.com/limpoxe/Android-Plugin-Framework" target="_blank" rel="external">limpoxe/Android-Plugin-Framework</a></li>
+<li><a href="https://github.com/iReaderAndroid/ZeusPlugin" target="_blank" rel="external">iReaderAndroid/ZeusPlugin</a></li>
+<li><a href="https://github.com/rickdynasty/TwsPluginFramework" target="_blank" rel="external">rickdynasty/TwsPluginFramework</a></li>
+<li><a href="https://github.com/didi/VirtualAPK" target="_blank" rel="external">didi/VirtualAPK</a></li>
+</ol>
+<h3 id="插件化文章"><a href="#插件化文章" class="headerlink" title="插件化文章"></a>插件化文章</h3><ol>
+<li><a href="http://www.androidblog.cn/index.php/Index/detail/id/16#" target="_blank" rel="external">Android博客周刊专题之＃插件化开发＃</a></li>
+<li><a href="http://www.trinea.cn/android/android-plugin/" target="_blank" rel="external">Android 插件化 动态升级</a></li>
+<li><a href="https://github.com/liaohuqiu/android-dynamic-load-awesome/blob/master/README-cn.md" target="_blank" rel="external">liaohuqiu/android-dynamic-load-awesome</a>  </li>
+<li><a href="https://github.com/kaedea/android-dynamical-loading" target="_blank" rel="external">kaedea/android-dynamical-loading</a> </li>
+<li><a href="http://tech.meituan.com/android_robust.html" target="_blank" rel="external">Android热更新方案Robust</a>    </li>
+<li><a href="http://blog.csdn.net/sbsujjbcy/article/details/52541803" target="_blank" rel="external">Android 热补丁技术——资源的热修复</a>     </li>
+<li><a href="http://mp.weixin.qq.com/s?__biz=MzA3NTYzODYzMg==&amp;mid=2653578947&amp;idx=1&amp;sn=279f089c9fb86669b8ad2382a28af8ce&amp;chksm=84b3b4c4b3c43dd2904d68f380874d2967ee492f4325486376f26d53dd2c0818cc32c663d282&amp;mpshare=1&amp;scene=23&amp;srcid=0505wrdN9VWydyfdLr1gSl2s#rd" target="_blank" rel="external">Android 插件技术实战总结</a>                   </li>
+<li><a href="https://github.com/tiann/understand-plugin-framework" target="_blank" rel="external">Android插件化原理解析</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/06/08/hotfix-framework-article/" data-id="cjp9ir658000uu6fblrkjtdv2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/06/08/hotfix-framework-article/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/techblog/2018/04/01/about-face-detection/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">人脸识别调研和部分应用场景</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/06/08/hotfix-framework-article/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/06/08/hotfix-framework-article/" class="title">开源热补丁和插件化项目整理</a></p>
+                            <p class="item-date"><time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/04/01/about-face-detection/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a></p>
+                            <p class="item-title"><a href="/techblog/2018/04/01/about-face-detection/" class="title">人脸识别调研和部分应用场景</a></p>
+                            <p class="item-date"><time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/15/android-interview/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/15/android-interview/" class="title">Android面试相关整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/08/NB-IOT/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/08/NB-IOT/" class="title">了解一下窄带网联网NB-IoT</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="title">RxJava&amp;Agera资料整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/NB-IoT/">NB-IoT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/RxJava/">RxJava</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Web/">Web</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/encryption/">encryption</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/face-detection/">face detection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Interview/">Interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/NB-IoT/">NB-IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Permissions/">Permissions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/RxJava/">RxJava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/face-detection/">face detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hotfix/">hotfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/rsa/">rsa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/vlc/">vlc</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/techblog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/techblog/tags/Interview/" style="font-size: 10px;">Interview</a> <a href="/techblog/tags/NB-IoT/" style="font-size: 10px;">NB-IoT</a> <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Permissions/" style="font-size: 10px;">Permissions</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/techblog/tags/Web/" style="font-size: 10px;">Web</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/face-detection/" style="font-size: 10px;">face detection</a> <a href="/techblog/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/techblog/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/techblog/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/techblog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/techblog/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/techblog/tags/vlc/" style="font-size: 10px;">vlc</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/techblog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/techblog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/techblog/js/main.js"></script>
+
+    </div>
+</body>
+</html>

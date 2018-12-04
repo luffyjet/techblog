@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                5
+                19
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                4
+                17
                 <span>标签</span>
             </div>
         </div>
@@ -207,7 +207,7 @@
 
             
             <section id="main">
-    <article id="post-android-debug-tools-hugo-scalpel-timber" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-hotfix-framework-article" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -215,7 +215,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/">Android调试自测工具01 (Hugo、Timber、Scalpel)</a>
+            <a class="article-title" href="/techblog/2018/06/08/hotfix-framework-article/">开源热补丁和插件化项目整理</a>
         </h1>
     
 
@@ -224,8 +224,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/">
-            <time datetime="2015-04-10T02:43:23.000Z" itemprop="datePublished">2015-04-10</time>
+        <a href="/techblog/2018/06/08/hotfix-framework-article/">
+            <time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time>
         </a>
     </div>
 
@@ -239,7 +239,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/techblog/tags/debug/">debug</a>
+        <a class="tag-link" href="/techblog/tags/hotfix/">hotfix</a>
     </div>
 
                     </div>
@@ -249,157 +249,25 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>三个工具都出自<a href="https://github.com/JakeWharton">JakeWharton</a>大神。hugo和timber用于打印Log, scalpel用于在3D下查看界面的图层。</p>
-<h2 id="Hugo"><a href="#Hugo" class="headerlink" title="Hugo"></a>Hugo</h2><p>做项目的时候有时候需要打印方法的传参和返回值，甚至方法的执行时间，有没有一种简单方便通用的方式去做这个呢，Hugo就可以。<br>使用方法很简单，Hugo是基于注解被调用的，引入相关依赖后，在方法上加上 @DebugLog 即可。也可以加在内部类上。</p>
-<p>我没研究在Eclipse下怎么引入这个东西，用Eclipse的同志趁早转投AndroidStudio吧。AndroidStudio下引入Hugo很方便，添加两行代码即可。</p>
-<p>先看看打印的效果图：</p>
-<p> <img src="http://ww3.sinaimg.cn/mw690/006lhyt2gw1f292wolk1wj30s40g6jwe.jpg" alt="hugo_logs"></p></p>
-            <p class="article-more-link">
-                <a href="/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://www.luffyjet.com/techblog/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/" data-id="cj27blzr80002bgfbamyo7wtr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://www.luffyjet.com/techblog/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/#comments" class="article-comment-link">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-facebook-stetho-okhttp-study" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/techblog/2015/04/08/facebook-stetho-okhttp-study/">Facebook Stetho 使用学习</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/techblog/2015/04/08/facebook-stetho-okhttp-study/">
-            <time datetime="2015-04-08T07:39:46.000Z" itemprop="datePublished">2015-04-08</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/techblog/categories/android/">android</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/techblog/tags/debug/">debug</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>今年年初，facebook开源了一个Android开发调试工具，叫stetho，应该是单词stethoscope的一部分吧，意为诊断器。</p>
-<blockquote>
-<p>代码托管地址： <a href="https://github.com/facebook/stetho">https://github.com/facebook/stetho</a></p>
-</blockquote>
-<p>在项目中添加相应代码，通过Chrome DevTools连接设备后具备以下功能：</p>
-<ol>
-<li>可以在Chrome里进行网络访问检测，可以查看请求链接，请求头，JSON数据等</li>
-<li>不root的情况下查看Sqlite数据库，并且可以使用sql语句去操作</li>
-<li>最近又升级了，API 15 以上能查看View hierarchy了</li>
-<li>dumpapp 工具提供强大的命令行接口来访问应用内部</li>
+            <p><h3 id="开源热补丁框架"><a href="#开源热补丁框架" class="headerlink" title="开源热补丁框架"></a>开源热补丁框架</h3><ol>
+<li>支付宝 <a href="https://github.com/alibaba/AndFix">AndFix</a></li>
+<li>QZone方案 (<a href="https://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;mid=400118620&amp;idx=1&amp;sn=b4fdd5055731290eef12ad0d17f39d4a&amp;scene=1&amp;srcid=1106Imu9ZgwybID13e7y2nEi#wechat_redirect">原理</a> , <a href="http://www.cnblogs.com/codingWarrior/p/5111957.html">dex分包方案</a>) <ul>
+<li><a href="https://github.com/dodola/HotFix">HotFix</a> </li>
+<li><a href="https://github.com/jasonross/Nuwa">Nuwa</a> </li>
+<li><a href="https://github.com/bunnyblue/DroidFix">DroidFix</a>  </li>
+</ul>
+</li>
+<li>微信 <a href="https://github.com/Tencent/tinker">Tinker</a> </li>
+<li>美团 <a href="https://github.com/Meituan-Dianping/Robust">Robust</a></li>
+<li>其它 <a href="https://github.com/dodola/RocooFix">RocooFix</a> <a href="https://github.com/dodola/AnoleFix">AnoleFix</a></li>
+<li><a href="https://github.com/ManbangGroup/Phantom">Phantom 零Hook稳定占坑 兼容Android 9.0</a>（2018.10月更新）</li>
 </ol>
-<p>更新比较频繁，前几天更新到1.1.0了，使用AndroidStudio可以很方便的添加到项目中。当然也可以从github页面下载最新Jar包。<br></p>
+<h3 id="热补丁整合框架"><a href="#热补丁整合框架" class="headerlink" title="热补丁整合框架"></a>热补丁整合框架</h3><ol>
+<li><a href="https://github.com/baidao/tinker-manager">tinker-manager</a> </li>
+<li><a href="https://github.com/zzz40500/Tinker_imitator">Tinker_imitator</a></li>
+<li><a href="https://github.com/TangXiaoLv/Android-Easy-MultiDex">Android 傻瓜式分包插件</a></p>
             <p class="article-more-link">
-                <a href="/techblog/2015/04/08/facebook-stetho-okhttp-study/#more">查看更多</a>
+                <a href="/techblog/2018/06/08/hotfix-framework-article/#more">查看更多</a>
             </p>
         
         </div>
@@ -410,7 +278,7 @@
 
 </div>
 
-    <a data-url="http://www.luffyjet.com/techblog/techblog/2015/04/08/facebook-stetho-okhttp-study/" data-id="cj27blzr20000bgfby7btpza9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/06/08/hotfix-framework-article/" data-id="cjp9ir658000uu6fblrkjtdv2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -478,7 +346,7 @@
 
             
     
-        <a href="http://www.luffyjet.com/techblog/techblog/2015/04/08/facebook-stetho-okhttp-study/#comments" class="article-comment-link">评论</a>
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/06/08/hotfix-framework-article/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -488,7 +356,7 @@
 
 
 
-    <article id="post-open-source-licenses-study" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-about-face-detection" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -496,7 +364,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/techblog/2015/04/08/open-source-licenses-study/">开源许可协议学习</a>
+            <a class="article-title" href="/techblog/2018/04/01/about-face-detection/">人脸识别调研和部分应用场景</a>
         </h1>
     
 
@@ -505,8 +373,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/techblog/2015/04/08/open-source-licenses-study/">
-            <time datetime="2015-04-08T04:03:41.000Z" itemprop="datePublished">2015-04-08</time>
+        <a href="/techblog/2018/04/01/about-face-detection/">
+            <time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time>
         </a>
     </div>
 
@@ -514,13 +382,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/techblog/categories/OpenSource/">OpenSource</a>
+        <a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a>
+        <a class="tag-link" href="/techblog/tags/face-detection/">face detection</a>
     </div>
 
                     </div>
@@ -530,16 +398,10 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>一直在用开源代码，但是对于那些 开源许可协议 了解太少，惭愧。</p>
-<p>关于几个主流协议间的区别，一图顶千言：<br><img src="http://ww2.sinaimg.cn/large/006lhyt2gw1f291tmf8imj30g409yaai.jpg" alt=""></p>
-<p>GitHub上开源项目协议使用情况：<br><img src="http://ww2.sinaimg.cn/large/006lhyt2gw1f291uhygs1j30m80dw40j.jpg" alt=""></p>
-<p>由图可以看出 MIT 限制是最宽松的，其可谓为所欲为，因此使用量也是最大的。当然图中的协议不全，还有比GPL更严格的协议AGPL。每个协议的具体内容，我看不懂，能区别他们就好。要商用的软件就不能采用带GPL系列许可证的，不过在中国这方面就… </p>
-<blockquote>
-<p>以下是具体的介绍，文字均来源于网络。</p>
-</blockquote>
-<h2 id="什么是软件许可协议？"><a href="#什么是软件许可协议？" class="headerlink" title="什么是软件许可协议？"></a>什么是软件许可协议？</h2></p>
+            <p><h2 id="人脸识别基本流程"><a href="#人脸识别基本流程" class="headerlink" title="人脸识别基本流程"></a>人脸识别基本流程</h2><p> <img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxur2wu2oxj30mf0gqn0g.jpg" alt=""></p>
+<p>人脸识别最难的部分是有充分适应各大光线环境的人脸预处理算法，需要在各种复杂的光线环境中提取到人脸信息，特别是移动互联网时代，摄像头拍照的地方可以在斑驳的树影下，也可以在昏暗的街灯下，以及深夜出租车内，这对算法的鲁棒性考验极大。同时还要考虑照片和视频欺诈，二次成像的光线污染等问题。<br></p>
             <p class="article-more-link">
-                <a href="/techblog/2015/04/08/open-source-licenses-study/#more">查看更多</a>
+                <a href="/techblog/2018/04/01/about-face-detection/#more">查看更多</a>
             </p>
         
         </div>
@@ -550,7 +412,7 @@
 
 </div>
 
-    <a data-url="http://www.luffyjet.com/techblog/techblog/2015/04/08/open-source-licenses-study/" data-id="cj27blzrf0006bgfb7erllv8t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/04/01/about-face-detection/" data-id="cjp9ir64o0008u6fb7tkp0m7t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -618,7 +480,7 @@
 
             
     
-        <a href="http://www.luffyjet.com/techblog/techblog/2015/04/08/open-source-licenses-study/#comments" class="article-comment-link">评论</a>
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/04/01/about-face-detection/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -628,7 +490,7 @@
 
 
 
-    <article id="post-retrofit-singleton-usage" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-android-interview" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -636,7 +498,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/techblog/2014/12/30/retrofit-singleton-usage/">Retrofit的科学使用：Singleton </a>
+            <a class="article-title" href="/techblog/2018/03/15/android-interview/">Android面试相关整理</a>
         </h1>
     
 
@@ -645,8 +507,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/techblog/2014/12/30/retrofit-singleton-usage/">
-            <time datetime="2014-12-30T02:43:23.000Z" itemprop="datePublished">2014-12-30</time>
+        <a href="/techblog/2018/03/15/android-interview/">
+            <time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time>
         </a>
     </div>
 
@@ -654,13 +516,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/techblog/categories/android/">android</a>
+        <a class="article-category-link" href="/techblog/categories/Android/">Android</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/techblog/tags/Retrofit/">Retrofit</a>
+        <a class="tag-link" href="/techblog/tags/Interview/">Interview</a>
     </div>
 
                     </div>
@@ -670,18 +532,23 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>单例模式很适合Android开发，对于<a href="http://square.github.io/retrofit/">Retrofit</a>(Android开发中一个非常优秀的Rest Client)，也要使用单例模式获取实例。</p>
-<p>下面是Jake大神在stackoverflow上关于Retrofit的使用问题的回答。</p>
-<pre><code>Both the RestAdapter and the generated instance of your services (MyTaskService in this case) are extremely expensive objects and should be used as singletons.
-
-This means that you should only ever call restAdapter.create once and re-use the same instance of MyTaskService every time you need to interact with.
-
-I cannot stress this enough.
-
-You can use the regular singleton pattern in order to ensure that there only is ever a single instance of these objects that you use everywhere. A dependency injection framework would also be something that could be used to manage these instances but would be a bit overkill if you are not already utilizing it.
-</code></pre><p>从中我们可以看到 Jake表示 Retrofit每次创建RestAdapter和自定义的接口对象是很耗费资源的，因此不需要每次去创建，要使用单例模式。确实Retrofit是通过添加运行时注解，采用动态代理的方式去创建实例的。<br></p>
+            <p><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ol>
+<li><p>[Android 开发工程师面试指南]<br>(<a href="https://www.diycode.cc/wiki/androidinterview">https://www.diycode.cc/wiki/androidinterview</a>)</p>
+</li>
+<li><p><a href="https://github.com/hadyang/interview">Java / Android 笔试、面试 知识整理</a></p>
+</li>
+<li><p><a href="http://www.jackywang.tech/AndroidInterview-Q-A/">国内一线互联网公司内部面试题库</a></p>
+</li>
+<li><a href="https://yuchengkai.cn/docs/zh/">InterviewMap 面试图谱</a></li>
+<li><a href="https://github.com/crossoverJie/JCSprout">Java Core Sprout </a></li>
+<li><a href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html">设计模式(菜鸟学院)</a></li>
+<li><a href="https://leetcode-cn.com">LeetCode算法题</a></li>
+<li><a href="https://www.jianshu.com/p/d1efe2f31b6d">史上最全 Android 面试资料集合</a></li>
+<li><a href="https://blog.csdn.net/qq_27053103/article/details/79564062?utm_source=blogxgwz4">2018 Android面试心得</a></li>
+<li><a href="https://www.jianshu.com/p/375ad14096b3">Android&amp;Java面试题大全</a></li>
+</ol></p>
             <p class="article-more-link">
-                <a href="/techblog/2014/12/30/retrofit-singleton-usage/#more">查看更多</a>
+                <a href="/techblog/2018/03/15/android-interview/#more">查看更多</a>
             </p>
         
         </div>
@@ -692,7 +559,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
 
 </div>
 
-    <a data-url="http://www.luffyjet.com/techblog/techblog/2014/12/30/retrofit-singleton-usage/" data-id="cj27blzri0008bgfbud27c34e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/03/15/android-interview/" data-id="cjp9ir64w000fu6fbfphp72nj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -760,7 +627,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
 
             
     
-        <a href="http://www.luffyjet.com/techblog/techblog/2014/12/30/retrofit-singleton-usage/#comments" class="article-comment-link">评论</a>
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/03/15/android-interview/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -770,7 +637,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
 
 
 
-    <article id="post-to_build_hexo_blog" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-NB-IOT" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -778,7 +645,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/techblog/2014/12/21/to_build_hexo_blog/">基于Hexo框架的静态博客搭建</a>
+            <a class="article-title" href="/techblog/2018/03/08/NB-IOT/">了解一下窄带网联网NB-IoT</a>
         </h1>
     
 
@@ -787,8 +654,8 @@ You can use the regular singleton pattern in order to ensure that there only is 
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/techblog/2014/12/21/to_build_hexo_blog/">
-            <time datetime="2014-12-21T14:20:20.000Z" itemprop="datePublished">2014-12-21</time>
+        <a href="/techblog/2018/03/08/NB-IOT/">
+            <time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time>
         </a>
     </div>
 
@@ -796,13 +663,13 @@ You can use the regular singleton pattern in order to ensure that there only is 
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/techblog/categories/other/">other</a>
+        <a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/techblog/tags/hexo/">hexo</a>
+        <a class="tag-link" href="/techblog/tags/NB-IoT/">NB-IoT</a>
     </div>
 
                     </div>
@@ -812,11 +679,10 @@ You can use the regular singleton pattern in order to ensure that there only is 
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>BBS,WordPress都折腾过，弄来弄去最后发现<a href="https://www.github.com">GitHub</a>上可以搭建自定义域名的静态页面博客，所以摸索了一下如何在github上搭建自己的博客。开始按着<a href="https://pages.github.com">GitHub pages</a>的介绍和文档，搭建了基于Jekyll的博客，但是折腾了很久都没发现自己喜欢的博客模板。后来搜索，发现了<a href="http://hexo.io/" title="Hexo">Hexo</a>框架，顿时觉得这正是我所需要的。到后面发现了国内的<a href="https://www.gitcafe.com">GitCafe</a>,把博客部署到GitCafe上，访问速度快了很多。</p>
-<p>Hexo框架的安装也没有Jekyll繁琐，对Windows的支持比Jekyll好很多。Jekyll在windows下各种问题。</p>
-<h5 id="Hexo的安装"><a href="#Hexo的安装" class="headerlink" title="Hexo的安装"></a>Hexo的安装</h5></p>
+            <p><h2 id="什么是窄带物联网（NB-IoT）？"><a href="#什么是窄带物联网（NB-IoT）？" class="headerlink" title="什么是窄带物联网（NB-IoT）？"></a>什么是窄带物联网（NB-IoT）？</h2><p>基于蜂窝的窄带物联网（Narrow Band Internet of Things, NB-IoT）俨然已成为万物互联网络的一个重要分支，作为 IoT 领一个新兴的技术，NB-IoT 构建于蜂窝网络，只消耗大约 180KHz 的带宽，可直接部署于 GSM 网络、UMTS 网络或 LTE 网络，以降低部署成本、实现平滑升级。</p>
+<p>NB-IoT 支持低功耗设备在广域网的蜂窝数据连接，也被叫作低功耗广域网(LPWA)，支持待机时间长、对网络连接要求较高设备的高效连接。据说 NB-IoT 设备电池寿命可以提高至至少 10 年，同时还能提供非常全面的室内蜂窝数据连接覆盖。<br></p>
             <p class="article-more-link">
-                <a href="/techblog/2014/12/21/to_build_hexo_blog/#more">查看更多</a>
+                <a href="/techblog/2018/03/08/NB-IOT/#more">查看更多</a>
             </p>
         
         </div>
@@ -827,7 +693,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
 
 </div>
 
-    <a data-url="http://www.luffyjet.com/techblog/techblog/2014/12/21/to_build_hexo_blog/" data-id="cj27blzrm0009bgfb3xfgl420" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/03/08/NB-IOT/" data-id="cjp9ir64e0002u6fbkk367sg0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -895,7 +761,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
 
             
     
-        <a href="http://www.luffyjet.com/techblog/techblog/2014/12/21/to_build_hexo_blog/#comments" class="article-comment-link">评论</a>
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/03/08/NB-IOT/#comments" class="article-comment-link">评论</a>
     
 
         </footer>
@@ -904,6 +770,151 @@ You can use the regular singleton pattern in order to ensure that there only is 
 </article>
 
 
+
+    <article id="post-RxJava-Agera-articles" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/techblog/2018/03/02/RxJava-Agera-articles/">RxJava&amp;Agera资料整理</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/techblog/2018/03/02/RxJava-Agera-articles/">
+            <time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/techblog/tags/RxJava/">RxJava</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><ol>
+<li><p><a href="http://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&amp;mid=2649796857&amp;idx=1&amp;sn=ed8325aeddac7fd2bd81a0717c010e98&amp;mpshare=1&amp;scene=23&amp;srcid=11286ayNT2eeDyDzzSRbS9rg#rd">RxJava &amp; Agera 从源码简要分析基本调用流程</a></p>
+</li>
+<li><p><a href="http://gank.io/post/560e15be2dca930e00da1083">给 Android 开发者的 RxJava 详解</a></p>
+</li>
+<li><a href="http://gank.io/post/56e80c2c677659311bed9841">RxJava 与 Retrofit 结合的最佳实践</a></li>
+<li><a href="http://blog.csdn.net/lzyzsd/article/details/41833541/">深入浅出RxJava（一：基础篇）</a>  系列文章</li>
+<li><a href="https://github.com/kaushikgopal/RxJava-Android-Samples">Learning RxJava for Android by example</a></li>
+<li><a href="https://github.com/lzyzsd/Awesome-RxJava">Awesome-RxJava</a> 资料整理</p>
+            <p class="article-more-link">
+                <a href="/techblog/2018/03/02/RxJava-Agera-articles/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2018/03/02/RxJava-Agera-articles/" data-id="cjp9ir6490000u6fbfwhz6x7f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.luffyjet.com/techblog/techblog/2018/03/02/RxJava-Agera-articles/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/techblog/page/2/">2</a><a class="page-number" href="/techblog/page/3/">3</a><a class="page-number" href="/techblog/page/4/">4</a><a class="extend next" rel="next" href="/techblog/page/2/">下一页 &raquo;</a>
+    </nav>
 </section>
             
                 <aside id="sidebar">
@@ -917,7 +928,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="thumbnail">
+                            <a href="/techblog/2018/06/08/hotfix-framework-article/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -928,15 +939,15 @@ You can use the regular singleton pattern in order to ensure that there only is 
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
-                            <p class="item-title"><a href="/techblog/2015/04/10/android-debug-tools-hugo-scalpel-timber/" class="title">Android调试自测工具01 (Hugo、Timber、Scalpel)</a></p>
-                            <p class="item-date"><time datetime="2015-04-10T02:43:23.000Z" itemprop="datePublished">2015-04-10</time></p>
+                            <p class="item-title"><a href="/techblog/2018/06/08/hotfix-framework-article/" class="title">开源热补丁和插件化项目整理</a></p>
+                            <p class="item-date"><time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/techblog/2015/04/08/facebook-stetho-okhttp-study/" class="thumbnail">
+                            <a href="/techblog/2018/04/01/about-face-detection/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -946,16 +957,16 @@ You can use the regular singleton pattern in order to ensure that there only is 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
-                            <p class="item-title"><a href="/techblog/2015/04/08/facebook-stetho-okhttp-study/" class="title">Facebook Stetho 使用学习</a></p>
-                            <p class="item-date"><time datetime="2015-04-08T07:39:46.000Z" itemprop="datePublished">2015-04-08</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a></p>
+                            <p class="item-title"><a href="/techblog/2018/04/01/about-face-detection/" class="title">人脸识别调研和部分应用场景</a></p>
+                            <p class="item-date"><time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/techblog/2015/04/08/open-source-licenses-study/" class="thumbnail">
+                            <a href="/techblog/2018/03/15/android-interview/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -965,16 +976,16 @@ You can use the regular singleton pattern in order to ensure that there only is 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/OpenSource/">OpenSource</a></p>
-                            <p class="item-title"><a href="/techblog/2015/04/08/open-source-licenses-study/" class="title">开源许可协议学习</a></p>
-                            <p class="item-date"><time datetime="2015-04-08T04:03:41.000Z" itemprop="datePublished">2015-04-08</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/15/android-interview/" class="title">Android面试相关整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/techblog/2014/12/30/retrofit-singleton-usage/" class="thumbnail">
+                            <a href="/techblog/2018/03/08/NB-IOT/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -984,16 +995,16 @@ You can use the regular singleton pattern in order to ensure that there only is 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
-                            <p class="item-title"><a href="/techblog/2014/12/30/retrofit-singleton-usage/" class="title">Retrofit的科学使用：Singleton </a></p>
-                            <p class="item-date"><time datetime="2014-12-30T02:43:23.000Z" itemprop="datePublished">2014-12-30</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/08/NB-IOT/" class="title">了解一下窄带网联网NB-IoT</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time></p>
                         </div>
                     </li>
                 
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/techblog/2014/12/21/to_build_hexo_blog/" class="thumbnail">
+                            <a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1003,9 +1014,9 @@ You can use the regular singleton pattern in order to ensure that there only is 
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/other/">other</a></p>
-                            <p class="item-title"><a href="/techblog/2014/12/21/to_build_hexo_blog/" class="title">基于Hexo框架的静态博客搭建</a></p>
-                            <p class="item-date"><time datetime="2014-12-21T14:20:20.000Z" itemprop="datePublished">2014-12-21</time></p>
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="title">RxJava&amp;Agera资料整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time></p>
                         </div>
                     </li>
                 
@@ -1018,7 +1029,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/NB-IoT/">NB-IoT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/RxJava/">RxJava</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Web/">Web</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/encryption/">encryption</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/face-detection/">face detection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1027,7 +1038,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -1036,7 +1047,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Interview/">Interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/NB-IoT/">NB-IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Permissions/">Permissions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/RxJava/">RxJava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/face-detection/">face detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hotfix/">hotfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/rsa/">rsa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/vlc/">vlc</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1045,7 +1056,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a>
+            <a href="/techblog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/techblog/tags/Interview/" style="font-size: 10px;">Interview</a> <a href="/techblog/tags/NB-IoT/" style="font-size: 10px;">NB-IoT</a> <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Permissions/" style="font-size: 10px;">Permissions</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/techblog/tags/Web/" style="font-size: 10px;">Web</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/face-detection/" style="font-size: 10px;">face detection</a> <a href="/techblog/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/techblog/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/techblog/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/techblog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/techblog/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/techblog/tags/vlc/" style="font-size: 10px;">vlc</a>
         </div>
     </div>
 
@@ -1073,7 +1084,7 @@ You can use the regular singleton pattern in order to ensure that there only is 
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2017 luffyjet<br>
+            &copy; 2018 luffyjet<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div>

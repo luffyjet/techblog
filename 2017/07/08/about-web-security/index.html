@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Web安全整理 | luffyjet の手帳</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Web技术的成熟使得Web应用的功能越来越强大，最终成为了互联网的主流。黑客们的目光，也渐渐转移到了Web这块大蛋糕上。
+安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。安全三要素，机密性，完整性，可用性
+机密性要去保护数据内容不能泄露，加密是实现机密性要求的常见手段。
+完整性则要求保护数据内容是完整、没有被篡改的。常见的保证一致性的技术手段是数字签名。
+可用性要求保护">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web安全整理">
+<meta property="og:url" content="http://www.luffyjet.com/techblog/2017/07/08/about-web-security/index.html">
+<meta property="og:site_name" content="luffyjet の手帳">
+<meta property="og:description" content="Web技术的成熟使得Web应用的功能越来越强大，最终成为了互联网的主流。黑客们的目光，也渐渐转移到了Web这块大蛋糕上。
+安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。安全三要素，机密性，完整性，可用性
+机密性要去保护数据内容不能泄露，加密是实现机密性要求的常见手段。
+完整性则要求保护数据内容是完整、没有被篡改的。常见的保证一致性的技术手段是数字签名。
+可用性要求保护">
+<meta property="og:updated_time" content="2018-12-04T07:57:39.555Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web安全整理">
+<meta name="twitter:description" content="Web技术的成熟使得Web应用的功能越来越强大，最终成为了互联网的主流。黑客们的目光，也渐渐转移到了Web这块大蛋糕上。
+安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。安全三要素，机密性，完整性，可用性
+机密性要去保护数据内容不能泄露，加密是实现机密性要求的常见手段。
+完整性则要求保护数据内容是完整、没有被篡改的。常见的保证一致性的技术手段是数字签名。
+可用性要求保护">
+    
+
+    
+        <link rel="alternate" href="/" title="luffyjet の手帳" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/techblog/css/images/favicon.png" />
+    
+
+    <link rel="stylesheet" href="/techblog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/techblog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/techblog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/techblog/css/style.css">
+
+    <script src="/techblog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/techblog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/techblog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">luffyjet の手帳</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/techblog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/techblog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/techblog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/techblog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/techblog/css/images/avatar.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/techblog/',
+        CONTENT_URL: '/techblog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/techblog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/techblog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/techblog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/techblog/css/images/avatar.jpg" />
+            <h2 id="name">luffyjet</h2>
+            <h3 id="title">Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/luffyjet/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                19
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                17
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/luffyjet/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/techblog/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-about-web-security" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Web安全整理
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/techblog/2017/07/08/about-web-security/">
+            <time datetime="2017-07-08T14:10:09.000Z" itemprop="datePublished">2017-07-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/techblog/categories/Web/">Web</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/techblog/tags/Web/">Web</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>Web技术的成熟使得Web应用的功能越来越强大，最终成为了互联网的主流。黑客们的目光，也渐渐转移到了Web这块大蛋糕上。</p>
+<h5 id="安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。"><a href="#安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。" class="headerlink" title="安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。"></a>安全问题的本质是信任的问题。一切安全方案的设计基础，都是建立在信任关系上的。</h5><h4 id="安全三要素，机密性，完整性，可用性"><a href="#安全三要素，机密性，完整性，可用性" class="headerlink" title="安全三要素，机密性，完整性，可用性"></a>安全三要素，机密性，完整性，可用性</h4><ul>
+<li>机密性要去保护数据内容不能泄露，加密是实现机密性要求的常见手段。</li>
+<li>完整性则要求保护数据内容是完整、没有被篡改的。常见的保证一致性的技术手段是数字签名。</li>
+<li>可用性要求保护资源是“随需而得”。<a id="more"></a>
+</li>
+</ul>
+<h4 id="实施安全评估"><a href="#实施安全评估" class="headerlink" title="实施安全评估"></a>实施安全评估</h4><p>一个安全评估的过程，可以简单地分为4个阶段：资产等级划分，威胁分析，风险分析，确认解决方案。实施的过程是层层递进，前后之间有因果关系。</p>
+<ul>
+<li>资产等级划分，帮助我们明确目标是什么，要保护什么。对互联网公司拥有的资产进行等级划分，就是对数据做等级划分。每家公司的侧重点可能不同。<strong>互联网安全的核心问题，是数据安全的问题。</strong></li>
+<li>威胁分析，就是把所有的威胁都找出来。可以参考微软的<a href="http://onlinehelp.microsoft.com/zh-cn/mdop/ff648644.aspx" target="_blank" rel="external">STRIDE模型</a>。</li>
+<li>风险分析，可以参考微软的 <a href="http://www.aiuxian.com/article/p-1962153.html" target="_blank" rel="external">DREAD模型</a>。</li>
+<li>安全评估的产出物，就是安全解决方案。一个优秀的安全方案应该具备：能有效的解决问题，用户体验好，高兴呢，低耦合，易于扩展和升级。</li>
+</ul>
+<h2 id="客户端脚本安全"><a href="#客户端脚本安全" class="headerlink" title="客户端脚本安全"></a>客户端脚本安全</h2><p>包含</p>
+<ul>
+<li>浏览器安全</li>
+<li>跨站脚本攻击(XSS)</li>
+<li>跨站点请求伪造(CSRF)</li>
+<li>点击劫持(ClickJacking)</li>
+<li>HTML5安全</li>
+</ul>
+<h3 id="1-浏览器安全"><a href="#1-浏览器安全" class="headerlink" title="1.浏览器安全"></a>1.浏览器安全</h3><p>浏览器是目前互联网最大的入口。浏览器具备许多安全功能。</p>
+<h5 id="同源策略-same-origin-policy"><a href="#同源策略-same-origin-policy" class="headerlink" title="同源策略(same origin policy)"></a>同源策略(same origin policy)</h5><p>是一种约定，是浏览器最核心也是最基本的安全功能。浏览器的同源策略，限制了不同源的document或JavaScript脚本，对当前document读取或设置某些属性。</p>
+<p>对于JavaScript，影响源的因素有：host(域名或IP，ip地址当做根域名)、子域名、端口、协议(例如http和https)。</p>
+<p>浏览器中，“script img iframe link” 等标签都能可以跨域加载资源，不受同源策略限制。XMLHttpRequest受到同源策略的约束，不能跨域访问资源。跨域访问方案的安全基础就是信任 “JavaScript无法控制该HTTP头”。</p>
+<h5 id="浏览器沙箱-Sandbox"><a href="#浏览器沙箱-Sandbox" class="headerlink" title="浏览器沙箱 Sandbox"></a>浏览器沙箱 Sandbox</h5><p>采用沙箱技术，无疑可以让不受信任的网页代码、JavaScript代码运行在一个受限制的环境中，从而保护本地桌面系统的安全。</p>
+<h5 id="恶意网站拦截"><a href="#恶意网站拦截" class="headerlink" title="恶意网站拦截"></a>恶意网站拦截</h5><p>浏览器周期性的从服务器获取一份最新的恶意网址黑名单，如果用户上网时访问的网址存在于此黑名单中，浏览器就会弹出一个警告页面。除了恶意网站拦截功能外，主流浏览器都开始支持EVSSL证书(Extended Validation SSL Certificate)，以增强对安全网站的识别。EV证书在浏览器上会有特殊的效果，比如绿色的标识。</p>
+<p>浏览器的安全以同源策略为基础，加深理解同源策略，才能把握住浏览器安全的本质。</p>
+<h3 id="2-跨站脚本攻击-XSS"><a href="#2-跨站脚本攻击-XSS" class="headerlink" title="2.跨站脚本攻击(XSS)"></a>2.跨站脚本攻击(XSS)</h3><p>跨站脚本攻击，全称Cross Site Script。为了和层叠样式表有所区别，所以在安全领域叫做XSS。XSS攻击，通常指黑客通过“html 注入”篡改了网页，插入了恶意脚本，从而在用户浏览器网页是，控制用户浏览器的一种攻击。XSS根据效果可以分成3种类型：</p>
+<ul>
+<li>反射型XSS，反射型XSS只是简单的把用户输入的数据“反射”给浏览器。也就是说，黑客往往需要诱使用户点击一个恶意链接，才能攻击成功。反射型XSS也叫做“非持久型XSS”。</li>
+<li>存储型XSS，存储型XSS会把用户输入的数据“存储”在服务端，这种XSS有很强的稳定性。存储型XSS通常也叫做“持久型XSS”。</li>
+<li>DOM Based XSS,通过修改页面的DOM节点形成的XSS，称之为DOM Based XSS。</li>
+</ul>
+<p>XSS进阶攻击：</p>
+<ul>
+<li><p>XSS playload ，XSS攻击成功后，攻击者能够对用户当前浏览的页面植入恶意脚本，通过恶意脚本，控制用户浏览器。XSS playload实际上就是JavaScript脚本，所以任何JavaScript脚本能做的事，XSS playload都能做到。</p>
+</li>
+<li><p>XSS蠕虫</p>
+</li>
+</ul>
+<p>XSS 实例查看：</p>
+<p><a href="http://www.cnblogs.com/leestar54/p/5798937.html#top" target="_blank" rel="external">http://www.cnblogs.com/leestar54/p/5798937.html#top</a></p>
+<p><a href="http://blog.csdn.net/kevon_sun/article/details/51135880" target="_blank" rel="external">http://blog.csdn.net/kevon_sun/article/details/51135880</a></p>
+<p><strong>XSS攻击平台</strong><br>这些平台的主要目的是演示XSS的危害,有助于深入理解XSS的原理和危害：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/milantgh/p/3645166.html" target="_blank" rel="external">Attack API</a></li>
+<li><a href="http://beefproject.com/" target="_blank" rel="external">BeEF</a></li>
+<li><a href="http://xss-proxy.sourceforge.net/" target="_blank" rel="external">XSS-Proxy</a></li>
+</ul>
+<p>XSS的攻击手段和技巧，还有很多，具体可以参考《白帽子讲web安全》一书。</p>
+<h5 id="XSS防御"><a href="#XSS防御" class="headerlink" title="XSS防御"></a>XSS防御</h5><ul>
+<li>设置HttpOnly，禁止JavaScript访问带有httponly属性的cookie。</li>
+<li>输入输出检查</li>
+<li>安全的编码函数</li>
+<li>处理富文本</li>
+<li>防御DOM Based XSS</li>
+</ul>
+<p>实例参考：<a href="http://www.cnblogs.com/digdeep/p/4695348.html" target="_blank" rel="external">http://www.cnblogs.com/digdeep/p/4695348.html</a></p>
+<h3 id="3-跨站点请求伪造-CSRF"><a href="#3-跨站点请求伪造-CSRF" class="headerlink" title="3.跨站点请求伪造(CSRF)"></a>3.跨站点请求伪造(CSRF)</h3><p>CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全。<br>原理和防御方法参考：<a href="http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html" target="_blank" rel="external">http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html</a></p>
+<h3 id="4-点击劫持"><a href="#4-点击劫持" class="headerlink" title="4.点击劫持"></a>4.点击劫持</h3><p>点击劫持，clickjacking，也被称为UI-覆盖攻击。这个词首次出现在2008年，是由互联网安全专家罗伯特·汉森和耶利米·格劳斯曼首创的。<br>它是通过覆盖不可见的框架误导受害者点击。<br>虽然受害者点击的是他所看到的网页，但其实他所点击的是被黑客精心构建的另一个置于原网页上面的透明页面。<br>这种攻击利用了HTML中 iframe 标签的透明属性。</p>
+<p>攻击和防御参考实例：<br><a href="http://www.freebuf.com/articles/web/67843.html" target="_blank" rel="external">http://www.freebuf.com/articles/web/67843.html</a></p>
+<h3 id="5-HTML5安全"><a href="#5-HTML5安全" class="headerlink" title="5.HTML5安全"></a>5.HTML5安全</h3><p>HTML5新增的标签和功能，可能带来新的XSS攻击。<br>该网站 <a href="http://html5sec.org/" target="_blank" rel="external">http://html5sec.org/</a> 列举了大部分的攻击方式。</p>
+<h2 id="服务器端应用安全"><a href="#服务器端应用安全" class="headerlink" title="服务器端应用安全"></a>服务器端应用安全</h2><ul>
+<li>注入攻击</li>
+<li>文件上传漏洞</li>
+<li>认证与会话管理</li>
+<li>访问控制</li>
+<li>加密算法与随机数</li>
+<li>Web框架安全</li>
+<li>应用层拒绝服务攻击</li>
+<li>webserver 配置安全</li>
+</ul>
+<h3 id="1-注入攻击"><a href="#1-注入攻击" class="headerlink" title="1.注入攻击"></a>1.注入攻击</h3><h5 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h5><p>SQL注入是比较常见的网络攻击方式之一，它不是利用操作系统的BUG来实现攻击，而是针对程序员编程时的疏忽，通过SQL语句，实现无帐号登录，甚至篡改数据库。<br>攻击手段示例和防御方法参考：<a href="http://www.cnblogs.com/baizhanshi/p/6002898.html" target="_blank" rel="external">http://www.cnblogs.com/baizhanshi/p/6002898.html</a></p>
+<h5 id="XML注入"><a href="#XML注入" class="headerlink" title="XML注入"></a>XML注入</h5><p><a href="http://blog.csdn.net/mevicky/article/details/48239481" target="_blank" rel="external">http://blog.csdn.net/mevicky/article/details/48239481</a></p>
+<h5 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h5><p><a href="http://blog.csdn.net/hitwangpeng/article/details/45716821" target="_blank" rel="external">http://blog.csdn.net/hitwangpeng/article/details/45716821</a></p>
+<h5 id="CRLF注入"><a href="#CRLF注入" class="headerlink" title="CRLF注入"></a>CRLF注入</h5><p><a href="http://www.2cto.com/article/201406/312590.html" target="_blank" rel="external">http://www.2cto.com/article/201406/312590.html</a></p>
+<h3 id="2-文件上传漏洞"><a href="#2-文件上传漏洞" class="headerlink" title="2.文件上传漏洞"></a>2.文件上传漏洞</h3><p>文件上传漏洞是指用户上传了一个可执行的脚本文件，并通过此脚本获得了执行服务器端命令的能力。文件上传后导致的常见安全问题一般有：</p>
+<ul>
+<li>上传文件是web脚本语言，服务器的web容器解释并执行了用户上传的脚本，导致代码执行；</li>
+<li>上传文件是Flash的策略文件crossdomain.xml,黑客用以控制flash在该域下的行为(其他通过类似方式控制策略文件的情况类似)；</li>
+<li>上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行；</li>
+<li>上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈。</li>
+</ul>
+<p>大多数情况下，文件上传漏洞一般都是指“上传web脚本能够被服务器解析”的问题,也就是通常所说的webshell，要完成这个攻击，要满足几个条件：</p>
+<ul>
+<li>首先，上传的文件能够被web容器解释执行；</li>
+<li>其次，用户能够从web上访问这个文件；</li>
+<li>最后，用户上传的文件若被安全检查，格式化，图片压缩等功能改变了内容，则也可能导致攻击不成功。</li>
+</ul>
+<p>攻击实例：<a href="http://www.cnblogs.com/crazylocust/p/6759529.html" target="_blank" rel="external">http://www.cnblogs.com/crazylocust/p/6759529.html</a></p>
+<p><strong>防御手段</strong>：</p>
+<ul>
+<li>文件上传的目录设置为不可执行</li>
+<li>判断文件类型</li>
+<li>使用随机数改写文件名和文件路径</li>
+<li>单独设置文件服务器的域名</li>
+</ul>
+<h3 id="3-认证与会话管理"><a href="#3-认证与会话管理" class="headerlink" title="3.认证与会话管理"></a>3.认证与会话管理</h3><p>认证的目的是为了认出用户是谁，而授权的目的是为了决定用户能够做什么。</p>
+<p><strong>密码的合理保存方式</strong>：将明文密码经过哈希后再保存到数据库，在计算哈希值时，增加一个“salt”，salt是一个字符串，作用是增加明文哈希值的复杂度，并使得彩虹表一类的攻击失效。</p>
+<p><strong>多因素认证</strong>：对于很多重要的系统，如果只有密码作为唯一的认证手段，从安全上看会略显不足，因此为了增强安全性， 大多数网上银行和网上支付平台都会采用双因素认证或多因素认证。</p>
+<p><strong>session fixation 攻击</strong>：用户登录网站的过程中，如果登录前后用户的sessionID没有发生变化，则会存在session fixation问题。</p>
+<p><strong>session 保持攻击</strong>:一般来说session是有生命周期的，当用户长时间未活动，或者用户退出，服务器将销毁session。如果攻击者能一直持有一个有效的session，而服务器对于活动的session一直不销毁的话，攻击者就能通过此有效session一直使用用户的账号，成为一个永久的后门。攻击者可以通过不停的发起访问请求，让session一直活下去，比如不停的刷新页面。如何对抗这种session保持攻击，常见的做法是在一定的时间后， 强制销毁session。但是强制销毁可能会影响到一些正常的用户，还可以选择的方法是在当用户客户端发生变化时，要求用户重新登录。比如用户的IP、useragent等信息发生了变化，就可以强制销毁当前的session，并要求用户重新登录。</p>
+<p><strong>单点登录(SSO)</strong>:英文全称，single sign on，简称sso。它希望用户只需要登录一次，就可以访问所有系统。从用户体验的角度看，sso无疑让用户的使用更加的方便，从安全角度看，sso把风险集中在单点上，这样做是有利有弊的。利是风险集中，缺点是风险集中了，所以单点一旦被攻破，后果会非常严重。</p>
+<h3 id="4-访问控制"><a href="#4-访问控制" class="headerlink" title="4.访问控制"></a>4.访问控制</h3><p>web安全领域中，权限控制的问题都可以归纳为访问控制的问题。</p>
+<p>访问控制实际上是建立用户与权限之间的对应关系，现在应用广泛的一种方法，就是基于角色的访问控制(Role-Based Access Control)，简称RBAC。RBAC事先会在系统中定义出不同的角色，不同的角色拥有不同的权限，一个角色实际上就是一个权限的集合，而系统的所有用户都会被分配到不同的角色中，一用户可能拥有多个角色，角色之间有权限高低之分。在系统验证权限时，只需要验证用户所属角色，然后就可以根据角色所拥有的权限进行授权了。</p>
+<p>RBAC属于垂直权限管理，在RBAC下，系统只会验证用户A是否属于角色RoleX，而不会判断用户A是否能否访问只属于用户B的数据DataB，用户B和用户A是属于同一角色的。因此发生了越权访问。这种问题，我们就称之为“水平权限管理问题”。此问题难以在统一框架下解决。</p>
+<p><strong>OAuth</strong> 是一个在不提供用户名和密码的情况下，授权第三方应用访问web资源的安全协议。</p>
+<p>具体说明和参考：</p>
+<p><a href="http://www.tuicool.com/articles/qqeuE3" target="_blank" rel="external">http://www.tuicool.com/articles/qqeuE3</a></p>
+<p><a href="http://blog.jobbole.com/49211/" target="_blank" rel="external">http://blog.jobbole.com/49211/</a></p>
+<h3 id="5-加密算法和随机数"><a href="#5-加密算法和随机数" class="headerlink" title="5.加密算法和随机数"></a>5.加密算法和随机数</h3><p>常见的加密算法通常分为分组加密算法与流密码加密算法两种，两者实现原理不同。<br>分组加密算法基于“分组”(block)进行操作，根据算法的不同， 每个分组的长度可能不同。分组加密算法的代表有DES，3-DES，Blowfish，IDEA，AES等。流密码加密算法，则每次只处理一个字节，密钥独立于消息之外，两者通过异或实现加密与解密。流密码加密算法的代表有RC4,ORYX，SEAL等。</p>
+<p>针对加密算法的攻击，一般根据攻击者能获得的信息，可以分为：</p>
+<ul>
+<li>唯密码攻击，攻击者有一些密文，它们是使用同一加密算法和同一密钥加密的。这种攻击是最难的。</li>
+<li>已知明文攻击，攻击者除了能得到一些密文外，还能得到这些密文对应的明文。本章中针对流密码的一些攻击为已知明文攻击。</li>
+<li>选择明文攻击，攻击者不仅能得到一些密文和明文，还能选择用于加密的明文。</li>
+<li>选择密文攻击，攻击者可以选择不同的密文来解密。</li>
+</ul>
+<h4 id="Reused-Key-Attack"><a href="#Reused-Key-Attack" class="headerlink" title="Reused Key Attack"></a>Reused Key Attack</h4><p>在流密码的使用中，最常见的错误便是使用同一个密钥进行多次加/解密。这将使得破解流密码变得非常简单。在这种攻击下，攻击者不需要知道，密钥，即可还原出明文。</p>
+<p>常见的加密模式有：ECB，CBC，CFB，OFB，CTR等。</p>
+<p>对于web应用来说，密钥管理，常见的做法是将密钥(包括密码)保存在配置文件或者数据库中。</p>
+<p>其他更多的攻击手段和案例参考《白帽子讲web安全》。</p>
+<p>加密算法的选择和使用的最佳实践：</p>
+<p>1.不要使用ECB模式</p>
+<p>2.不要使用流密码(比如RC4)</p>
+<p>3.使用HMAC-SHA1代替MD5(甚至是代替SHA1)</p>
+<p>4.不要使用相同的key做不同的时期</p>
+<p>5.salt与IV需要随机产生</p>
+<p>6.不要自己实现加密算法，尽量使用安全专家已经实现好的库</p>
+<p>7.不要依赖系统的保密性</p>
+<p>当你不知道如何选择时，有一下建议：</p>
+<p>1.使用CBC模式的AES256用于加密</p>
+<p>2.使用HMAC-SHA512用于完整性检查</p>
+<p>3.使用带salt的SHA-256或SHA-512用于Hashing。</p>
+<h3 id="6-web框架安全"><a href="#6-web框架安全" class="headerlink" title="6.web框架安全"></a>6.web框架安全</h3><p>在框架中实施安全方案，比由程序员在业务中修复一个个具体的bug,有着更多的优势。</p>
+<p>模板引擎与XSS防御，在View层，可以解决XSS问题。使用“输出编码” 的防御方法，针对不同的情况使用不同的编码函数。</p>
+<p>在web框架中可以使用security token解决CSRF攻击，在web开发中，对“读操作”和“写操作”予以区分，比如所有的“写操作”都使用Http post。</p>
+<p>参考：<a href="http://www.cnblogs.com/Mainz/archive/2012/11/01/2749874.html" target="_blank" rel="external">Spring MVC防御CSRF、XSS和SQL注入攻击</a></p>
+<p>此外还有web框架本身的安全漏洞。</p>
+<p><a href="https://www.ibm.com/developerworks/cn/rational/r-cn-appscanusage/" target="_blank" rel="external">Web 应用安全利器：IBM Rational AppScan</a>IBM Rational AppScan 是一个全面的 Web 应用安全解决方案，为 Web 及 Web 2.0 应用提供了安全漏洞扫描、报告和修复建议等功能，可以帮助开发者全面准确地发现并解决安全问题。</p>
+<h3 id="7-应用层拒绝服务攻击"><a href="#7-应用层拒绝服务攻击" class="headerlink" title="7.应用层拒绝服务攻击"></a>7.应用层拒绝服务攻击</h3><p>DDOS又称为分布式拒绝服务，常见的DDOS攻击有SYN flood，UDP flood，ICMP flood等。应用层DDOS攻击是针对服务器性能的一种攻击，那么许多优化服务器性能的方法，或多或少地能缓解此种攻击。常见的防御措施：</p>
+<ul>
+<li>限制请求频率，在应用中，针对每个“客户端”做一个请求频率的限制。</li>
+<li>应用代码做好性能优化</li>
+<li>网络架构上做好优化，利用好负载均衡和CDN。</li>
+<li>实现一些对抗手段，比如限制每个IP的请求频率</li>
+<li>加入验证码</li>
+</ul>
+<p><strong>CC攻击</strong>：Challenge Collapasar,意值在黑洞(一款反DDOS设备)的防御下，仍然能有效的完成拒绝服务攻击。CC攻击的原理就是对一些消耗资源较大的应用页面不断的发起正常的请求，以达到消耗服务器资源的目的。</p>
+<p><strong>资源耗尽攻击</strong></p>
+<p>slowloris攻击，原理是以极低的速度往服务器发送http请求，由于webserver对于并发的连接数都有一定的上限，因此若是恶意的占用住这些连接不放，那么webserver的所有连接都将被恶意连接占用，从而无法接受新的请求，导致拒绝服务。</p>
+<p>http post dos,原理是在发送http post包时，指定一个非常大的content-length值，然后以很低的速度发包，比如10~100s发一个字节，保持住这个连接不断开。这样客户端连接数多了以后，占用住了webserver的所有可用连接，从而导致DOS。</p>
+<p><a href="https://www.zhihu.com/question/19581905" target="_blank" rel="external">如何防御DDOS攻击?</a></p>
+<h3 id="8-WebServer配置安全"><a href="#8-WebServer配置安全" class="headerlink" title="8.WebServer配置安全"></a>8.WebServer配置安全</h3><p>web服务器是web应用的载体，如果这个载体出现安全问题，那么运行在其中的web应用程序的安全也无法得到保障。</p>
+<p><a href="http://blog.csdn.net/carechere/article/details/52346776" target="_blank" rel="external">Apache安全</a></p>
+<p><a href="http://blog.csdn.net/vivid_110/article/details/51809019" target="_blank" rel="external">Nginx安全</a></p>
+<p><a href="http://blog.csdn.net/earbao/article/details/48677143" target="_blank" rel="external">Tomcat安全配置</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.luffyjet.com/techblog/techblog/2017/07/08/about-web-security/" data-id="cjp9ir64s0009u6fbk8ev9s7p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.luffyjet.com/techblog/techblog/2017/07/08/about-web-security/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/techblog/2017/07/25/vlc_android_build_record/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    VLC Android 编译流程记录
+                
+            </div>
+        </a>
+    
+    
+        <a href="/techblog/2017/05/19/iOS-resource/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">iOS资源整理</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/06/08/hotfix-framework-article/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/android/">android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/06/08/hotfix-framework-article/" class="title">开源热补丁和插件化项目整理</a></p>
+                            <p class="item-date"><time datetime="2018-06-08T14:30:12.000Z" itemprop="datePublished">2018-06-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/04/01/about-face-detection/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/face-detection/">face detection</a></p>
+                            <p class="item-title"><a href="/techblog/2018/04/01/about-face-detection/" class="title">人脸识别调研和部分应用场景</a></p>
+                            <p class="item-date"><time datetime="2018-04-01T04:30:12.000Z" itemprop="datePublished">2018-04-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/15/android-interview/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/15/android-interview/" class="title">Android面试相关整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-15T15:28:55.000Z" itemprop="datePublished">2018-03-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/08/NB-IOT/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/NB-IoT/">NB-IoT</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/08/NB-IOT/" class="title">了解一下窄带网联网NB-IoT</a></p>
+                            <p class="item-date"><time datetime="2018-03-08T04:30:12.000Z" itemprop="datePublished">2018-03-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/techblog/categories/RxJava/">RxJava</a></p>
+                            <p class="item-title"><a href="/techblog/2018/03/02/RxJava-Agera-articles/" class="title">RxJava&amp;Agera资料整理</a></p>
+                            <p class="item-date"><time datetime="2018-03-02T02:43:23.000Z" itemprop="datePublished">2018-03-02</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/NB-IoT/">NB-IoT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/OpenSource/">OpenSource</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/RxJava/">RxJava</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Spring/">Spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/Web/">Web</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/android/">android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/encryption/">encryption</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/face-detection/">face detection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/iOS/">iOS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/techblog/categories/other/">other</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2018/03/">三月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/07/">七月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/techblog/archives/2014/12/">十二月 2014</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Interview/">Interview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/NB-IoT/">NB-IoT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/OpenSourceLicenses/">OpenSourceLicenses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Permissions/">Permissions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Retrofit/">Retrofit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/RxJava/">RxJava</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/Web/">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/face-detection/">face detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/gitlab/">gitlab</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/hotfix/">hotfix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/iOS/">iOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/rsa/">rsa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/techblog/tags/vlc/">vlc</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/techblog/tags/Android/" style="font-size: 10px;">Android</a> <a href="/techblog/tags/Interview/" style="font-size: 10px;">Interview</a> <a href="/techblog/tags/NB-IoT/" style="font-size: 10px;">NB-IoT</a> <a href="/techblog/tags/OpenSourceLicenses/" style="font-size: 10px;">OpenSourceLicenses</a> <a href="/techblog/tags/Permissions/" style="font-size: 10px;">Permissions</a> <a href="/techblog/tags/Retrofit/" style="font-size: 10px;">Retrofit</a> <a href="/techblog/tags/RxJava/" style="font-size: 20px;">RxJava</a> <a href="/techblog/tags/Web/" style="font-size: 10px;">Web</a> <a href="/techblog/tags/debug/" style="font-size: 20px;">debug</a> <a href="/techblog/tags/face-detection/" style="font-size: 10px;">face detection</a> <a href="/techblog/tags/gitlab/" style="font-size: 10px;">gitlab</a> <a href="/techblog/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/techblog/tags/hotfix/" style="font-size: 10px;">hotfix</a> <a href="/techblog/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/techblog/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/techblog/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/techblog/tags/vlc/" style="font-size: 10px;">vlc</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 luffyjet<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132481"></script>
+
+
+
+    
+        <script src="/techblog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/techblog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/techblog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/techblog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
